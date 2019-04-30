@@ -5,7 +5,7 @@ class DailyNews {
   List<News> news;
 
   DailyNews.fromJson(Map<String, dynamic> json) {
-    date = DateTime.parse(json['date']);
+//    date = DateTime.parse(json['date']);
     news = (json['news'] as List)?.map((i) => News.fromJson(i))?.toList();
   }
 }

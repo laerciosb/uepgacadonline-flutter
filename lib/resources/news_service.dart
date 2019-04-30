@@ -1,0 +1,29 @@
+import 'dart:async';
+import 'dart:convert';
+
+import 'package:http/http.dart' show Client;
+import 'package:uepgacadonline_flutter/models/response.dart';
+
+class NewsService {
+  Client client = Client();
+
+  Future<Response> fetchNewsItems() async {
+    final response = await client.get("http://104.197.53.11/portal/newsitem?date=30/04/2019");
+
+    if (response.statusCode == 200) {
+      return Response.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('Erro');
+    }
+  }
+
+  Future<Response> fetchNewsItem() async {
+    final response = await client.get("http://104.197.53.11/portal/news?cod=6714");
+
+    if (response.statusCode == 200) {
+      return Response.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('Erro');
+    }
+  }
+}

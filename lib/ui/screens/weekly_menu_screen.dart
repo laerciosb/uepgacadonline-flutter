@@ -31,15 +31,18 @@ class _WeeklyMenuScreenState extends State<WeeklyMenuScreen> {
           appBar: AppBar(
             title: Text(widget.title),
             bottom: TabBar(
-              tabs: values
-                  .map((value) => Center(
-                          child: Column(
-                        children: <Widget>[
-                          Text(value['day']),
-                          Text(value['date'], style: TextStyle(fontSize: 10.0))
-                        ],
-                      )))
-                  .toList(),
+              tabs: values.map((value) {
+                var index = values.indexOf(value);
+
+                return Center(
+                    child: Column(
+                  children: <Widget>[
+//                    Icon(Icons.restaurant_menu, size: index == index ? 12.0 : 10.0),
+                    Text(value['day'], style: TextStyle(fontSize: 15.0)),
+                    Text(value['date'], style: TextStyle(fontSize: 10.0)),
+                  ],
+                ));
+              }).toList(),
             ),
           ),
           body: TabBarView(
