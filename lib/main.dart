@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uepgacadonline_flutter/ui/screens/grade_screen.dart';
+import 'package:uepgacadonline_flutter/ui/screens/weekly_menu_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,7 +13,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: GradeScreen(title: 'Notas'),
+      home: WeeklyMenuScreen(title: 'Ru'),
+//      home: GradeScreen(title: 'Notas'),
     );
   }
 }
