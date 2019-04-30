@@ -15,24 +15,55 @@ class _WeeklyMenuScreenState extends State<WeeklyMenuScreen> {
   @override
   Widget build(BuildContext context) {
     weeklyMenuBloc.fetchWeeklyMenu();
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
-        body: StreamBuilder(
-          stream: weeklyMenuBloc.weeklyMenu,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return ListView.builder(
-                  itemCount: snapshot.data.menus.length,
-                  itemBuilder: (context, index) =>
-                      _itemBuilder(context, index, snapshot.data.menus[index]));
-            }
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          },
-        ));
+
+    final values = [
+      {'day': 'Seg', 'date': '22/04'},
+      {'day': 'Ter', 'date': '23/04'},
+      {'day': 'Qua', 'date': '24/04'},
+      {'day': 'Qui', 'date': '25/04'},
+      {'day': 'Sex', 'date': '26/04'},
+      {'day': 'Sáb', 'date': '27/04'},
+    ];
+
+    return DefaultTabController(
+      length: values.length,
+      child: Scaffold(
+          appBar: AppBar(
+            title: Text(widget.title),
+            bottom: TabBar(
+              tabs: values
+                  .map((value) => Center(
+                          child: Column(
+                        children: <Widget>[
+                          Text(value['day']),
+                          Text(value['date'], style: TextStyle(fontSize: 10.0))
+                        ],
+                      )))
+                  .toList(),
+            ),
+          ),
+          body: TabBarView(
+              children: values
+                  .map((value) => Container(
+                        child: StreamBuilder(
+                          stream: weeklyMenuBloc.weeklyMenu,
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              return ListView.builder(
+                                  itemCount: snapshot.data.menus.length,
+                                  itemBuilder: (context, index) => _itemBuilder(
+                                      context,
+                                      index,
+                                      snapshot.data.menus[index]));
+                            }
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          },
+                        ),
+                      ))
+                  .toList())),
+    );
   }
 
   Widget _itemBuilder(BuildContext context, int index, Menu menu) {
