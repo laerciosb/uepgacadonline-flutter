@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:uepgacadonline_flutter/blocs/news_bloc.dart';
 import 'package:uepgacadonline_flutter/models/news.dart';
+import 'package:uepgacadonline_flutter/ui/screens/news_item.screen.dart';
 
-class NewsScreen extends StatefulWidget {
-  NewsScreen({Key key, this.title}) : super(key: key);
+class NewsItemsScreen extends StatefulWidget {
+  NewsItemsScreen({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _NewsScreenState createState() => _NewsScreenState();
+  _NewsItemsScreenState createState() => _NewsItemsScreenState();
 }
 
-class _NewsScreenState extends State<NewsScreen> {
+class _NewsItemsScreenState extends State<NewsItemsScreen> {
   @override
   Widget build(BuildContext context) {
     newsBloc.fetchNewItems();
@@ -36,11 +37,24 @@ class _NewsScreenState extends State<NewsScreen> {
   }
 
   Widget _itemBuilder(BuildContext context, int index, News news) {
-    return Container(
-      child: Card(
-        child: Column(
-          children: <Widget>[Text(news.title)],
-        ),
+    return Card(
+      child: Stack(
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              children: <Widget>[Text(news.title)],
+            ),
+          ),
+          Positioned.fill(
+              child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              borderRadius: BorderRadius.all(Radius.circular(4.0)),
+              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => NewsItemScreen(title: news.title, newsItem: news))),
+            ),
+          ))
+        ],
       ),
     );
   }
