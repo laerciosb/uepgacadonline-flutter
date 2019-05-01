@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uepgacadonline_flutter/ui/screens/login_screen.dart';
 import 'package:uepgacadonline_flutter/ui/screens/news_items_screen.dart';
 
 void main() => runApp(MyApp());
@@ -14,6 +15,8 @@ class MyApp extends StatelessWidget {
         ),
 //      home: WeeklyMenuScreen(title: 'Ru'),
 //      home: GradeScreen(title: 'Notas'),
-        home: NewsItemsScreen(title: 'News'));
+//        home: NewsItemsScreen(title: 'News')
+        home: LoginScreen()
+    );
   }
 }

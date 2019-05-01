@@ -8,7 +8,7 @@ class NewsService {
   Client client = Client();
 
   Future<Response> fetchNewsItems() async {
-    final response = await client.get("http://104.197.53.11/portal/newsitem?date=30/04/2019");
+    final response = await client.get("http://104.197.53.11/portal/newsitem?date=01/05/2019");
 
     if (response.statusCode == 200) {
       return Response.fromJson(json.decode(response.body));
