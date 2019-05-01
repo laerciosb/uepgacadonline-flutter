@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:uepgacadonline_flutter/blocs/news_bloc.dart';
+import 'package:uepgacadonline_flutter/blocs/news_items_bloc.dart';
 import 'package:uepgacadonline_flutter/models/news.dart';
 import 'package:uepgacadonline_flutter/ui/screens/news_item.screen.dart';
 
@@ -15,13 +15,13 @@ class NewsItemsScreen extends StatefulWidget {
 class _NewsItemsScreenState extends State<NewsItemsScreen> {
   @override
   Widget build(BuildContext context) {
-    newsBloc.fetchNewItems();
+    newsItemsBloc.fetchNewItems();
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
         ),
         body: StreamBuilder(
-          stream: newsBloc.dailyNews,
+          stream: newsItemsBloc.dailyNews,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return ListView.builder(
@@ -51,7 +51,7 @@ class _NewsItemsScreenState extends State<NewsItemsScreen> {
             color: Colors.transparent,
             child: InkWell(
               borderRadius: BorderRadius.all(Radius.circular(4.0)),
-              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => NewsItemScreen(title: news.title, newsItem: news))),
+              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => NewsItemScreen(title: news.title, news: news))),
             ),
           ))
         ],

@@ -17,8 +17,8 @@ class NewsService {
     }
   }
 
-  Future<Response> fetchNewsItem() async {
-    final response = await client.get("http://104.197.53.11/portal/news?cod=6714");
+  Future<Response> fetchNewsItem(String cod) async {
+    final response = await client.get("http://104.197.53.11/portal/news?cod="+cod);
 
     if (response.statusCode == 200) {
       return Response.fromJson(json.decode(response.body));

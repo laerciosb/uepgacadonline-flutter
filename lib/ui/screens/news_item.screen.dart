@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:uepgacadonline_flutter/blocs/news_bloc.dart';
+import 'package:uepgacadonline_flutter/blocs/news_item_bloc.dart';
+import 'package:uepgacadonline_flutter/blocs/news_items_bloc.dart';
 import 'package:uepgacadonline_flutter/models/news.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:uepgacadonline_flutter/models/news_item.dart';
 
 class NewsItemScreen extends StatefulWidget {
-  NewsItemScreen({Key key, this.title, this.newsItem}) : super(key: key);
+  NewsItemScreen({Key key, this.title, this.news}) : super(key: key);
 
-  final News newsItem;
+  final News news;
   final String title;
 
   @override
@@ -15,13 +18,27 @@ class NewsItemScreen extends StatefulWidget {
 class _NewsItemScreenState extends State<NewsItemScreen> {
   @override
   Widget build(BuildContext context) {
-    newsBloc.fetchNewItems();
+    newsItemBloc.fetchNewItem(widget.news.cod);
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
         ),
-        body: Container(
-          child: Text(widget.newsItem.toString()),
+        body: StreamBuilder(
+          stream: newsItemBloc.newsItem,
+          builder: (context, AsyncSnapshot<NewsItem> snapshot) {
+            if (snapshot.hasData) {
+              return Container(
+                child: SingleChildScrollView(
+                  child: Html(
+                    data: snapshot.data.content
+                  ),
+                ),
+              );
+            }
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
         ));
   }
 }
