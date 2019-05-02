@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uepgacadonline_flutter/modules/grade/grade_screen.dart';
-import 'package:uepgacadonline_flutter/ui/screens/login_screen.dart';
+import 'package:uepgacadonline_flutter/modules/login/login_screen.dart';
 import 'package:uepgacadonline_flutter/modules/news_items/news_items_screen.dart';
 
 void main() => runApp(MyApp());

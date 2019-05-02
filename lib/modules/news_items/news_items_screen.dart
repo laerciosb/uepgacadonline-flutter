@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uepgacadonline_flutter/models/news.dart';
 import 'package:uepgacadonline_flutter/modules/news_items/bloc.dart';
-import 'package:uepgacadonline_flutter/ui/screens/news_item.screen.dart';
+import 'package:uepgacadonline_flutter/modules/news_item/news_item.screen.dart';
 
 class NewsItemsScreen extends StatefulWidget {
   NewsItemsScreen({Key key, this.title}) : super(key: key);
@@ -16,7 +16,9 @@ class NewsItemsScreen extends StatefulWidget {
 class _NewsItemsScreenState extends State<NewsItemsScreen> {
   final newsItemsBloc = NewsItemsBloc();
 
-  _NewsItemsScreenState() {
+  @override
+  initState() {
+    super.initState();
     newsItemsBloc.dispatch(NewsItemsFetch());
   }
 

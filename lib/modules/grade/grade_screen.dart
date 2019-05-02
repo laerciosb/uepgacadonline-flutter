@@ -16,7 +16,9 @@ class GradeScreen extends StatefulWidget {
 class _GradeScreenState extends State<GradeScreen> {
   final _gradeBloc = GradeBloc();
 
-  _GradeScreenState() {
+  @override
+  initState() {
+    super.initState();
     _gradeBloc.dispatch(GradeFetch());
   }
 
