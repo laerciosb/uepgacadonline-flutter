@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uepgacadonline_flutter/models/news.dart';
-import 'package:uepgacadonline_flutter/modules/news_items/bloc.dart';
 import 'package:uepgacadonline_flutter/modules/news_item/news_item.screen.dart';
+import 'package:uepgacadonline_flutter/modules/news_items/bloc.dart';
+import 'package:uepgacadonline_flutter/widgets/bottom_loader.dart';
 
 class NewsItemsScreen extends StatefulWidget {
   NewsItemsScreen({Key key, this.title}) : super(key: key);
@@ -14,12 +15,30 @@ class NewsItemsScreen extends StatefulWidget {
 }
 
 class _NewsItemsScreenState extends State<NewsItemsScreen> {
-  final newsItemsBloc = NewsItemsBloc();
+  final _newsItemsBloc = NewsItemsBloc();
+
+  final _scrollController = ScrollController();
+  final _scrollThreshold = 200.0;
 
   @override
   initState() {
     super.initState();
-    newsItemsBloc.dispatch(NewsItemsFetch());
+    _newsItemsBloc.dispatch(NewsItemsFetch());
+    _scrollController.addListener(() {
+      final maxScroll = _scrollController.position.maxScrollExtent;
+      final currentScroll = _scrollController.position.pixels;
+
+      if (maxScroll - currentScroll <= _scrollThreshold) {
+        print('Loading more');
+        _newsItemsBloc.dispatch(NewsItemsFetch());
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _newsItemsBloc.dispose();
   }
 
   @override
@@ -29,7 +48,7 @@ class _NewsItemsScreenState extends State<NewsItemsScreen> {
           title: Text(widget.title),
         ),
         body: BlocBuilder(
-          bloc: newsItemsBloc,
+          bloc: _newsItemsBloc,
           builder: (context, NewsItemsState state) {
             if (state is NewsItemsUninitialized) {
               return Center(
@@ -42,9 +61,13 @@ class _NewsItemsScreenState extends State<NewsItemsScreen> {
                 );
               }
               return ListView.builder(
+                  controller: _scrollController,
                   itemCount: state.newsItems.news.length,
-                  itemBuilder: (context, index) => _itemBuilder(
-                      context, index, state.newsItems.news[index]));
+                  itemBuilder: (context, index) =>
+                      index >= state.newsItems.news.length
+                          ? BottomLoader()
+                          : _itemBuilder(
+                              context, index, state.newsItems.news[index]));
             } else if (state is NewsItemsLoaded) {
               return Center(
                 child: Text('Error'),

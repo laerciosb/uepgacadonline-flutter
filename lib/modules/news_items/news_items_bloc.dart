@@ -13,13 +13,16 @@ class NewsItemsBloc extends Bloc<NewsItemsEvent, NewsItemsState> {
   Stream<NewsItemsState> mapEventToState(
     NewsItemsEvent event,
   ) async* {
-    if(event is NewsItemsFetch) {
+    if(event is NewsItemsFetch && !_hasReachedMax(currentState)) {
       try {
         final newsItems = (await _repository.fetchNewsItems()).dailyNews;
-        yield NewsItemsLoaded(newsItems: newsItems);
+        yield NewsItemsLoaded(newsItems: newsItems, hasReachedMax: false);
       } catch (_) {
         yield NewsItemsError();
       }
     }
   }
+
+  bool _hasReachedMax(NewsItemsState state) =>
+      state is NewsItemsLoaded && state.hasReachedMax;
 }

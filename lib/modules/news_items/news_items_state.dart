@@ -16,9 +16,11 @@ class NewsItemsUninitialized extends NewsItemsState {
 
 class NewsItemsLoaded extends NewsItemsState {
   final NewsItems newsItems;
+  final bool hasReachedMax;
 
   NewsItemsLoaded({
-    this.newsItems
+    this.newsItems,
+    this.hasReachedMax
   });
 
   @override
