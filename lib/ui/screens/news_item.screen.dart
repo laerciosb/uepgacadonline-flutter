@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:uepgacadonline_flutter/blocs/news_item_bloc.dart';
-import 'package:uepgacadonline_flutter/blocs/news_items_bloc.dart';
+import 'package:uepgacadonline_flutter/modules/news_item_bloc.dart';
+import 'package:uepgacadonline_flutter/modules/news_items_bloc.dart';
 import 'package:uepgacadonline_flutter/models/news.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:uepgacadonline_flutter/models/news_item.dart';

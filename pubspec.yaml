@@ -19,6 +19,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  equatable: ^0.1.0
+  bloc: ^0.12.0
+  flutter_bloc: ^0.12.0
   http: ^0.12.0+2
   rxdart: ^0.21.0
   uri: ^0.11.3+1
@@ -47,7 +50,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - images/uepg_logo.png
+  - images/uepg_logo.png
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

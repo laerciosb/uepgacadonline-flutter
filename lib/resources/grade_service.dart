@@ -6,7 +6,7 @@ import 'package:uepgacadonline_flutter/models/response.dart';
 
 class GradeService {
   Client client = Client();
-  final _apiKey = "C32D6AD76970251EBF62A3FD1DBA1738";
+  final _apiKey = "97D60AD21EF6BC75FC1407861DA77FF8";
 
   Future<Response> fetchGrade() async {
     final response = await client.get(

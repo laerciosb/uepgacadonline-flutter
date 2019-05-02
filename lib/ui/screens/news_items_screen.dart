@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:uepgacadonline_flutter/blocs/news_items_bloc.dart';
+import 'package:uepgacadonline_flutter/modules/news_items_bloc.dart';
 import 'package:uepgacadonline_flutter/models/news.dart';
 import 'package:uepgacadonline_flutter/ui/screens/news_item.screen.dart';
 

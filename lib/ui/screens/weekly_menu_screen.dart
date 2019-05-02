@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:uepgacadonline_flutter/blocs/weekly_menu_bloc.dart';
+import 'package:uepgacadonline_flutter/modules/weekly_menu_bloc.dart';
 import 'package:uepgacadonline_flutter/models/menu.dart';
 
 class WeeklyMenuScreen extends StatefulWidget {
