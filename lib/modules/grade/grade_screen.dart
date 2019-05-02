@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:uepgacadonline_flutter/models/discipline.dart';
 import 'package:uepgacadonline_flutter/modules/grade/bloc.dart';
 import 'package:uepgacadonline_flutter/modules/grade/grade_state.dart';
@@ -36,7 +34,7 @@ class _GradeScreenState extends State<GradeScreen> {
                   child: CircularProgressIndicator(),
                 );
               } else if (state is GradeLoaded) {
-                if (state.grade.disciplines.isEmpty) {
+                if (state.grade == null || state.grade.disciplines.isEmpty) {
                   return Center(
                     child: Text('Empty'),
                   );

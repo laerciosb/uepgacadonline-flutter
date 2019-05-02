@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:uepgacadonline_flutter/modules/news_item_bloc.dart';
-import 'package:uepgacadonline_flutter/modules/news_items_bloc.dart';
-import 'package:uepgacadonline_flutter/models/news.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:uepgacadonline_flutter/models/news.dart';
 import 'package:uepgacadonline_flutter/models/news_item.dart';
+import 'package:uepgacadonline_flutter/modules/news_item_bloc.dart';
 
 class NewsItemScreen extends StatefulWidget {
   NewsItemScreen({Key key, this.title, this.news}) : super(key: key);

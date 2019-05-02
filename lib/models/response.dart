@@ -1,4 +1,4 @@
-import 'package:uepgacadonline_flutter/models/daily_news.dart';
+import 'package:uepgacadonline_flutter/models/news_items.dart';
 import 'package:uepgacadonline_flutter/models/grade.dart';
 import 'package:uepgacadonline_flutter/models/news_item.dart';
 import 'package:uepgacadonline_flutter/models/user.dart';
@@ -8,7 +8,7 @@ class Response {
   String message;
   bool status;
 
-  DailyNews dailyNews;
+  NewsItems dailyNews;
   Grade grade;
   WeeklyMenu weeklyMenu;
   NewsItem news;
@@ -20,7 +20,7 @@ class Response {
     
     user = json.containsKey('perfil') ? User.fromJson(json['perfil']) : null;
     news = json.containsKey('news') ? NewsItem.fromJson(json['news']) : null;
-    dailyNews = json.containsKey('daily_news') ? DailyNews.fromJson(json['daily_news']) : null;
+    dailyNews = json.containsKey('daily_news') ? NewsItems.fromJson(json['daily_news']) : null;
     weeklyMenu = json.containsKey('weekly_menu') ? WeeklyMenu.fromJson(json) : null;
     grade = json.containsKey('grade') ? Grade.fromJson(json['grade']) : null;
   }
