@@ -49,10 +49,10 @@ class _NewsItemScreenState extends State<NewsItemScreen> {
                                 style: TextStyle(
                                     fontSize: 18.0,
                                     fontWeight: FontWeight.bold)),
-                            SizedBox(height: 12.0),
+                            SizedBox(height: state.newsItem.subtitle != "" ? 12.0 : 0.0),
                             Text(state.newsItem.subtitle,
                                 style: TextStyle(
-                                    color: Colors.grey, fontSize: 14.0),
+                                    color: Colors.grey, fontSize: state.newsItem.subtitle != "" ? 14.0 : 0.0),
                                 textAlign: TextAlign.center),
                             SizedBox(height: 12.0),
 //                            Text("Criado em: ${state.newsItem}")
@@ -65,11 +65,14 @@ class _NewsItemScreenState extends State<NewsItemScreen> {
                                 if (node is dom.Element) {
                                   switch (node.localName) {
                                     case "img":
-                                      return ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                        child: Image.network(
-                                            node.attributes['src']),
+                                      return Container(
+                                        margin: EdgeInsets.symmetric(vertical: 8.0),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          child: Image.network(
+                                              node.attributes['src']),
+                                        ),
                                       );
                                       break;
                                     case "p":
