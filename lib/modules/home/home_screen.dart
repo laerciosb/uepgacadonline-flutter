@@ -32,8 +32,9 @@ class _HomeScreenState extends State<HomeScreen> {
         body: Container(
           child: Column(
             children: <Widget>[
+              SizedBox(height: 10.0),
               SizedBox(
-                height: 160.0,
+                height: 120.0,
                 child: BlocBuilder(
                     bloc: _homeBloc,
                     builder: (context, HomeState state) {
@@ -60,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
       itemBuilder: (BuildContext context, int index) {
         return _buildSwiperItem(featured[index]);
       },
-      itemCount: 3,
+      itemCount: featured.length,
       autoplay: true,
       duration: 2000,
       viewportFraction: 0.8,
@@ -69,9 +70,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildSwiperItem(Featured featured) {
-    return Container(
-      decoration:
-          BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(16.0))),
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(12.0),
       child: Image.network(
         featured.image,
         fit: BoxFit.fill,
