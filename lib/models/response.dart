@@ -1,3 +1,4 @@
+import 'package:uepgacadonline_flutter/models/featured.dart';
 import 'package:uepgacadonline_flutter/models/news_items.dart';
 import 'package:uepgacadonline_flutter/models/grade.dart';
 import 'package:uepgacadonline_flutter/models/news_item.dart';
@@ -13,11 +14,13 @@ class Response {
   WeeklyMenu weeklyMenu;
   NewsItem news;
   User user;
+  List<Featured> featured;
   
   Response.fromJson(Map<String, dynamic> json) {
     message = json.containsKey('message') ? json['message'] : null;
     status = json.containsKey('status') ? json['status'] : null;
-    
+
+    featured = json.containsKey('featured') ? (json['featured'] as List)?.map((i) => Featured.fromJson(i))?.toList() : null;
     user = json.containsKey('perfil') ? User.fromJson(json['perfil']) : null;
     news = json.containsKey('news') ? NewsItem.fromJson(json['news']) : null;
     dailyNews = json.containsKey('daily_news') ? NewsItems.fromJson(json['daily_news']) : null;

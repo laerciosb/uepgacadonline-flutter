@@ -86,6 +86,7 @@ class _LoginFormState extends State<LoginForm> {
                       icon: Icon(Icons.person),
                       labelText: 'Registro Acadêmico',
                     ),
+                    maxLength: 8,
                     autovalidate: true,
                     autocorrect: false,
                     validator: (_) {
