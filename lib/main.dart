@@ -50,7 +50,7 @@ class _AppState extends State<App> {
                 return NewsItemsScreen();
               }
 
-              return Center(child: Text('null'));
+              return LoginScreen();
             }
           )
       ),

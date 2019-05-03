@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:uepgacadonline_flutter/modules/login/bloc.dart';
+import 'package:uepgacadonline_flutter/modules/login/login_form.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key key}) : super(key: key);
@@ -8,17 +10,22 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  LoginBloc _loginBloc;
+
+  @override
+  void initState() {
+    super.initState();
+    _loginBloc = LoginBloc();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Container(
-        margin: EdgeInsets.all(16.0),
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
+    return Material(child: LoginForm());
+  }
 
-            ]),
-      ),
-    );
+  @override
+  void dispose() {
+    _loginBloc.dispose();
+    super.dispose();
   }
 }

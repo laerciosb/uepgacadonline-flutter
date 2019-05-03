@@ -12,6 +12,8 @@ class LoginService {
 
     final response = await client.post("http://104.197.53.11/acadonline/login", body: body);
 
+    print(response.body);
+
     if (response.statusCode == 200) {
       return Response.fromJson(json.decode(response.body));
     } else {

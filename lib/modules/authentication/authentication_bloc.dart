@@ -17,7 +17,7 @@ class AuthenticationBloc
     AuthenticationEvent event,
   ) async* {
     if (event is AppStarted) {
-      yield AuthenticationUninitialized();
+      yield AuthenticationUnauthenticated();
     } else if (event is LoggedIn) {
       final response = await _repository.doLogin(event.ra, event.password);
       yield AuthenticationAuthenticated(response.user);
