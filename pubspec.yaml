@@ -19,14 +19,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  equatable: ^0.1.0
   bloc: ^0.12.0
+  cached_network_image: ^0.7.0
+  equatable: ^0.1.0
   flutter_bloc: ^0.12.0
+  flutter_html: ^0.9.6
+  flutter_swiper: ^1.1.6
   http: ^0.12.0+2
   rxdart: ^0.21.0
   uri: ^0.11.3+1
-  flutter_html: ^0.9.6
-  flutter_swiper : ^1.1.6
+
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -65,6 +67,14 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: fonts/Roboto-Regular.ttf
+        - asset: fonts/Roboto-Bold.ttf
+          weight: 700
+        - asset: fonts/Roboto-Italic.ttf
+          style: italic
   # fonts:
   #   - family: Schyler
   #     fonts:

@@ -16,7 +16,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     if (event is HomeFetch) {
       try {
         final featured = (await _repository.fetchHome()).featured;
-        yield HomeLoaded(featured: featured);
+        final newsItems = (await _repository.fetchNewsItems()).dailyNews;
+        yield HomeLoaded(featured: featured, newsItems: newsItems);
       } catch (_) {
         yield HomeError();
       }
