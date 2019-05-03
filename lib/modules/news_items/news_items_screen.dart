@@ -18,7 +18,7 @@ class _NewsItemsScreenState extends State<NewsItemsScreen> {
   final _newsItemsBloc = NewsItemsBloc();
 
   final _scrollController = ScrollController();
-  final _scrollThreshold = 200.0;
+  final _scrollThreshold = 100.0;
 
   @override
   initState() {
@@ -96,7 +96,7 @@ class _NewsItemsScreenState extends State<NewsItemsScreen> {
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                          NewsItemScreen(title: news.title, news: news))),
+                          NewsItemScreen(title: "Notícia", news: news))),
             ),
           ))
         ],

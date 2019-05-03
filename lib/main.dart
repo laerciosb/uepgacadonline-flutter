@@ -39,8 +39,8 @@ class _AppState extends State<App> {
           ),
 //      home: WeeklyMenuScreen(title: 'Ru'),
 //      home: GradeScreen(title: 'Notas'),
-//        home: NewsItemsScreen(title: 'News')
-      home: HomeScreen(title: 'Home')
+        home: NewsItemsScreen(title: 'News')
+//      home: HomeScreen(title: 'Home')
 //          home: BlocBuilder(
 //            bloc: _authenticationBloc,
 //            builder: (context, AuthenticationState state) {

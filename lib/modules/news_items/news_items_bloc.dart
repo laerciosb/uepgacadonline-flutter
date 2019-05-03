@@ -1,7 +1,8 @@
 import 'dart:async';
+
 import 'package:bloc/bloc.dart';
+import 'package:uepgacadonline_flutter/modules/news_items/bloc.dart';
 import 'package:uepgacadonline_flutter/resources/repository.dart';
-import './bloc.dart';
 
 class NewsItemsBloc extends Bloc<NewsItemsEvent, NewsItemsState> {
   final _repository = Repository();
@@ -13,10 +14,24 @@ class NewsItemsBloc extends Bloc<NewsItemsEvent, NewsItemsState> {
   Stream<NewsItemsState> mapEventToState(
     NewsItemsEvent event,
   ) async* {
-    if(event is NewsItemsFetch && !_hasReachedMax(currentState)) {
+    if (event is NewsItemsFetch && !_hasReachedMax(currentState)) {
       try {
-        final newsItems = (await _repository.fetchNewsItems()).dailyNews;
-        yield NewsItemsLoaded(newsItems: newsItems, hasReachedMax: false);
+        if (currentState is NewsItemsUninitialized) {
+          final date = DateTime.now();
+          final newsItems = (await _repository.fetchNewsItems(date)).dailyNews;
+          yield NewsItemsLoaded(
+              newsItems: newsItems,
+              hasReachedMax: false,
+              date: date.subtract(Duration(days: 1)));
+        }
+        if (currentState is NewsItemsLoaded) {
+          final newsItems = (await _repository.fetchNewsItems(currentState.date)).dailyNews;
+          yield newsItems.news.isEmpty
+              ? currentState.copyWith(hasReachedMax(
+                  hasReachedMax: true,
+                  date: currentState.date.subtract(Duration(days: 1))))
+              : NewsItemsLoaded(newsItems: newsItems, hasReachedMax: false);
+        }
       } catch (_) {
         yield NewsItemsError();
       }

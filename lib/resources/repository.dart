@@ -17,7 +17,7 @@ class Repository {
   Future<Response> fetchHome() => homeService.fetchHome();
   Future<Response> fetchGrade() => gradeService.fetchGrade();
   Future<Response> fetchWeeklyMenu() => ruService.fetchWeeklyMenu();
-  Future<Response> fetchNewsItems() => newsService.fetchNewsItems();
+  Future<Response> fetchNewsItems(DateTime date) => newsService.fetchNewsItems(date);
   Future<Response> fetchNewsItem(String cod) => newsService.fetchNewsItem(cod);
 
   Future<Response> doLogin(String login, String password) => loginService.doLogin(login, password);
