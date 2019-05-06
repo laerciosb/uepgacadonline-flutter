@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:uepgacadonline_flutter/models/featured.dart';
 import 'package:uepgacadonline_flutter/models/news.dart';
@@ -30,11 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _bottomNavigationBarItem(int index) {
-    return [
-      NewsItemsScreen(),
-      GradeScreen(),
-      WeeklyMenuScreen()
-    ][index];
+    return [NewsItemsScreen(), GradeScreen(), WeeklyMenuScreen()][index];
   }
 
   @override
@@ -43,17 +38,19 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           title: Text(widget.title),
         ),
-        drawer: Drawer(),
+        drawer: _buildDrawer(),
         bottomNavigationBar: BottomNavigationBar(
             currentIndex: _selectedItem,
             onTap: _onItemTapped,
             items: [
-          BottomNavigationBarItem(title: Text("Notícias"), icon: Icon(Icons.note)),
-          BottomNavigationBarItem(title: Text("Notas"), icon: Icon(Icons.grade)),
-          BottomNavigationBarItem(title: Text("Restaurante"), icon: Icon(Icons.restaurant))
-        ]),
-        body: _bottomNavigationBarItem(_selectedItem)
-    );
+              BottomNavigationBarItem(
+                  title: Text("Notícias"), icon: Icon(Icons.note)),
+              BottomNavigationBarItem(
+                  title: Text("Notas"), icon: Icon(Icons.grade)),
+              BottomNavigationBarItem(
+                  title: Text("Restaurante"), icon: Icon(Icons.restaurant))
+            ]),
+        body: _bottomNavigationBarItem(_selectedItem));
   }
 
   Widget _buildSwiper(List<Featured> featured) {
@@ -83,6 +80,23 @@ class _HomeScreenState extends State<HomeScreen> {
         fit: BoxFit.fill,
       ),
     );
+  }
+
+  Widget _buildDrawer() {
+    return Drawer(
+        child: Container(
+      color: Colors.white,
+      child: ListView(
+        padding: EdgeInsets.fromLTRB(24.0, 8.0, 24.0, 8.0),
+        children: <Widget>[
+          Divider(height: 16),
+          ListTile(
+              leading: Icon(Icons.exit_to_app),
+              title: Text("Sair"),
+              onTap: () {})
+        ],
+      ),
+    ));
   }
 
   Widget _itemBuilder(BuildContext context, int index, News news) {
