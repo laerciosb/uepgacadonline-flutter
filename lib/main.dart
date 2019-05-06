@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uepgacadonline_flutter/modules/authentication/bloc.dart';
+import 'package:uepgacadonline_flutter/modules/grade/grade_screen.dart';
 import 'package:uepgacadonline_flutter/modules/home/home_screen.dart';
 import 'package:uepgacadonline_flutter/modules/login/login_screen.dart';
 import 'package:uepgacadonline_flutter/modules/news_items/news_items_screen.dart';
@@ -39,22 +40,22 @@ class _AppState extends State<App> {
           ),
 //      home: WeeklyMenuScreen(title: 'Ru'),
 //      home: GradeScreen(title: 'Notas'),
-        home: NewsItemsScreen(title: 'News')
+//        home: NewsItemsScreen(title: 'News')
 //      home: HomeScreen(title: 'Home')
-//          home: BlocBuilder(
-//            bloc: _authenticationBloc,
-//            builder: (context, AuthenticationState state) {
-//              if(state is AuthenticationUninitialized) {
-//                return SplashScreen();
-//              }
-//
-//              if(state is AuthenticationAuthenticated) {
-//                return NewsItemsScreen();
-//              }
-//
-//              return LoginScreen();
-//            }
-//          )
+          home: BlocBuilder(
+            bloc: _authenticationBloc,
+            builder: (context, AuthenticationState state) {
+              if(state is AuthenticationUninitialized) {
+                return SplashScreen();
+              }
+
+              if(state is AuthenticationAuthenticated) {
+                return NewsItemsScreen();
+              }
+
+              return LoginScreen();
+            }
+          )
       ),
     );
   }

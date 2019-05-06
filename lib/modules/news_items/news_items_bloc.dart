@@ -24,9 +24,15 @@ class NewsItemsBloc extends Bloc<NewsItemsEvent, NewsItemsState> {
               hasReachedMax: false,
               date: date.subtract(Duration(days: 1)));
         } else if (currentState is NewsItemsLoaded) {
-          final newsItems = (await _repository.fetchNewsItems((currentState as NewsItemsLoaded).date)).dailyNews;
-          yield newsItems.news.isEmpty
-              ? (currentState as NewsItemsLoaded).copyWith(hasReachedMax: true, date: (currentState as NewsItemsLoaded).date.subtract(Duration(days: 1)))
+          final newsItems = (await _repository
+                  .fetchNewsItems((currentState as NewsItemsLoaded).date))
+              .dailyNews;
+          yield newsItems == null
+              ? (currentState as NewsItemsLoaded).copyWith(
+                  hasReachedMax: true,
+                  date: (currentState as NewsItemsLoaded)
+                      .date
+                      .subtract(Duration(days: 1)))
               : NewsItemsLoaded(newsItems: newsItems, hasReachedMax: false);
         }
       } catch (_) {

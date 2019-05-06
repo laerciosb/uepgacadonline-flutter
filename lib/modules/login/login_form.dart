@@ -43,7 +43,10 @@ class _LoginFormState extends State<LoginForm> {
               SnackBar(
                 content: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [Text('Erro ao realizar login!'), Icon(Icons.error)],
+                  children: [
+                    Text('Erro ao realizar login!'),
+                    Icon(Icons.error)
+                  ],
                 ),
                 backgroundColor: Colors.red,
               ),
@@ -71,59 +74,83 @@ class _LoginFormState extends State<LoginForm> {
       child: BlocBuilder(
         bloc: _loginBloc,
         builder: (BuildContext context, LoginState state) {
-          return Padding(
-            padding: EdgeInsets.all(20.0),
-            child: Form(
-              child: ListView(
-                children: <Widget>[
-//                  Padding(
-//                    padding: EdgeInsets.symmetric(vertical: 20),
-//                    child: Image.asset('images/uepg_logo.png', height: 200),
-//                  ),
-                  TextFormField(
-                    controller: _raController,
-                    decoration: InputDecoration(
-                      icon: Icon(Icons.person),
-                      labelText: 'Registro Acadêmico',
+          return Column(
+            children: <Widget>[
+              Expanded(flex: 6, child: Container()),
+              Expanded(
+                flex: 10,
+                child: ListView(
+                  children: <Widget>[
+//                Padding(
+//                  padding: EdgeInsets.symmetric(vertical: 20),
+//                  child: Image.asset('images/uepg_logo.png', height: 200),
+//                ),
+                    Card(
+                      child: Container(
+                        padding: EdgeInsets.all(16.0),
+                        child: Column(
+                          children: <Widget>[
+                            TextFormField(
+                              controller: _raController,
+                              decoration: InputDecoration(
+                                icon: Icon(Icons.person),
+                                labelText: 'Registro Acadêmico',
+                              ),
+                              maxLength: 8,
+                              autovalidate: true,
+                              autocorrect: false,
+                              validator: (_) {
+                                return !state.isRaValid
+                                    ? 'Registro Acadêmico Inválido'
+                                    : null;
+                              },
+                            ),
+                            TextFormField(
+                              controller: _passwordController,
+                              decoration: InputDecoration(
+                                icon: Icon(Icons.lock),
+                                labelText: 'Senha',
+                              ),
+                              obscureText: true,
+                              autovalidate: true,
+                              autocorrect: false,
+                              validator: (_) {
+                                return !state.isPasswordValid
+                                    ? 'Senha inválida'
+                                    : null;
+                              },
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(vertical: 20),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: <Widget>[
+                                  LoginButton(
+                                    onPressed: isLoginButtonEnabled(state)
+                                        ? _onFormSubmitted
+                                        : null,
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
                     ),
-                    maxLength: 8,
-                    autovalidate: true,
-                    autocorrect: false,
-                    validator: (_) {
-                      return !state.isRaValid
-                          ? 'Registro Acadêmico Inválido'
-                          : null;
-                    },
-                  ),
-                  TextFormField(
-                    controller: _passwordController,
-                    decoration: InputDecoration(
-                      icon: Icon(Icons.lock),
-                      labelText: 'Senha',
-                    ),
-                    obscureText: true,
-                    autovalidate: true,
-                    autocorrect: false,
-                    validator: (_) {
-                      return !state.isPasswordValid ? 'Senha inválida' : null;
-                    },
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        LoginButton(
-                          onPressed: isLoginButtonEnabled(state)
-                              ? _onFormSubmitted
-                              : null,
-                        )
-                      ],
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
+              Expanded(
+                  flex: 4,
+                  child: Opacity(
+                    opacity: 0.25,
+                    child: Container(
+                        margin: EdgeInsets.only(bottom: 24.0),
+                        alignment: Alignment.bottomCenter,
+                        child: Text("v0.0.1",
+                            style: TextStyle(color: Colors.white))),
+                  ))
+            ],
           );
         },
       ),

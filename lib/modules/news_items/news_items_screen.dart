@@ -18,7 +18,7 @@ class _NewsItemsScreenState extends State<NewsItemsScreen> {
   final _newsItemsBloc = NewsItemsBloc();
 
   final _scrollController = ScrollController();
-  final _scrollThreshold = 100.0;
+  final _scrollThreshold = 200.0;
 
   @override
   initState() {
@@ -55,14 +55,16 @@ class _NewsItemsScreenState extends State<NewsItemsScreen> {
                 child: CircularProgressIndicator(),
               );
             } else if (state is NewsItemsLoaded) {
-              if (state.newsItems == null || state.newsItems.news.isEmpty) {
+              if (state.newsItems == null) {
                 return Center(
                   child: Text('Empty'),
                 );
               }
               return ListView.builder(
                   controller: _scrollController,
-                  itemCount: state.newsItems.news.length,
+                  itemCount: state.hasReachedMax
+                      ? state.newsItems.news.length
+                      : state.newsItems.news.length + 1,
                   itemBuilder: (context, index) =>
                       index >= state.newsItems.news.length
                           ? BottomLoader()
