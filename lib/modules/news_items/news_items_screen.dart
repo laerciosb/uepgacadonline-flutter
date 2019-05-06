@@ -6,10 +6,6 @@ import 'package:uepgacadonline_flutter/modules/news_items/bloc.dart';
 import 'package:uepgacadonline_flutter/widgets/bottom_loader.dart';
 
 class NewsItemsScreen extends StatefulWidget {
-  NewsItemsScreen({Key key, this.title}) : super(key: key);
-
-  final String title;
-
   @override
   _NewsItemsScreenState createState() => _NewsItemsScreenState();
 }
@@ -43,40 +39,35 @@ class _NewsItemsScreenState extends State<NewsItemsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
-        body: BlocBuilder(
-          bloc: _newsItemsBloc,
-          builder: (context, NewsItemsState state) {
-            if (state is NewsItemsUninitialized) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (state is NewsItemsLoaded) {
-              if (state.newsItems == null) {
-                return Center(
-                  child: Text('Empty'),
-                );
-              }
-              return ListView.builder(
-                  controller: _scrollController,
-                  itemCount: state.hasReachedMax
-                      ? state.newsItems.news.length
-                      : state.newsItems.news.length + 1,
-                  itemBuilder: (context, index) =>
-                      index >= state.newsItems.news.length
-                          ? BottomLoader()
-                          : _itemBuilder(
-                              context, index, state.newsItems.news[index]));
-            } else if (state is NewsItemsLoaded) {
-              return Center(
-                child: Text('Error'),
-              );
-            }
-          },
-        ));
+    return BlocBuilder(
+      bloc: _newsItemsBloc,
+      builder: (context, NewsItemsState state) {
+        if (state is NewsItemsUninitialized) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (state is NewsItemsLoaded) {
+          if (state.newsItems == null) {
+            return Center(
+              child: Text('Empty'),
+            );
+          }
+          return ListView.builder(
+              controller: _scrollController,
+              itemCount: state.hasReachedMax
+                  ? state.newsItems.news.length
+                  : state.newsItems.news.length + 1,
+              itemBuilder: (context, index) => index >=
+                      state.newsItems.news.length
+                  ? BottomLoader()
+                  : _itemBuilder(context, index, state.newsItems.news[index]));
+        } else if (state is NewsItemsLoaded) {
+          return Center(
+            child: Text('Error'),
+          );
+        }
+      },
+    );
   }
 
   Widget _itemBuilder(BuildContext context, int index, News news) {

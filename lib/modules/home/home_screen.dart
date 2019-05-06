@@ -7,6 +7,7 @@ import 'package:uepgacadonline_flutter/modules/grade/grade_screen.dart';
 import 'package:uepgacadonline_flutter/modules/home/bloc.dart';
 import 'package:uepgacadonline_flutter/modules/menu/menu_screen.dart';
 import 'package:uepgacadonline_flutter/modules/news_item/news_item.screen.dart';
+import 'package:uepgacadonline_flutter/modules/news_items/news_items_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key, this.title}) : super(key: key);
@@ -30,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _bottomNavigationBarItem(int index) {
     return [
+      NewsItemsScreen(),
       GradeScreen(),
       WeeklyMenuScreen()
     ][index];
@@ -46,6 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
             currentIndex: _selectedItem,
             onTap: _onItemTapped,
             items: [
+          BottomNavigationBarItem(title: Text("Notícias"), icon: Icon(Icons.note)),
           BottomNavigationBarItem(title: Text("Notas"), icon: Icon(Icons.grade)),
           BottomNavigationBarItem(title: Text("Restaurante"), icon: Icon(Icons.restaurant))
         ]),
