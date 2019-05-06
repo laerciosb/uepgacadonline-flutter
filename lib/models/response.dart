@@ -8,6 +8,7 @@ import 'package:uepgacadonline_flutter/models/weekly_menu.dart';
 class Response {
   String message;
   bool status;
+  String token;
 
   NewsItems dailyNews;
   Grade grade;
@@ -19,6 +20,7 @@ class Response {
   Response.fromJson(Map<String, dynamic> json) {
     message = json.containsKey('message') ? json['message'] : null;
     status = json.containsKey('status') ? json['status'] : null;
+    token = json.containsKey('token') ? json['token'] : null;
 
     featured = json.containsKey('featured') ? (json['featured'] as List)?.map((i) => Featured.fromJson(i))?.toList() : null;
     user = json.containsKey('perfil') ? User.fromJson(json['perfil']) : null;

@@ -29,6 +29,7 @@ dependencies:
   rxdart: ^0.21.0
   uri: ^0.11.3+1
   intl: ^0.15.8
+  shared_preferences: ^0.5.2
 
 
 
@@ -70,13 +71,13 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Roboto
-      fonts:
-        - asset: fonts/Roboto-Regular.ttf
-        - asset: fonts/Roboto-Bold.ttf
-          weight: 700
-        - asset: fonts/Roboto-Italic.ttf
-          style: italic
+  - family: Roboto
+    fonts:
+    - asset: fonts/Roboto-Regular.ttf
+    - asset: fonts/Roboto-Bold.ttf
+      weight: 700
+    - asset: fonts/Roboto-Italic.ttf
+      style: italic
   # fonts:
   #   - family: Schyler
   #     fonts:

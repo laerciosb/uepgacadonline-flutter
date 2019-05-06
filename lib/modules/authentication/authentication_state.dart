@@ -13,9 +13,9 @@ class AuthenticationUninitialized extends AuthenticationState {
 }
 
 class AuthenticationAuthenticated extends AuthenticationState {
-  final User user;
+//  final User user;
 
-  AuthenticationAuthenticated(this.user) : super([user]);
+//  AuthenticationAuthenticated(this.user) : super([user]);
 
   @override
   String toString() => 'Authenticated';

@@ -79,7 +79,7 @@ class _LoginFormState extends State<LoginForm> {
               Expanded(flex: 6, child: Container()),
               Expanded(
                 flex: 10,
-                child: ListView(
+                child: Column(
                   children: <Widget>[
 //                Padding(
 //                  padding: EdgeInsets.symmetric(vertical: 20),
@@ -142,14 +142,11 @@ class _LoginFormState extends State<LoginForm> {
               ),
               Expanded(
                   flex: 4,
-                  child: Opacity(
-                    opacity: 0.25,
-                    child: Container(
-                        margin: EdgeInsets.only(bottom: 24.0),
-                        alignment: Alignment.bottomCenter,
-                        child: Text("v0.0.1",
-                            style: TextStyle(color: Colors.white))),
-                  ))
+                  child: Container(
+                      margin: EdgeInsets.only(bottom: 32.0),
+                      alignment: Alignment.bottomCenter,
+                      child: Text("v0.0.1",
+                          style: TextStyle(color: Colors.white))))
             ],
           );
         },
