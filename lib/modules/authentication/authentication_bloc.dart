@@ -30,10 +30,7 @@ class AuthenticationBloc
         yield AuthenticationUnauthenticated();
       }
     } else if (event is LoggedIn) {
-      final response = await _repository.doLogin(event.ra, event.password);
-
-      _prefs.setString('token', response.token);
-
+      print("AUTHENTICATED");
       yield AuthenticationAuthenticated();
     } else if (event is LoggedOut) {
       yield AuthenticationUnauthenticated();

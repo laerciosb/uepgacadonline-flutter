@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uepgacadonline_flutter/resources/repository.dart';
 import './bloc.dart';
 
@@ -28,6 +29,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
+    final _prefs = await SharedPreferences.getInstance();
+
     if (event is RaChanged) {
       yield currentState.update(
         isRaValid: true
@@ -39,7 +42,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     } else if (event is LoginWithCredentialsPressed) {
       yield LoginState.loading();
       try {
-        await _repository.doLogin(event.ra, event.password);
+        final response = await _repository.doLogin(event.ra, event.password);
+
+        print("set TOKEN:"+response.token);
+        _prefs.setString('token', response.token);
+
         yield LoginState.success();
       } catch(_) {
         yield LoginState.failure();
