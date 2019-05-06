@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:uepgacadonline_flutter/models/featured.dart';
 import 'package:uepgacadonline_flutter/models/news.dart';
+import 'package:uepgacadonline_flutter/modules/authentication/authentication_bloc.dart';
+import 'package:uepgacadonline_flutter/modules/authentication/bloc.dart';
 import 'package:uepgacadonline_flutter/modules/grade/grade_screen.dart';
 import 'package:uepgacadonline_flutter/modules/home/bloc.dart';
 import 'package:uepgacadonline_flutter/modules/menu/menu_screen.dart';
@@ -19,12 +21,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final _homeBloc = HomeBloc();
+  AuthenticationBloc _authenticationBloc;
 
   int _selectedItem = 0;
 
   @override
   initState() {
     super.initState();
+    _authenticationBloc = AuthenticationBloc();
     _homeBloc.dispatch(HomeFetch());
   }
 
@@ -93,7 +97,9 @@ class _HomeScreenState extends State<HomeScreen> {
           ListTile(
               leading: Icon(Icons.exit_to_app),
               title: Text("Sair"),
-              onTap: () {})
+              onTap: () {
+                _authenticationBloc.dispatch(LoggedOut());
+              })
         ],
       ),
     ));

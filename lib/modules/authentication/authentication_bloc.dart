@@ -30,9 +30,10 @@ class AuthenticationBloc
         yield AuthenticationUnauthenticated();
       }
     } else if (event is LoggedIn) {
-      print("AUTHENTICATED");
       yield AuthenticationAuthenticated();
     } else if (event is LoggedOut) {
+      _prefs.setString('token', null);
+      print('LOGOUT');
       yield AuthenticationUnauthenticated();
     }
   }
