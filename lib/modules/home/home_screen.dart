@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:uepgacadonline_flutter/models/featured.dart';
 import 'package:uepgacadonline_flutter/models/news.dart';
+import 'package:uepgacadonline_flutter/modules/grade/grade_screen.dart';
 import 'package:uepgacadonline_flutter/modules/home/bloc.dart';
+import 'package:uepgacadonline_flutter/modules/menu/menu_screen.dart';
 import 'package:uepgacadonline_flutter/modules/news_item/news_item.screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -18,10 +20,19 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final _homeBloc = HomeBloc();
 
+  int _selectedItem = 0;
+
   @override
   initState() {
     super.initState();
     _homeBloc.dispatch(HomeFetch());
+  }
+
+  Widget _bottomNavigationBarItem(int index) {
+    return [
+      GradeScreen(),
+      WeeklyMenuScreen()
+    ][index];
   }
 
   @override
@@ -31,51 +42,15 @@ class _HomeScreenState extends State<HomeScreen> {
           title: Text(widget.title),
         ),
         drawer: Drawer(),
-        body: Container(
-          child: BlocBuilder(
-              bloc: _homeBloc,
-              builder: (context, HomeState state) {
-                if (state is HomeUninitialized) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state is HomeLoaded) {
-                  return Column(
-                    children: <Widget>[
-//                      Expanded(
-//                          flex: 16,
-//                          child: Material(
-//                            elevation: 4.0,
-//                            child: Container(
-//                                padding: EdgeInsets.symmetric(vertical: 16.0),
-//                                decoration: BoxDecoration(color: Colors.blue),
-//                                child: _buildSwiper(state.featured)),
-//                          )),
-                      Container(
-                        padding: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 4.0),
-                        child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text("Notícias", style: TextStyle(fontSize: 16.0))),
-                      ),
-                      Expanded(
-                        flex: 44,
-                        child: Container(
-                          margin: EdgeInsets.symmetric(horizontal: 8.0),
-                          child: ListView.builder(
-                              itemCount: state.newsItems.news.length,
-                              itemBuilder: (context, index) => _itemBuilder(
-                                  context, index, state.newsItems.news[index])),
-                        ),
-                      )
-                    ],
-                  );
-                } else if (state is HomeError) {
-                  return Center(
-                    child: Text('Error'),
-                  );
-                }
-              }),
-        ));
+        bottomNavigationBar: BottomNavigationBar(
+            currentIndex: _selectedItem,
+            onTap: _onItemTapped,
+            items: [
+          BottomNavigationBarItem(title: Text("Notas"), icon: Icon(Icons.grade)),
+          BottomNavigationBarItem(title: Text("Restaurante"), icon: Icon(Icons.restaurant))
+        ]),
+        body: _bottomNavigationBarItem(_selectedItem)
+    );
   }
 
   Widget _buildSwiper(List<Featured> featured) {
@@ -89,6 +64,12 @@ class _HomeScreenState extends State<HomeScreen> {
       viewportFraction: 0.8,
       scale: 0.8,
     );
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedItem = index;
+    });
   }
 
   Widget _buildSwiperItem(Featured featured) {

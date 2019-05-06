@@ -50,7 +50,7 @@ class _AppState extends State<App> {
               }
 
               if(state is AuthenticationAuthenticated) {
-                return GradeScreen(title: "Notas");
+                return HomeScreen(title: "Home");
               }
 
               return LoginScreen();
