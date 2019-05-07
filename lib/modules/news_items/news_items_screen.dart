@@ -47,6 +47,7 @@ class _NewsItemsScreenState extends State<NewsItemsScreen> {
             child: CircularProgressIndicator(),
           );
         } else if (state is NewsItemsLoaded) {
+          print(state.newsItems);
           if (state.newsItems == null) {
             return Center(
               child: Text('Empty'),

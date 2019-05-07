@@ -18,12 +18,16 @@ class NewsItemsBloc extends Bloc<NewsItemsEvent, NewsItemsState> {
       try {
         if (currentState is NewsItemsUninitialized) {
           final date = DateTime.now();
+
           final newsItems = (await _repository.fetchNewsItems(date)).dailyNews;
+
           yield NewsItemsLoaded(
               newsItems: newsItems,
               hasReachedMax: false,
               date: date.subtract(Duration(days: 1)));
-        } else if (currentState is NewsItemsLoaded) {
+        }
+
+        if (currentState is NewsItemsLoaded) {
           final newsItems = (await _repository
                   .fetchNewsItems((currentState as NewsItemsLoaded).date))
               .dailyNews;

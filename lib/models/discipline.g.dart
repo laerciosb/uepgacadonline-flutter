@@ -6,7 +6,7 @@ part of 'discipline.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Discipline _$DisciplineFromJson(Map<String, dynamic> json) {
+Discipline _$DisciplineFromJson(Map json) {
   return Discipline(
       json['absences'] as int,
       json['class_name'] as String,

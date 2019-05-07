@@ -6,10 +6,13 @@ part of 'grade.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Grade _$GradeFromJson(Map<String, dynamic> json) {
+Grade _$GradeFromJson(Map json) {
   return Grade((json['disciplines'] as List)
-      ?.map((e) =>
-          e == null ? null : Discipline.fromJson(e as Map<String, dynamic>))
+      ?.map((e) => e == null
+          ? null
+          : Discipline.fromJson((e as Map)?.map(
+              (k, e) => MapEntry(k as String, e),
+            )))
       ?.toList());
 }
 

@@ -6,29 +6,42 @@ part of 'response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Response _$ResponseFromJson(Map<String, dynamic> json) {
+Response _$ResponseFromJson(Map json) {
   return Response(
       json['message'] as String,
       json['status'] as bool,
       json['token'] as String,
       json['daily_news'] == null
           ? null
-          : NewsItems.fromJson(json['daily_news'] as Map<String, dynamic>),
+          : NewsItems.fromJson((json['daily_news'] as Map)?.map(
+              (k, e) => MapEntry(k as String, e),
+            )),
       json['grade'] == null
           ? null
-          : Grade.fromJson(json['grade'] as Map<String, dynamic>),
+          : Grade.fromJson((json['grade'] as Map)?.map(
+              (k, e) => MapEntry(k as String, e),
+            )),
       json['weekly_menu'] == null
           ? null
-          : WeeklyMenu.fromJson(json['weekly_menu'] as Map<String, dynamic>),
+          : WeeklyMenu.fromJson((json['weekly_menu'] as Map)?.map(
+              (k, e) => MapEntry(k as String, e),
+            )),
       json['news'] == null
           ? null
-          : NewsItem.fromJson(json['news'] as Map<String, dynamic>),
+          : NewsItem.fromJson((json['news'] as Map)?.map(
+              (k, e) => MapEntry(k as String, e),
+            )),
       json['user'] == null
           ? null
-          : User.fromJson(json['user'] as Map<String, dynamic>),
+          : User.fromJson((json['user'] as Map)?.map(
+              (k, e) => MapEntry(k as String, e),
+            )),
       (json['featured'] as List)
-          ?.map((e) =>
-              e == null ? null : Featured.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => e == null
+              ? null
+              : Featured.fromJson((e as Map)?.map(
+                  (k, e) => MapEntry(k as String, e),
+                )))
           ?.toList());
 }
 

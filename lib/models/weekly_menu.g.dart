@@ -6,9 +6,13 @@ part of 'weekly_menu.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-WeeklyMenu _$WeeklyMenuFromJson(Map<String, dynamic> json) {
+WeeklyMenu _$WeeklyMenuFromJson(Map json) {
   return WeeklyMenu((json['weekly_menu'] as List)
-      ?.map((e) => e == null ? null : Menu.fromJson(e as Map<String, dynamic>))
+      ?.map((e) => e == null
+          ? null
+          : Menu.fromJson((e as Map)?.map(
+              (k, e) => MapEntry(k as String, e),
+            )))
       ?.toList());
 }
 

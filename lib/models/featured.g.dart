@@ -6,7 +6,7 @@ part of 'featured.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Featured _$FeaturedFromJson(Map<String, dynamic> json) {
+Featured _$FeaturedFromJson(Map json) {
   return Featured(json['image'] as String, json['address'] as String);
 }
 

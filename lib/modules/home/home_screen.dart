@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uepgacadonline_flutter/modules/authentication/authentication_bloc.dart';
 import 'package:uepgacadonline_flutter/modules/authentication/bloc.dart';
 import 'package:uepgacadonline_flutter/modules/grade/grade_screen.dart';
-import 'package:uepgacadonline_flutter/modules/home/bloc.dart';
 import 'package:uepgacadonline_flutter/modules/menu/menu_screen.dart';
 import 'package:uepgacadonline_flutter/modules/news_items/news_items_screen.dart';
 
@@ -17,14 +16,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final _homeBloc = HomeBloc();
   int _selectedItem = 0;
-
-  @override
-  initState() {
-    super.initState();
-    _homeBloc.dispatch(HomeFetch());
-  }
 
   Widget _bottomNavigationBarItem(int index) {
     return [NewsItemsScreen(), GradeScreen(), WeeklyMenuScreen()][index];

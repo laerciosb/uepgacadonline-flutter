@@ -6,12 +6,15 @@ part of 'news_items.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-NewsItems _$NewsItemsFromJson(Map<String, dynamic> json) {
+NewsItems _$NewsItemsFromJson(Map json) {
   return NewsItems(
       json['date'] == null ? null : DateTime.parse(json['date'] as String),
       (json['news'] as List)
-          ?.map((e) =>
-              e == null ? null : News.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => e == null
+              ? null
+              : News.fromJson((e as Map)?.map(
+                  (k, e) => MapEntry(k as String, e),
+                )))
           ?.toList());
 }
 

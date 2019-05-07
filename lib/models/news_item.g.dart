@@ -6,7 +6,7 @@ part of 'news_item.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-NewsItem _$NewsItemFromJson(Map<String, dynamic> json) {
+NewsItem _$NewsItemFromJson(Map json) {
   return NewsItem(
       json['author'] as String,
       json['title'] as String,

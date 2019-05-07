@@ -6,7 +6,7 @@ part of 'menu.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Menu _$MenuFromJson(Map<String, dynamic> json) {
+Menu _$MenuFromJson(Map json) {
   return Menu(
       json['date'] == null ? null : DateTime.parse(json['date'] as String),
       json['day'] as String,

@@ -46,10 +46,58 @@ class _GradeScreenState extends State<GradeScreen> {
   }
 
   Widget _itemBuilder(BuildContext context, int index, Discipline discipline) {
-    return Container(
-      child: Card(
+    return Card(
+      elevation: 2.0,
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 32.0),
         child: Column(
-          children: <Widget>[Text(discipline.name)],
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Icon(Icons.add),
+                Text(discipline.name)
+              ],
+            ),
+            Table(
+              children: <TableRow>[
+                TableRow(
+                  decoration: BoxDecoration(
+                    color: Colors.grey
+                  ),
+                  children: [
+                    Text("Avaliação"),
+                    Text("Nota"),
+                    Text("Faltas"),
+                    Text("Frequência")
+                  ]
+                ),
+                TableRow(
+                  children: [
+                    Text("1 Semestre"),
+                    Text("8.0"),
+                    Text("30"),
+                    Text("80%")
+                  ]
+                ),
+                TableRow(
+                    children: [
+                      Text("2 Semestre"),
+                      Text("8.0"),
+                      Text("30"),
+                      Text("80%")
+                    ]
+                ),
+                TableRow(
+                    children: [
+                      Text("Exame"),
+                      Text("8.0"),
+                      Text("30"),
+                      Text("80%")
+                    ]
+                )
+              ],
+            )
+          ],
         ),
       ),
     );

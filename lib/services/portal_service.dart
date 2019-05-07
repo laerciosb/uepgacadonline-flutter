@@ -10,9 +10,6 @@ class PortalService {
 
   Future<Response> fetchNewsItems(DateTime date) async {
     final dateFormatted = DateFormat('dd/MM/yyyy').format(date);
-
-    print(dateFormatted);
-
     final response = await client.get("http://104.197.53.11/portal/newsitem?date=06/05/2019");
 
     if (response.statusCode == 200) {
