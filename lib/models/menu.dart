@@ -1,11 +1,17 @@
-class Menu {
-  DateTime date;
-  String day;
-  List<String> food;
+import 'package:json_annotation/json_annotation.dart';
 
-  Menu.fromJson(Map<String, dynamic> json) {
-//    date = DateTime.parse(json['date']);
-    day = json[day];
-    food = (json['food'] as List)?.map((i) => i.toString())?.toList();
-  }
+part 'menu.g.dart';
+
+@JsonSerializable()
+
+class Menu {
+
+  Menu(this.date, this.day, this.food);
+
+  @JsonKey(name: 'date') DateTime date;
+  @JsonKey(name: 'day') String day;
+  @JsonKey(name: 'food') List<String> food;
+
+  factory Menu.fromJson(Map<String, dynamic> json) => _$MenuFromJson(json);
+  Map<String, dynamic> toJson() => _$MenuToJson(this);
 }

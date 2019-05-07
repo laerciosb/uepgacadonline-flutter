@@ -1,16 +1,21 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'news_item.g.dart';
+
+@JsonSerializable()
+
 class NewsItem {
-  String author;
-  String title;
-  String subtitle;
-  String content;
 
-  //DateTime created_at;
-  //DateTime updated_at;
+  NewsItem(this.author, this.title, this.subtitle, this.content,
+      this.created_at, this.updated_at);
 
-  NewsItem.fromJson(Map<String, dynamic> json) {
-    author = json['author'];
-    title = json['title'];
-    subtitle = json['subtitle'];
-    content = json['content'];
-  }
+  @JsonKey(name: 'author') String author;
+  @JsonKey(name: 'title') String title;
+  @JsonKey(name: 'subtitle') String subtitle;
+  @JsonKey(name: 'content') String content;
+  @JsonKey(name: 'created_at') DateTime created_at;
+  @JsonKey(name: 'updated_at') DateTime updated_at;
+
+  factory NewsItem.fromJson(Map<String, dynamic> json) => _$NewsItemFromJson(json);
+  Map<String, dynamic> toJson() => _$NewsItemToJson(this);
 }

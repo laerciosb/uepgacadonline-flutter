@@ -5,29 +5,28 @@ import 'package:uepgacadonline_flutter/models/grade.dart';
 import 'package:uepgacadonline_flutter/models/news_item.dart';
 import 'package:uepgacadonline_flutter/models/user.dart';
 import 'package:uepgacadonline_flutter/models/weekly_menu.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+part 'response.g.dart';
+
+@JsonSerializable()
 
 class Response {
-  String message;
-  bool status;
-  String token;
 
-  NewsItems dailyNews;
-  Grade grade;
-  WeeklyMenu weeklyMenu;
-  NewsItem news;
-  User user;
-  List<Featured> featured;
-  
-  Response.fromJson(Map<String, dynamic> json) {
-    message = json.containsKey('message') ? json['message'] : null;
-    status = json.containsKey('status') ? json['status'] : null;
-    token = json.containsKey('token') ? json['token'] : null;
+  Response(this.message, this.status, this.token, this.dailyNews, this.grade,
+      this.weeklyMenu, this.news, this.user, this.featured);
 
-    featured = json.containsKey('featured') ? (json['featured'] as List)?.map((i) => Featured.fromJson(i))?.toList() : null;
-    user = json.containsKey('perfil') ? User.fromJson(json['perfil']) : null;
-    news = json.containsKey('news') ? NewsItem.fromJson(json['news']) : null;
-    dailyNews = json.containsKey('daily_news') ? NewsItems.fromJson(json['daily_news']) : null;
-    weeklyMenu = json.containsKey('weekly_menu') ? WeeklyMenu.fromJson(json) : null;
-    grade = json.containsKey('grade') ? Grade.fromJson(json['grade']) : null;
-  }
+  @JsonKey(name: 'message') String message;
+  @JsonKey(name: 'status') bool status;
+  @JsonKey(name: 'token') String token;
+
+  @JsonKey(name: 'daily_news') NewsItems dailyNews;
+  @JsonKey(name: 'grade') Grade grade;
+  @JsonKey(name: 'weekly_menu') WeeklyMenu weeklyMenu;
+  @JsonKey(name: 'news') NewsItem news;
+  @JsonKey(name: 'user') User user;
+  @JsonKey(name: 'featured') List<Featured> featured;
+
+  factory Response.fromJson(Map<String, dynamic> json) => _$ResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$ResponseToJson(this);
 }
