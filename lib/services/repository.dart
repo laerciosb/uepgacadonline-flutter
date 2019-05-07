@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:uepgacadonline_flutter/models/response.dart';
-import 'package:uepgacadonline_flutter/resources/grade_service.dart';
-import 'package:uepgacadonline_flutter/resources/home_service.dart';
-import 'package:uepgacadonline_flutter/resources/login_service.dart';
-import 'package:uepgacadonline_flutter/resources/portal_service.dart';
-import 'package:uepgacadonline_flutter/resources/ru_service.dart';
+import 'package:uepgacadonline_flutter/services/grade_service.dart';
+import 'package:uepgacadonline_flutter/services/home_service.dart';
+import 'package:uepgacadonline_flutter/services/login_service.dart';
+import 'package:uepgacadonline_flutter/services/portal_service.dart';
+import 'package:uepgacadonline_flutter/services/ru_service.dart';
 
 class Repository {
   final gradeService = GradeService();

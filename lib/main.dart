@@ -15,24 +15,25 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  final _authenticationBloc = AuthenticationBloc();
+  AuthenticationBloc authenticationBloc;
 
   @override
   void initState() {
     super.initState();
-    _authenticationBloc.dispatch(AppStarted());
+    authenticationBloc = AuthenticationBloc();
+    authenticationBloc.dispatch(AppStarted());
   }
 
   @override
   void dispose() {
     super.dispose();
-    _authenticationBloc.dispose();
+    authenticationBloc.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      bloc: _authenticationBloc,
+    return BlocProvider<AuthenticationBloc>(
+      bloc: authenticationBloc,
       child: MaterialApp(
           title: 'Flutter Demo',
           theme: ThemeData(
@@ -43,7 +44,7 @@ class _AppState extends State<App> {
 //        home: NewsItemsScreen(title: 'News')
 //      home: HomeScreen(title: 'Home')
           home: BlocBuilder(
-            bloc: _authenticationBloc,
+            bloc: authenticationBloc,
             builder: (context, AuthenticationState state) {
               if(state is AuthenticationUninitialized) {
                 return SplashScreen();

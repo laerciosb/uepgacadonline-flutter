@@ -14,10 +14,12 @@ class AppStarted extends AuthenticationEvent {
 class LoggedIn extends AuthenticationEvent {
   final String ra;
   final String password;
+  final String token;
 
   LoggedIn({
     this.ra,
-    this.password
+    this.password,
+    this.token
   });
 
   @override

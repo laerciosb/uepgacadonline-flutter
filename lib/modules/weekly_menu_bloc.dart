@@ -1,7 +1,7 @@
 import 'package:rxdart/rxdart.dart';
 import 'package:uepgacadonline_flutter/models/response.dart';
 import 'package:uepgacadonline_flutter/models/weekly_menu.dart';
-import 'package:uepgacadonline_flutter/resources/repository.dart';
+import 'package:uepgacadonline_flutter/services/repository.dart';
 
 class WeeklyMenuBloc {
   final _repository = Repository();

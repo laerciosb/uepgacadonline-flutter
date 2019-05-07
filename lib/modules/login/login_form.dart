@@ -5,15 +5,20 @@ import 'package:uepgacadonline_flutter/modules/login/bloc.dart';
 import 'package:uepgacadonline_flutter/widgets/login_button.dart';
 
 class LoginForm extends StatefulWidget {
+  final LoginBloc loginBloc;
+  final AuthenticationBloc authenticationBloc;
+
+  LoginForm({
+    this.loginBloc,
+    this.authenticationBloc
+  });
+
   State<LoginForm> createState() => _LoginFormState();
 }
 
 class _LoginFormState extends State<LoginForm> {
   final TextEditingController _raController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
-  LoginBloc _loginBloc;
-  AuthenticationBloc _authenticationBloc;
 
   bool get isPopulated =>
       _raController.text.isNotEmpty && _passwordController.text.isNotEmpty;
@@ -25,8 +30,6 @@ class _LoginFormState extends State<LoginForm> {
   @override
   void initState() {
     super.initState();
-    _loginBloc = LoginBloc();
-    _authenticationBloc = AuthenticationBloc();
     _raController.addListener(_onEmailChanged);
     _passwordController.addListener(_onPasswordChanged);
   }
@@ -34,7 +37,7 @@ class _LoginFormState extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
     return BlocListener(
-      bloc: _loginBloc,
+      bloc: widget.loginBloc,
       listener: (BuildContext context, LoginState state) {
         if (state.isFailure) {
           Scaffold.of(context)
@@ -68,11 +71,11 @@ class _LoginFormState extends State<LoginForm> {
             );
         }
         if (state.isSuccess) {
-          _authenticationBloc.dispatch(LoggedIn());
+          widget.authenticationBloc.dispatch(LoggedIn());
         }
       },
       child: BlocBuilder(
-        bloc: _loginBloc,
+        bloc: widget.loginBloc,
         builder: (BuildContext context, LoginState state) {
           return Column(
             children: <Widget>[
@@ -162,19 +165,19 @@ class _LoginFormState extends State<LoginForm> {
   }
 
   void _onEmailChanged() {
-    _loginBloc.dispatch(
+    widget.loginBloc.dispatch(
       RaChanged(ra: _raController.text),
     );
   }
 
   void _onPasswordChanged() {
-    _loginBloc.dispatch(
+    widget.loginBloc.dispatch(
       PasswordChanged(password: _passwordController.text),
     );
   }
 
   void _onFormSubmitted() {
-    _loginBloc.dispatch(
+    widget.loginBloc.dispatch(
       LoginWithCredentialsPressed(
         ra: _raController.text,
         password: _passwordController.text,

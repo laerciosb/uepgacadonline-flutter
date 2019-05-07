@@ -1,16 +1,12 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:uepgacadonline_flutter/resources/repository.dart';
+import 'package:uepgacadonline_flutter/repositories/user_repository.dart';
 
 import './bloc.dart';
 
-import 'package:shared_preferences/shared_preferences.dart';
-
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
-  final _repository = Repository();
-
   @override
   AuthenticationState get initialState => AuthenticationUninitialized();
 
@@ -18,22 +14,17 @@ class AuthenticationBloc
   Stream<AuthenticationState> mapEventToState(
     AuthenticationEvent event,
   ) async* {
-    final _prefs = await SharedPreferences.getInstance();
-
     if (event is AppStarted) {
+      final token = userRepository.getToken();
+      yield token != null ? AuthenticationAuthenticated() : AuthenticationUnauthenticated();
+    }
 
-      final token = _prefs.getString('token');
-
-      if(token != null) {
-        yield AuthenticationAuthenticated();
-      } else {
-        yield AuthenticationUnauthenticated();
-      }
-    } else if (event is LoggedIn) {
+    if (event is LoggedIn) {
       yield AuthenticationAuthenticated();
-    } else if (event is LoggedOut) {
-      _prefs.setString('token', null);
-      print('LOGOUT');
+    }
+
+    if (event is LoggedOut) {
+      userRepository.clearToken();
       yield AuthenticationUnauthenticated();
     }
   }

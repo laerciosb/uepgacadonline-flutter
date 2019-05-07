@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:uepgacadonline_flutter/modules/news_items/bloc.dart';
-import 'package:uepgacadonline_flutter/resources/repository.dart';
+import 'package:uepgacadonline_flutter/services/repository.dart';
 
 class NewsItemsBloc extends Bloc<NewsItemsEvent, NewsItemsState> {
   final _repository = Repository();
