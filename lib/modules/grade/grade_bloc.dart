@@ -19,7 +19,8 @@ class GradeBloc extends Bloc<GradeEvent, GradeState> {
       try {
         final grade = (await _repository.fetchGrade()).grade;
         yield GradeLoaded(grade: grade);
-      } catch (_) {
+      } catch (e) {
+        print(e.toString());
         yield GradeError();
       }
     }

@@ -1,9 +1,16 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:uepgacadonline_flutter/models/discipline.dart';
 
-class Grade {
-  List<Discipline> disciplines;
+part 'grade.g.dart';
 
-  Grade.fromJson(Map<String, dynamic> json) {
-    disciplines = (json['disciplines'] as List)?.map((i) => Discipline.fromJson(i))?.toList();
-  }
+@JsonSerializable()
+
+class Grade {
+
+  Grade(this.disciplines);
+
+  @JsonKey(name: 'disciplines') List<Discipline> disciplines;
+
+  factory Grade.fromJson(Map<String, dynamic> json) => _$GradeFromJson(json);
+  Map<String, dynamic> toJson() => _$GradeToJson(this);
 }

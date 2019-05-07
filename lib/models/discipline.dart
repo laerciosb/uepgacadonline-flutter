@@ -1,31 +1,29 @@
-class Discipline {
-  int absences;
-  String className;
-  String cod;
-  int frequency;
-  int plannedClasses;
-  int givenClasses;
-  double grade1;
-  double grade2;
-  double gradeE;
-  String mean;
-  String name;
-  String status;
-  String year;
+import 'package:json_annotation/json_annotation.dart';
 
-  Discipline.fromJson(Map<String, dynamic> json) {
-    absences = json['absences'];
-    className = json['className'];
-    cod = json['cod'];
-    frequency = json['frequency'];
-    plannedClasses = json['plannedClasses'];
-    givenClasses = json['givenClasses'];
-    grade1 = json['grade1'];
-    grade2 = json['grade2'];
-    gradeE = json['gradeE'];
-    mean = json['mean'];
-    name = json['name'];
-    status = json['status'];
-    year = json['year'];
-  }
+part 'discipline.g.dart';
+
+@JsonSerializable()
+
+class Discipline {
+
+  Discipline(this.absences, this.className, this.cod, this.frequency,
+      this.plannedClasses, this.givenClasses, this.grade1, this.grade2,
+      this.gradeE, this.mean, this.name, this.status, this.year);
+
+  @JsonKey(name: 'absences') int absences;
+  @JsonKey(name: 'class_name') String className;
+  @JsonKey(name: 'cod') String cod;
+  @JsonKey(name: 'frequency') int frequency;
+  @JsonKey(name: 'planned_classes') int plannedClasses;
+  @JsonKey(name: 'given_classes') int givenClasses;
+  @JsonKey(name: 'grade1') double grade1;
+  @JsonKey(name: 'grade2') double grade2;
+  @JsonKey(name: 'gradeE') double gradeE;
+  @JsonKey(name: 'mean') String mean;
+  @JsonKey(name: 'name') String name;
+  @JsonKey(name: 'status') String status;
+  @JsonKey(name: 'year') String year;
+
+  factory Discipline.fromJson(Map<String, dynamic> json) => _$DisciplineFromJson(json);
+  Map<String, dynamic> toJson() => _$DisciplineToJson(this);
 }

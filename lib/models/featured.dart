@@ -1,9 +1,16 @@
-class Featured {
-  String image;
-  String address;
+import 'package:json_annotation/json_annotation.dart';
 
-  Featured.fromJson(Map<String, dynamic> json) {
-    image = json['image'];
-    address = json['address'];
-  }
+part 'featured.g.dart';
+
+@JsonSerializable()
+
+class Featured {
+
+  Featured(this.image, this.address);
+
+  @JsonKey(name: 'image') String image;
+  @JsonKey(name: 'address') String address;
+
+  factory Featured.fromJson(Map<String, dynamic> json) => _$FeaturedFromJson(json);
+  Map<String, dynamic> toJson() => _$FeaturedToJson(this);
 }

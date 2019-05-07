@@ -1,3 +1,4 @@
+import 'package:uepgacadonline_flutter/models/discipline.dart';
 import 'package:uepgacadonline_flutter/models/featured.dart';
 import 'package:uepgacadonline_flutter/models/news_items.dart';
 import 'package:uepgacadonline_flutter/models/grade.dart';
