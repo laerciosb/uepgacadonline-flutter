@@ -46,7 +46,9 @@ class _NewsItemsScreenState extends State<NewsItemsScreen> {
           return Center(
             child: CircularProgressIndicator(),
           );
-        } else if (state is NewsItemsLoaded) {
+        }
+
+        if (state is NewsItemsLoaded) {
           print(state.newsItems);
           if (state.newsItems == null) {
             return Center(
@@ -62,7 +64,9 @@ class _NewsItemsScreenState extends State<NewsItemsScreen> {
                       state.newsItems.news.length
                   ? BottomLoader()
                   : _itemBuilder(context, index, state.newsItems.news[index]));
-        } else if (state is NewsItemsLoaded) {
+        }
+
+        if (state is NewsItemsError) {
           return Center(
             child: Text('Error'),
           );

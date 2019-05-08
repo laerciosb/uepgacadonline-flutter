@@ -1,5 +1,6 @@
 import 'package:uepgacadonline_flutter/models/discipline.dart';
 import 'package:uepgacadonline_flutter/models/featured.dart';
+import 'package:uepgacadonline_flutter/models/menu.dart';
 import 'package:uepgacadonline_flutter/models/news_items.dart';
 import 'package:uepgacadonline_flutter/models/grade.dart';
 import 'package:uepgacadonline_flutter/models/news_item.dart';
@@ -22,7 +23,7 @@ class Response {
 
   @JsonKey(name: 'daily_news') NewsItems dailyNews;
   @JsonKey(name: 'grade') Grade grade;
-  @JsonKey(name: 'weekly_menu') WeeklyMenu weeklyMenu;
+  @JsonKey(name: 'weekly_menu') List<Menu> weeklyMenu;
   @JsonKey(name: 'news') NewsItem news;
   @JsonKey(name: 'perfil') User user;
   @JsonKey(name: 'featured') List<Featured> featured;

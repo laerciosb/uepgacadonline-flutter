@@ -21,11 +21,13 @@ Response _$ResponseFromJson(Map json) {
           : Grade.fromJson((json['grade'] as Map)?.map(
               (k, e) => MapEntry(k as String, e),
             )),
-      json['weekly_menu'] == null
-          ? null
-          : WeeklyMenu.fromJson((json['weekly_menu'] as Map)?.map(
-              (k, e) => MapEntry(k as String, e),
-            )),
+      (json['weekly_menu'] as List)
+          ?.map((e) => e == null
+              ? null
+              : Menu.fromJson((e as Map)?.map(
+                  (k, e) => MapEntry(k as String, e),
+                )))
+          ?.toList(),
       json['news'] == null
           ? null
           : NewsItem.fromJson((json['news'] as Map)?.map(

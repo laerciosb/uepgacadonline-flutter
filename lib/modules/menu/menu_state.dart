@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:uepgacadonline_flutter/models/weekly_menu.dart';
+import 'package:uepgacadonline_flutter/models/menu.dart';
 
 @immutable
 abstract class MenuState extends Equatable {
@@ -15,11 +15,9 @@ class MenuUninitialized extends MenuState {
 }
 
 class MenuLoaded extends MenuState {
-  final WeeklyMenu menu;
+  final List<Menu> menu;
 
-  MenuLoaded({
-    this.menu
-  });
+  MenuLoaded({this.menu});
 
   @override
   String toString() => 'MenuLoaded';
