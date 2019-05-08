@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uepgacadonline_flutter/models/discipline.dart';
+import 'package:uepgacadonline_flutter/modules/discipline/discipline_screen.dart';
 import 'package:uepgacadonline_flutter/modules/grade/bloc.dart';
 import 'package:uepgacadonline_flutter/modules/grade/grade_state.dart';
 
@@ -60,7 +61,12 @@ class _GradeScreenState extends State<GradeScreen> {
       child: Card(
         elevation: 2.0,
         child: InkWell(
-          onTap: () => {},
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => DisciplineScreen(discipline: discipline)));
+          },
           child: Column(
             children: <Widget>[
               Container(
@@ -70,21 +76,24 @@ class _GradeScreenState extends State<GradeScreen> {
                     IconButton(
                         icon: Icon(Icons.assessment, size: 32.0),
                         onPressed: () => {}),
-                    Conmtainer(
+                    Container(
                         child: Expanded(
                             child: Text(discipline.name,
                                 style: TextStyle(
-                                    fontSize: 14.0, fontWeight: FontWeight.bold),
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.bold),
                                 textAlign: TextAlign.left)))
                   ],
                 ),
               ),
               SizedBox(height: 16.0),
               Table(
-                  border: TableBorder(horizontalInside: BorderSide(color: Colors.grey[300])),
+                  border: TableBorder(
+                      horizontalInside: BorderSide(color: Colors.grey[300])),
                   children: rows
                       .asMap()
-                      .map((index, value) => MapEntry(index, _rowBuilder(index, value['title'], value['value'])))
+                      .map((index, value) => MapEntry(index,
+                          _rowBuilder(index, value['title'], value['value'])))
                       .values
                       .toList())
             ],
@@ -98,16 +107,20 @@ class _GradeScreenState extends State<GradeScreen> {
     return TableRow(children: [
       Container(
           padding: EdgeInsets.all(8.0),
-          decoration: BoxDecoration(color: index % 2 == 0 ? Colors.grey[50] : Colors.white),
+          decoration: BoxDecoration(
+              color: index % 2 == 0 ? Colors.grey[50] : Colors.white),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(title, textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.w700)),
+              Text(title,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontWeight: FontWeight.w700)),
             ],
           )),
       Container(
           padding: EdgeInsets.all(8.0),
-          decoration: BoxDecoration(color: index % 2 == 0 ? Colors.grey[50] : Colors.white),
+          decoration: BoxDecoration(
+              color: index % 2 == 0 ? Colors.grey[50] : Colors.white),
           child: Text(value, textAlign: TextAlign.center)),
     ]);
   }
