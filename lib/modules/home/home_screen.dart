@@ -57,9 +57,29 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Container(
       color: Colors.white,
       child: ListView(
-        padding: EdgeInsets.fromLTRB(24.0, 8.0, 24.0, 8.0),
+        padding: EdgeInsets.fromLTRB(24.0, 64.0, 24.0, 64.0),
         children: <Widget>[
+          Text("Paulo Alves", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+          Text("14147326"),
           Divider(height: 16),
+          ListTile(
+              leading: Icon(Icons.insert_drive_file),
+              title: Text("Arquivos"),
+              onTap: () {
+
+              }),
+          ListTile(
+              leading: Icon(Icons.assignment),
+              title: Text("Atividades"),
+              onTap: () {
+
+              }),
+          ListTile(
+              leading: Icon(Icons.calendar_today),
+              title: Text("Calendário"),
+              onTap: () {
+
+              }),
           ListTile(
               leading: Icon(Icons.exit_to_app),
               title: Text("Sair"),
