@@ -47,65 +47,68 @@ class _GradeScreenState extends State<GradeScreen> {
 
   Widget _itemBuilder(BuildContext context, int index, Discipline discipline) {
     final rows = [
-      {'title': 'Código', 'value': discipline.cod.toString()},
-      {'title': 'Turma', 'value': discipline.className.toString()},
       {'title': '1° Semestre', 'value': discipline.grade1?.toString() ?? '-'},
       {'title': '2° Semestre', 'value': discipline.grade2?.toString() ?? '-'},
       {'title': 'Exame', 'value': discipline.gradeE?.toString() ?? '-'},
       {'title': 'Média', 'value': discipline.mean?.toString() ?? '-'},
       {'title': 'Faltas', 'value': discipline.absences?.toString() ?? '-'},
       {'title': 'Frequência', 'value': discipline.frequency?.toString() ?? '-'},
-      {'title': 'Estado', 'value': discipline.status?.toString() ?? '-'},
     ];
 
     return Container(
-      margin: EdgeInsets.fromLTRB(4.0, index == 0 ? 16.0 : 0.0, 4.0, 8.0),
+      margin: EdgeInsets.fromLTRB(8.0, index == 0 ? 16.0 : 0.0, 8.0, 8.0),
       child: Card(
         elevation: 2.0,
-        child: Column(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 0.0),
-              child: Row(
-                children: <Widget>[
-                  IconButton(
-                      icon: Icon(Icons.assessment, size: 32.0),
-                      onPressed: () => {}),
-                  Container(
-                      child: Expanded(
-                          child: Text(discipline.name,
-                              style: TextStyle(
-                                  fontSize: 14.0, fontWeight: FontWeight.bold),
-                              textAlign: TextAlign.left)))
-                ],
+        child: InkWell(
+          onTap: () => {},
+          child: Column(
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 0.0),
+                child: Row(
+                  children: <Widget>[
+                    IconButton(
+                        icon: Icon(Icons.assessment, size: 32.0),
+                        onPressed: () => {}),
+                    Container(
+                        child: Expanded(
+                            child: Text(discipline.name,
+                                style: TextStyle(
+                                    fontSize: 14.0, fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.left)))
+                  ],
+                ),
               ),
-            ),
-            SizedBox(height: 16.0),
-            Table(
-                border: TableBorder(horizontalInside: BorderSide(color: Colors.grey[300])),
-                children: rows
-                    .map((value) => _rowBuilder(value['title'], value['value']))
-                    .toList())
-          ],
+              SizedBox(height: 16.0),
+              Table(
+                  border: TableBorder(horizontalInside: BorderSide(color: Colors.grey[300])),
+                  children: rows
+                      .asMap()
+                      .map((index, value) => MapEntry(index, _rowBuilder(index, value['title'], value['value'])))
+                      .values
+                      .toList())
+            ],
+          ),
         ),
       ),
     );
   }
 
-  TableRow _rowBuilder(String title, String value) {
+  TableRow _rowBuilder(int index, String title, String value) {
     return TableRow(children: [
       Container(
           padding: EdgeInsets.all(8.0),
-          decoration: BoxDecoration(color: Colors.grey[200]),
+          decoration: BoxDecoration(color: index % 2 == 0 ? Colors.grey[50] : Colors.white),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(title, textAlign: TextAlign.center),
+              Text(title, textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.w700)),
             ],
           )),
       Container(
           padding: EdgeInsets.all(8.0),
-          child: Text(value, textAlign: TextAlign.center))
+          decoration: BoxDecoration(color: index % 2 == 0 ? Colors.grey[50] : Colors.white),
+          child: Text(value, textAlign: TextAlign.center)),
     ]);
   }
 }
