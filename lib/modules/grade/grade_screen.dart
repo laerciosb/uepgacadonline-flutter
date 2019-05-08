@@ -70,7 +70,7 @@ class _GradeScreenState extends State<GradeScreen> {
                     IconButton(
                         icon: Icon(Icons.assessment, size: 32.0),
                         onPressed: () => {}),
-                    Container(
+                    Conmtainer(
                         child: Expanded(
                             child: Text(discipline.name,
                                 style: TextStyle(
