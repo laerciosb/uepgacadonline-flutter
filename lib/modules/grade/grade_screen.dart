@@ -28,7 +28,9 @@ class _GradeScreenState extends State<GradeScreen> {
             return Center(
               child: CircularProgressIndicator(),
             );
-          } else if (state is GradeLoaded) {
+          }
+
+          if (state is GradeLoaded) {
             if (state.grade == null || state.grade.disciplines.isEmpty) {
               return Center(
                 child: Text('Empty'),
@@ -38,7 +40,9 @@ class _GradeScreenState extends State<GradeScreen> {
                 itemCount: state.grade.disciplines.length,
                 itemBuilder: (context, index) => _itemBuilder(
                     context, index, state.grade.disciplines[index]));
-          } else if (state is GradeError) {
+          }
+
+          if (state is GradeError) {
             return Center(
               child: Text('Error'),
             );

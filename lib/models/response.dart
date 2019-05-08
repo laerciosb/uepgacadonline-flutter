@@ -24,7 +24,7 @@ class Response {
   @JsonKey(name: 'grade') Grade grade;
   @JsonKey(name: 'weekly_menu') WeeklyMenu weeklyMenu;
   @JsonKey(name: 'news') NewsItem news;
-  @JsonKey(name: 'user') User user;
+  @JsonKey(name: 'perfil') User user;
   @JsonKey(name: 'featured') List<Featured> featured;
 
   factory Response.fromJson(Map<String, dynamic> json) => _$ResponseFromJson(json);

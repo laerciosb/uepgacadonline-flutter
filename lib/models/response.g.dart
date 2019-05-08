@@ -31,9 +31,9 @@ Response _$ResponseFromJson(Map json) {
           : NewsItem.fromJson((json['news'] as Map)?.map(
               (k, e) => MapEntry(k as String, e),
             )),
-      json['user'] == null
+      json['perfil'] == null
           ? null
-          : User.fromJson((json['user'] as Map)?.map(
+          : User.fromJson((json['perfil'] as Map)?.map(
               (k, e) => MapEntry(k as String, e),
             )),
       (json['featured'] as List)
@@ -53,6 +53,6 @@ Map<String, dynamic> _$ResponseToJson(Response instance) => <String, dynamic>{
       'grade': instance.grade,
       'weekly_menu': instance.weeklyMenu,
       'news': instance.news,
-      'user': instance.user,
+      'perfil': instance.user,
       'featured': instance.featured
     };

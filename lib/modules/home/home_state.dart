@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:uepgacadonline_flutter/models/featured.dart';
-import 'package:uepgacadonline_flutter/models/news_items.dart';
+import 'package:uepgacadonline_flutter/models/user.dart';
 
 @immutable
 abstract class HomeState extends Equatable {
@@ -16,12 +15,10 @@ class HomeUninitialized extends HomeState {
 }
 
 class HomeLoaded extends HomeState {
-  final List<Featured> featured;
-  final NewsItems newsItems;
+  final User user;
 
   HomeLoaded({
-    this.featured,
-    this.newsItems
+    this.user,
   });
 
   @override

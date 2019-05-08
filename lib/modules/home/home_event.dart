@@ -7,6 +7,6 @@ abstract class HomeEvent extends Equatable {
 }
 class HomeFetch extends HomeEvent {
   @override
-  String toString() => 'HomeFetch';
+  String toString() => 'UserFetch';
 }
 
