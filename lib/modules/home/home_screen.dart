@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedItem = 0;
 
   Widget _bottomNavigationBarItem(int index) {
-    return [NewsItemsScreen(), GradeScreen(), WeeklyMenuScreen()][index];
+    return [NewsItemsScreen(), GradeScreen()][index];
   }
 
   @override
@@ -45,8 +45,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   title: Text("Notícias"), icon: Icon(Icons.note)),
               BottomNavigationBarItem(
                   title: Text("Notas"), icon: Icon(Icons.grade)),
-              BottomNavigationBarItem(
-                  title: Text("Restaurante"), icon: Icon(Icons.restaurant))
             ]),
         body: _bottomNavigationBarItem(_selectedItem));
   }
@@ -94,6 +92,16 @@ class _HomeScreenState extends State<HomeScreen> {
                       leading: Icon(Icons.calendar_today),
                       title: Text("Calendário"),
                       onTap: () {}),
+                  ListTile(
+                    leading: Icon(Icons.restaurant),
+                    title: Text("Restaurante"),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => WeeklyMenuScreen()));
+                    },
+                  ),
                   ListTile(
                       leading: Icon(Icons.exit_to_app),
                       title: Text("Sair"),

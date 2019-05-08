@@ -19,28 +19,33 @@ class _WeeklyMenuScreenState extends State<WeeklyMenuScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder(
-      bloc: _menuBloc,
-      builder: (context, MenuState state) {
-        if(state is MenuUninitialized) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Restaurante"),
+      ),
+      body: BlocBuilder(
+        bloc: _menuBloc,
+        builder: (context, MenuState state) {
+          if(state is MenuUninitialized) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
 
-        if(state is MenuLoaded) {
-          return ListView.builder(
-              itemCount: state.menu.length,
-              itemBuilder: (context, index) =>
-                  _itemBuilder(context, index, state.menu[index]));
-        }
+          if(state is MenuLoaded) {
+            return ListView.builder(
+                itemCount: state.menu.length,
+                itemBuilder: (context, index) =>
+                    _itemBuilder(context, index, state.menu[index]));
+          }
 
-        if (state is MenuError) {
-          return Center(
-            child: Text('Error'),
-          );
-        }
-      },
+          if (state is MenuError) {
+            return Center(
+              child: Text('Error'),
+            );
+          }
+        },
+      ),
     );
   }
 
