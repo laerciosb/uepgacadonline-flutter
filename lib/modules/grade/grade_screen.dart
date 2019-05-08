@@ -46,60 +46,66 @@ class _GradeScreenState extends State<GradeScreen> {
   }
 
   Widget _itemBuilder(BuildContext context, int index, Discipline discipline) {
-    return Card(
-      elevation: 2.0,
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 32.0),
+    final rows = [
+      {'title': 'Código', 'value': discipline.cod.toString()},
+      {'title': 'Turma', 'value': discipline.className.toString()},
+      {'title': '1° Semestre', 'value': discipline.grade1?.toString() ?? '-'},
+      {'title': '2° Semestre', 'value': discipline.grade2?.toString() ?? '-'},
+      {'title': 'Exame', 'value': discipline.gradeE?.toString() ?? '-'},
+      {'title': 'Média', 'value': discipline.mean?.toString() ?? '-'},
+      {'title': 'Faltas', 'value': discipline.absences?.toString() ?? '-'},
+      {'title': 'Frequência', 'value': discipline.frequency?.toString() ?? '-'},
+      {'title': 'Estado', 'value': discipline.status?.toString() ?? '-'},
+    ];
+
+    return Container(
+      margin: EdgeInsets.fromLTRB(4.0, index == 0 ? 16.0 : 0.0, 4.0, 8.0),
+      child: Card(
+        elevation: 2.0,
         child: Column(
           children: <Widget>[
-            Row(
-              children: <Widget>[
-                Icon(Icons.add),
-                Text(discipline.name)
-              ],
+            Container(
+              padding: EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 0.0),
+              child: Row(
+                children: <Widget>[
+                  IconButton(
+                      icon: Icon(Icons.assessment, size: 32.0),
+                      onPressed: () => {}),
+                  Container(
+                      child: Expanded(
+                          child: Text(discipline.name,
+                              style: TextStyle(
+                                  fontSize: 14.0, fontWeight: FontWeight.bold),
+                              textAlign: TextAlign.left)))
+                ],
+              ),
             ),
+            SizedBox(height: 16.0),
             Table(
-              children: <TableRow>[
-                TableRow(
-                  decoration: BoxDecoration(
-                    color: Colors.grey
-                  ),
-                  children: [
-                    Text("Avaliação"),
-                    Text("Nota"),
-                    Text("Faltas"),
-                    Text("Frequência")
-                  ]
-                ),
-                TableRow(
-                  children: [
-                    Text("1 Semestre"),
-                    Text("8.0"),
-                    Text("30"),
-                    Text("80%")
-                  ]
-                ),
-                TableRow(
-                    children: [
-                      Text("2 Semestre"),
-                      Text("8.0"),
-                      Text("30"),
-                      Text("80%")
-                    ]
-                ),
-                TableRow(
-                    children: [
-                      Text("Exame"),
-                      Text("8.0"),
-                      Text("30"),
-                      Text("80%")
-                    ]
-                )
-              ],
-            )
+                border: TableBorder(horizontalInside: BorderSide(color: Colors.grey[300])),
+                children: rows
+                    .map((value) => _rowBuilder(value['title'], value['value']))
+                    .toList())
           ],
         ),
       ),
     );
+  }
+
+  TableRow _rowBuilder(String title, String value) {
+    return TableRow(children: [
+      Container(
+          padding: EdgeInsets.all(8.0),
+          decoration: BoxDecoration(color: Colors.grey[200]),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(title, textAlign: TextAlign.center),
+            ],
+          )),
+      Container(
+          padding: EdgeInsets.all(8.0),
+          child: Text(value, textAlign: TextAlign.center))
+    ]);
   }
 }

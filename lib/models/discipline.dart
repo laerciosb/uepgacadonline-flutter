@@ -11,7 +11,7 @@ class Discipline {
       this.gradeE, this.mean, this.name, this.status, this.year);
 
   @JsonKey(name: 'absences') int absences;
-  @JsonKey(name: 'class_name') String className;
+  @JsonKey(name: 'className') String className;
   @JsonKey(name: 'cod') String cod;
   @JsonKey(name: 'frequency') int frequency;
   @JsonKey(name: 'planned_classes') int plannedClasses;

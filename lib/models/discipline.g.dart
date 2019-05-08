@@ -9,7 +9,7 @@ part of 'discipline.dart';
 Discipline _$DisciplineFromJson(Map json) {
   return Discipline(
       json['absences'] as int,
-      json['class_name'] as String,
+      json['className'] as String,
       json['cod'] as String,
       json['frequency'] as int,
       json['planned_classes'] as int,
@@ -26,7 +26,7 @@ Discipline _$DisciplineFromJson(Map json) {
 Map<String, dynamic> _$DisciplineToJson(Discipline instance) =>
     <String, dynamic>{
       'absences': instance.absences,
-      'class_name': instance.className,
+      'className': instance.className,
       'cod': instance.cod,
       'frequency': instance.frequency,
       'planned_classes': instance.plannedClasses,
