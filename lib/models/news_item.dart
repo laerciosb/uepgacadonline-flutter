@@ -13,7 +13,7 @@ class NewsItem {
   @JsonKey(name: 'title') String title;
   @JsonKey(name: 'subtitle') String subtitle;
   @JsonKey(name: 'content') String content;
-  @JsonKey(name: 'created_at') DateTime created_at;
+  @JsonKey(name: 'created_at', ) DateTime created_at;
   @JsonKey(name: 'updated_at') DateTime updated_at;
 
   factory NewsItem.fromJson(Map<String, dynamic> json) => _$NewsItemFromJson(json);

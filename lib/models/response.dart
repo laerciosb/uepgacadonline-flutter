@@ -5,7 +5,6 @@ import 'package:uepgacadonline_flutter/models/news_items.dart';
 import 'package:uepgacadonline_flutter/models/grade.dart';
 import 'package:uepgacadonline_flutter/models/news_item.dart';
 import 'package:uepgacadonline_flutter/models/user.dart';
-import 'package:uepgacadonline_flutter/models/weekly_menu.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'response.g.dart';

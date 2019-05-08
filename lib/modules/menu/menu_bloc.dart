@@ -7,7 +7,7 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
   final _repository = Repository();
 
   @override
-  MenuState get initialState => InitialMenuState();
+  MenuState get initialState => MenuUninitialized();
 
   @override
   Stream<MenuState> mapEventToState(
@@ -17,7 +17,8 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
       try {
         final menu = (await _repository.fetchWeeklyMenu()).weeklyMenu;
         yield MenuLoaded(menu: menu);
-      } catch (_) {
+      } catch (e) {
+        print(e.toString());
         yield MenuError();
       }
     }
