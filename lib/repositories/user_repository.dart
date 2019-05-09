@@ -13,9 +13,9 @@ class UserRepository {
     final lastLogin = _prefs.getString('last_login') != null ? DateTime.parse(_prefs.getString('last_login')) : null;
 
     if(lastLogin != null) {
-      final diference = now.difference(lastLogin).inMinutes;
+      final difference = now.difference(lastLogin).inMinutes;
 
-      if(diference > 10) {
+      if(difference > 10) {
         final login = _prefs.getString('login');
         final password = _prefs.getString('password');
 

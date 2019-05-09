@@ -44,13 +44,21 @@ Response _$ResponseFromJson(Map json) {
               : Featured.fromJson((e as Map)?.map(
                   (k, e) => MapEntry(k as String, e),
                 )))
-          ?.toList());
+          ?.toList())
+    ..activities = (json['activities'] as List)
+        ?.map((e) => e == null
+            ? null
+            : Activity.fromJson((e as Map)?.map(
+                (k, e) => MapEntry(k as String, e),
+              )))
+        ?.toList();
 }
 
 Map<String, dynamic> _$ResponseToJson(Response instance) => <String, dynamic>{
       'message': instance.message,
       'status': instance.status,
       'token': instance.token,
+      'activities': instance.activities,
       'daily_news': instance.dailyNews,
       'grade': instance.grade,
       'weekly_menu': instance.weeklyMenu,

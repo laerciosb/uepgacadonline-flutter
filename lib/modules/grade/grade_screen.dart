@@ -8,7 +8,7 @@ import 'package:uepgacadonline_flutter/modules/grade/grade_state.dart';
 class GradeScreen extends StatefulWidget {
   @override
   _GradeScreenState createState() => _GradeScreenState();
-}
+} 
 
 class _GradeScreenState extends State<GradeScreen> {
   final _gradeBloc = GradeBloc();

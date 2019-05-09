@@ -1,3 +1,4 @@
+import 'package:uepgacadonline_flutter/models/activity.dart';
 import 'package:uepgacadonline_flutter/models/discipline.dart';
 import 'package:uepgacadonline_flutter/models/featured.dart';
 import 'package:uepgacadonline_flutter/models/menu.dart';
@@ -20,6 +21,7 @@ class Response {
   @JsonKey(name: 'status') bool status;
   @JsonKey(name: 'token') String token;
 
+  @JsonKey(name: 'activities') List<Activity> activities;
   @JsonKey(name: 'daily_news') NewsItems dailyNews;
   @JsonKey(name: 'grade') Grade grade;
   @JsonKey(name: 'weekly_menu') List<Menu> weeklyMenu;

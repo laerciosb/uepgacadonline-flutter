@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uepgacadonline_flutter/modules/activities/activities_screen.dart';
 import 'package:uepgacadonline_flutter/modules/authentication/authentication_bloc.dart';
 import 'package:uepgacadonline_flutter/modules/authentication/bloc.dart';
 import 'package:uepgacadonline_flutter/modules/grade/grade_screen.dart';
@@ -87,7 +88,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   ListTile(
                       leading: Icon(Icons.assignment),
                       title: Text("Atividades"),
-                      onTap: () {}),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ActivitiesScreen()));
+                      }),
                   ListTile(
                       leading: Icon(Icons.calendar_today),
                       title: Text("Calendário"),
@@ -101,6 +107,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           MaterialPageRoute(
                               builder: (context) => WeeklyMenuScreen()));
                     },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.supervised_user_circle),
+                    title: Text("Sobre"),
+                    onTap: () {},
                   ),
                   ListTile(
                       leading: Icon(Icons.exit_to_app),
