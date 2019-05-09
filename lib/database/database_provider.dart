@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:uepgacadonline_flutter/models/calendar.dart';
 
 class DBProvider {
   DBProvider._();
@@ -25,12 +26,7 @@ class DBProvider {
     String path = join(documentsDirectory.path, "uepgacadonline.db");
     return await openDatabase(path, version: 1, onOpen: (db) {
     }, onCreate: (Database db, int version) async {
-      await db.execute("CREATE TABLE calendar ("
-          "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
-          "title TEXT,"
-          "date DATE,"
-          "complete BIT"
-          ")");
+      await db.execute(Calendar.createTable);
     });
   }
 }
