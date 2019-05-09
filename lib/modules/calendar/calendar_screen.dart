@@ -53,10 +53,30 @@ class _CalendarScreenState extends State<CalendarScreen> {
         ],
       )),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => {},
+        onPressed: _showDialog,
         child: Icon(Icons.add),
       ),
     );
+  }
+
+  void _showDialog() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Nova atividade"),
+            content: Column(children: <Widget>[Text("Form")]),
+            actions: <Widget>[
+              FlatButton(
+                child: Text("Cancelar"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              FlatButton(child: Text("Inserir"))
+            ],
+          );
+        });
   }
 
   Widget _buildTableCalendarList(List<Calendar> calendar) {
