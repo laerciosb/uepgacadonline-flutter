@@ -4,6 +4,8 @@ import 'package:uepgacadonline_flutter/modules/about/about_screen.dart';
 import 'package:uepgacadonline_flutter/modules/activities/activities_screen.dart';
 import 'package:uepgacadonline_flutter/modules/authentication/authentication_bloc.dart';
 import 'package:uepgacadonline_flutter/modules/authentication/bloc.dart';
+import 'package:uepgacadonline_flutter/modules/calendar/CalendarScreen.dart';
+import 'package:uepgacadonline_flutter/modules/files/files_screen.dart';
 import 'package:uepgacadonline_flutter/modules/grade/grade_screen.dart';
 import 'package:uepgacadonline_flutter/modules/home/bloc.dart';
 import 'package:uepgacadonline_flutter/modules/menu/menu_screen.dart';
@@ -85,7 +87,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   ListTile(
                       leading: Icon(Icons.insert_drive_file),
                       title: Text("Arquivos"),
-                      onTap: () {}),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => FilesScreen()));
+                      }),
                   ListTile(
                       leading: Icon(Icons.assignment),
                       title: Text("Atividades"),
@@ -98,7 +105,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   ListTile(
                       leading: Icon(Icons.calendar_today),
                       title: Text("Calendário"),
-                      onTap: () {}),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CalendarScreen()));
+                      }),
                   ListTile(
                     leading: Icon(Icons.restaurant),
                     title: Text("Restaurante"),
@@ -114,9 +126,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     title: Text("Sobre"),
                     onTap: () {
                       Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => AboutScreen()));
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AboutScreen()));
                     },
                   ),
                   ListTile(
