@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uepgacadonline_flutter/modules/about/about_screen.dart';
 import 'package:uepgacadonline_flutter/modules/activities/activities_screen.dart';
 import 'package:uepgacadonline_flutter/modules/authentication/authentication_bloc.dart';
 import 'package:uepgacadonline_flutter/modules/authentication/bloc.dart';
@@ -111,7 +112,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   ListTile(
                     leading: Icon(Icons.supervised_user_circle),
                     title: Text("Sobre"),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AboutScreen()));
+                    },
                   ),
                   ListTile(
                       leading: Icon(Icons.exit_to_app),
