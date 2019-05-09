@@ -43,10 +43,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (event is LoginWithCredentialsPressed) {
       yield LoginState.loading();
       try {
-        final token = await userRepository.doLogin(event.ra, event.password);
+        final doLogin = await userRepository.doLogin(event.ra, event.password);
+        if(!doLogin[1]) throw("Usuário/senha inválido!");
 
         authenticationBloc.dispatch(
-            LoggedIn(ra: event.ra, password: event.password, token: token));
+            LoggedIn(ra: event.ra, password: event.password));
 
         yield LoginState.success();
       } catch (e) {

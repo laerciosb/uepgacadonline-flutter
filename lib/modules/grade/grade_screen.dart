@@ -21,33 +21,36 @@ class _GradeScreenState extends State<GradeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder(
-        bloc: _gradeBloc,
-        builder: (context, GradeState state) {
-          if (state is GradeUninitialized) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-
-          if (state is GradeLoaded) {
-            if (state.grade == null || state.grade.disciplines.isEmpty) {
+    return Container(
+      decoration: BoxDecoration(color: Colors.grey[100]),
+      child: BlocBuilder(
+          bloc: _gradeBloc,
+          builder: (context, GradeState state) {
+            if (state is GradeUninitialized) {
               return Center(
-                child: Text('Empty'),
+                child: CircularProgressIndicator(),
               );
             }
-            return ListView.builder(
-                itemCount: state.grade.disciplines.length,
-                itemBuilder: (context, index) => _itemBuilder(
-                    context, index, state.grade.disciplines[index]));
-          }
 
-          if (state is GradeError) {
-            return Center(
-              child: Text('Error'),
-            );
-          }
-        });
+            if (state is GradeLoaded) {
+              if (state.grade == null || state.grade.disciplines.isEmpty) {
+                return Center(
+                  child: Text('Empty'),
+                );
+              }
+              return ListView.builder(
+                  itemCount: state.grade.disciplines.length,
+                  itemBuilder: (context, index) => _itemBuilder(
+                      context, index, state.grade.disciplines[index]));
+            }
+
+            if (state is GradeError) {
+              return Center(
+                child: Text('Error'),
+              );
+            }
+          }),
+    );
   }
 
   Widget _itemBuilder(BuildContext context, int index, Discipline discipline) {

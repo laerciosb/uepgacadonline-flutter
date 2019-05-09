@@ -39,7 +39,8 @@ class NewsItemsBloc extends Bloc<NewsItemsEvent, NewsItemsState> {
                       .subtract(Duration(days: 1)))
               : NewsItemsLoaded(newsItems: newsItems, hasReachedMax: false);
         }
-      } catch (_) {
+      } catch (e) {
+        print(e.toString());
         yield NewsItemsError();
       }
     }

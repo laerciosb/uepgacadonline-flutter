@@ -19,10 +19,10 @@ class UserRepository {
         final login = _prefs.getString('login');
         final password = _prefs.getString('password');
 
-        final token = await this.doLogin(login, password);
-        _prefs.setString('token', token);
+        final doLogin = await this.doLogin(login, password);
+        _prefs.setString('token', doLogin[0]);
 
-        return token;
+        return doLogin[0];
       }
     }
 
@@ -42,7 +42,7 @@ class UserRepository {
     return user;
   }
 
-  Future<String> doLogin(String login, String password) async {
+  Future<List> doLogin(String login, String password) async {
     final _prefs = await SharedPreferences.getInstance();
     final response = await _loginService.doLogin(login, password);
 
@@ -51,7 +51,13 @@ class UserRepository {
     _prefs.setString('token', response.token);
     _prefs.setString('user', json.encode(response.user));
     _prefs.setString('last_login', DateTime.now().toString());
-    return response.token;
+    return [response.token, response.user != null];
+  }
+
+  Future<void> doLogout() async {
+    final _prefs = await SharedPreferences.getInstance();
+    _prefs.setString('token', null);
+    _prefs.setString('user', null);
   }
 }
 

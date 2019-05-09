@@ -15,8 +15,8 @@ class AuthenticationBloc
     AuthenticationEvent event,
   ) async* {
     if (event is AppStarted) {
-      final token = await userRepository.getToken();
-      yield token != null
+      final user = await userRepository.getUser();
+      yield user != null
           ? AuthenticationAuthenticated()
           : AuthenticationUnauthenticated();
     }
@@ -26,7 +26,7 @@ class AuthenticationBloc
     }
 
     if (event is LoggedOut) {
-      userRepository.clearToken();
+      userRepository.doLogout();
       yield AuthenticationUnauthenticated();
     }
   }
