@@ -17,8 +17,8 @@ class GradeBloc extends Bloc<GradeEvent, GradeState> {
   ) async* {
     if (event is GradeFetch) {
       try {
-        final grade = (await _repository.fetchGrade()).grade;
-        yield GradeLoaded(grade: grade);
+        final disciplines = (await _repository.fetchGrade()).disciplines;
+        yield GradeLoaded(disciplines: disciplines);
       } catch (e) {
         print(e.toString());
         yield GradeError();

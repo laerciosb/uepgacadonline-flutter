@@ -16,11 +16,6 @@ Response _$ResponseFromJson(Map json) {
           : NewsItems.fromJson((json['daily_news'] as Map)?.map(
               (k, e) => MapEntry(k as String, e),
             )),
-      json['grade'] == null
-          ? null
-          : Grade.fromJson((json['grade'] as Map)?.map(
-              (k, e) => MapEntry(k as String, e),
-            )),
       (json['weekly_menu'] as List)
           ?.map((e) => e == null
               ? null
@@ -51,6 +46,13 @@ Response _$ResponseFromJson(Map json) {
             : Activity.fromJson((e as Map)?.map(
                 (k, e) => MapEntry(k as String, e),
               )))
+        ?.toList()
+    ..disciplines = (json['disciplines'] as List)
+        ?.map((e) => e == null
+            ? null
+            : Discipline.fromJson((e as Map)?.map(
+                (k, e) => MapEntry(k as String, e),
+              )))
         ?.toList();
 }
 
@@ -60,7 +62,7 @@ Map<String, dynamic> _$ResponseToJson(Response instance) => <String, dynamic>{
       'token': instance.token,
       'activities': instance.activities,
       'daily_news': instance.dailyNews,
-      'grade': instance.grade,
+      'disciplines': instance.disciplines,
       'weekly_menu': instance.weeklyMenu,
       'news': instance.news,
       'perfil': instance.user,

@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:uepgacadonline_flutter/models/grade.dart';
+import 'package:uepgacadonline_flutter/models/discipline.dart';
 
 @immutable
 abstract class GradeState extends Equatable {}
@@ -13,10 +13,10 @@ class GradeUninitialized extends GradeState {
 }
 
 class GradeLoaded extends GradeState {
-  final Grade grade;
+  final List<Discipline> disciplines;
 
   GradeLoaded({
-    this.grade
+    this.disciplines
   });
 
   @override

@@ -33,15 +33,15 @@ class _GradeScreenState extends State<GradeScreen> {
             }
 
             if (state is GradeLoaded) {
-              if (state.grade == null || state.grade.disciplines.isEmpty) {
+              if (state.disciplines.isEmpty) {
                 return Center(
                   child: Text('Empty'),
                 );
               }
               return ListView.builder(
-                  itemCount: state.grade.disciplines.length,
+                  itemCount: state.disciplines.length,
                   itemBuilder: (context, index) => _itemBuilder(
-                      context, index, state.grade.disciplines[index]));
+                      context, index, state.disciplines[index]));
             }
 
             if (state is GradeError) {
