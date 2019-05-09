@@ -25,12 +25,13 @@ dependencies:
   flutter_bloc: ^0.12.0
   flutter_html: ^0.9.6
   flutter_swiper: ^1.1.6
-  json_annotation: ^2.0.0
   http: ^0.12.0+2
+  intl: ^0.15.8
+  json_annotation: ^2.0.0
   rxdart: ^0.21.0
   uri: ^0.11.3+1
-  intl: ^0.15.8
   shared_preferences: ^0.5.2
+  table_calendar: ^1.2.0
 
 
 

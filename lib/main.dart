@@ -4,8 +4,11 @@ import 'package:uepgacadonline_flutter/modules/authentication/bloc.dart';
 import 'package:uepgacadonline_flutter/modules/home/home_screen.dart';
 import 'package:uepgacadonline_flutter/modules/login/login_screen.dart';
 import 'package:uepgacadonline_flutter/modules/splash/splash_screen.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
-void main() => runApp(App());
+void main() {
+  initializeDateFormatting().then((_) => runApp(App()));
+}
 
 class App extends StatefulWidget {
   @override
