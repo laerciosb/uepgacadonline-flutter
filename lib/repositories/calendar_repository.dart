@@ -9,12 +9,12 @@ class CalendarRepository {
     return result;
   }
 
-  dynamic find(int id) async {
+  Future<Calendar> find(int id) async {
     final database = await DBProvider.db.database;
     final result =
         await database.query(Calendar.table, where: "id = ?", whereArgs: [id]);
 
-    return result;
+    return Calendar.fromJson(result.first);
   }
 
   dynamic findByDate(DateTime date) async {
@@ -25,7 +25,7 @@ class CalendarRepository {
     return result;
   }
 
-  dynamic all() async {
+  Future<List<Calendar>> all() async {
     final database = await DBProvider.db.database;
     var result = await database.query(Calendar.table);
 
@@ -44,3 +44,5 @@ class CalendarRepository {
     return result;
   }
 }
+
+final calendarRepository = CalendarRepository();
