@@ -1,12 +1,11 @@
+import 'package:sqflite/sqflite.dart';
 import 'package:uepgacadonline_flutter/database/database_provider.dart';
 import 'package:uepgacadonline_flutter/models/calendar.dart';
 
 class CalendarRepository {
-  dynamic create(Calendar calendar) async {
+  Future<void> create(Calendar calendar) async {
     final database = await DBProvider.db.database;
-    final result = await database.insert(Calendar.table, calendar.toJson());
-
-    return result;
+    await database.insert(Calendar.table, calendar.toJson(), conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   Future<Calendar> find(int id) async {

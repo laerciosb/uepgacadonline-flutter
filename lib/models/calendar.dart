@@ -19,8 +19,8 @@ class Calendar {
 
   @JsonKey(name: 'id') int id;
   @JsonKey(name: 'title') String title;
-  @JsonKey(name: 'date', fromJson: dateFromJson, toJson: dateToJson) DateTime date;
-  @JsonKey(name: 'complete') bool complete;
+  @JsonKey(name: 'date') DateTime date;
+  @JsonKey(name: 'complete') int complete;
 
   factory Calendar.fromJson(Map<String, dynamic> json) => _$CalendarFromJson(json);
   Map<String, dynamic> toJson() => _$CalendarToJson(this);

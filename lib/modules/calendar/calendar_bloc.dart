@@ -16,12 +16,9 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
   ) async* {
     if (event is CalendarFetch) {
       try {
-        await calendarRepository
-            .create(Calendar(null, "Teste", DateTime.now(), false));
-        await calendarRepository
-            .create(Calendar(null, "Teste 2", DateTime.now(), false));
-        await calendarRepository
-            .create(Calendar(null, "Teste 3", DateTime.now(), false));
+        final calendar_ = Calendar(1, "Teste", DateTime.now(), 0);
+        await calendarRepository.create(calendar_);
+        print(calendar_.toString());
 
         final calendar = await calendarRepository.all();
         yield CalendarLoaded(calendar: calendar);
