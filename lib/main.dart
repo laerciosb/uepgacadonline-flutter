@@ -5,6 +5,9 @@ import 'package:uepgacadonline_flutter/modules/home/home_screen.dart';
 import 'package:uepgacadonline_flutter/modules/login/login_screen.dart';
 import 'package:uepgacadonline_flutter/modules/splash/splash_screen.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
+FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
 void main() {
   initializeDateFormatting().then((_) => runApp(App()));
@@ -21,8 +24,25 @@ class _AppState extends State<App> {
   @override
   void initState() {
     super.initState();
+
+    var initializationSettingsAndroid =
+    new AndroidInitializationSettings('@mipmap/ic_launcher');
+    var initializationSettingsIOS = new IOSInitializationSettings();
+    var initializationSettings = new InitializationSettings(
+        initializationSettingsAndroid, initializationSettingsIOS);
+    flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
+    flutterLocalNotificationsPlugin.initialize(initializationSettings,
+        onSelectNotification: onSelectNotification);
+
     authenticationBloc = AuthenticationBloc();
     authenticationBloc.dispatch(AppStarted());
+  }
+
+  Future onSelectNotification(String payload) async {
+    showDialog(
+      context: context,
+      builder: (_) {},
+    );
   }
 
   @override
