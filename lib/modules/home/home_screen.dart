@@ -95,15 +95,15 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontSize: 18.0, fontWeight: FontWeight.bold)),
                   Text(state.user?.academicRegister),
                   Divider(height: 16),
-                  ListTile(
-                      leading: Icon(Icons.insert_drive_file),
-                      title: Text("Arquivos"),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => FilesScreen()));
-                      }),
+//                  ListTile(
+//                      leading: Icon(Icons.insert_drive_file),
+//                      title: Text("Arquivos"),
+//                      onTap: () {
+//                        Navigator.push(
+//                            context,
+//                            MaterialPageRoute(
+//                                builder: (context) => FilesScreen()));
+//                      }),
                   ListTile(
                       leading: Icon(Icons.assignment),
                       title: Text("Atividades"),

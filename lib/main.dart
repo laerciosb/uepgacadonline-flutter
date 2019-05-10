@@ -10,7 +10,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
 void main() {
-  initializeDateFormatting().then((_) => runApp(App()));
+  initializeDateFormatting("pt_BR", null).then((_) => runApp(App()));
 }
 
 class App extends StatefulWidget {
@@ -27,10 +27,10 @@ class _AppState extends State<App> {
 
     var initializationSettingsAndroid =
     new AndroidInitializationSettings('@mipmap/ic_launcher');
-    var initializationSettingsIOS = new IOSInitializationSettings();
-    var initializationSettings = new InitializationSettings(
+    var initializationSettingsIOS = IOSInitializationSettings();
+    var initializationSettings = InitializationSettings(
         initializationSettingsAndroid, initializationSettingsIOS);
-    flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
+    flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
     flutterLocalNotificationsPlugin.initialize(initializationSettings,
         onSelectNotification: onSelectNotification);
 
@@ -58,7 +58,7 @@ class _AppState extends State<App> {
       child: MaterialApp(
           title: 'Flutter Demo',
           theme: ThemeData(
-            primarySwatch: Colors.blue,
+            primarySwatch: Colors.indigo,
           ),
           home: BlocBuilder(
               bloc: authenticationBloc,
@@ -68,7 +68,7 @@ class _AppState extends State<App> {
                 }
 
                 if (state is AuthenticationAuthenticated) {
-                  return HomeScreen(title: "Home");
+                  return HomeScreen(title: "");
                 }
 
                 return LoginScreen();
