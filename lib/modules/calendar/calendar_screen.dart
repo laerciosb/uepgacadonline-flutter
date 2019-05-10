@@ -20,64 +20,57 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Calendário")),
-      body: Container(
-          child: Column(
-        children: <Widget>[
-          _buildTableCalendar(),
-          BlocBuilder(
-              bloc: _calendarBloc,
-              builder: (context, CalendarState state) {
-                if (state is CalendarUninitialized) {
+    return Container(
+        child: Column(
+      children: <Widget>[
+        _buildTableCalendar(),
+        BlocBuilder(
+            bloc: _calendarBloc,
+            builder: (context, CalendarState state) {
+              if (state is CalendarUninitialized) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+
+              if (state is CalendarLoaded) {
+                if (state.calendar.isEmpty) {
                   return Center(
-                    child: CircularProgressIndicator(),
+                    child: Text('Empty'),
                   );
                 }
+                return _buildTableCalendarList(state.calendar);
+              }
 
-                if (state is CalendarLoaded) {
-                  if (state.calendar.isEmpty) {
-                    return Center(
-                      child: Text('Empty'),
-                    );
-                  }
-                  return _buildTableCalendarList(state.calendar);
-                }
-
-                if (state is CalendarError) {
-                  return Center(
-                    child: Text('Error'),
-                  );
-                }
-              })
-        ],
-      )),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _showDialog,
-        child: Icon(Icons.add),
-      ),
-    );
+              if (state is CalendarError) {
+                return Center(
+                  child: Text('Error'),
+                );
+              }
+            })
+      ],
+    ));
   }
 
-  void _showDialog() {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text("Nova atividade"),
-            content: Column(children: <Widget>[Text("Form")]),
-            actions: <Widget>[
-              FlatButton(
-                child: Text("Cancelar"),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-              FlatButton(child: Text("Inserir"))
-            ],
-          );
-        });
-  }
+//  void showCalendarDialog(BuildContext context) {
+//    showDialog(
+//        context: context,
+//        builder: (BuildContext context) {
+//          return AlertDialog(
+//            title: Text("Nova atividade"),
+//            content: Column(children: <Widget>[Text("Form")]),
+//            actions: <Widget>[
+//              FlatButton(
+//                child: Text("Cancelar"),
+//                onPressed: () {
+//                  Navigator.of(context).pop();
+//                },
+//              ),
+//              FlatButton(child: Text("Inserir"))
+//            ],
+//          );
+//        });
+//  }
 
   Widget _buildTableCalendarList(List<Calendar> calendar) {
     return Expanded(

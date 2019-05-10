@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uepgacadonline_flutter/helpers/notification_helper.dart';
 import 'package:uepgacadonline_flutter/modules/about/about_screen.dart';
 import 'package:uepgacadonline_flutter/modules/activities/activities_screen.dart';
 import 'package:uepgacadonline_flutter/modules/authentication/authentication_bloc.dart';
@@ -24,8 +25,12 @@ class _HomeScreenState extends State<HomeScreen> {
   final _homeBloc = HomeBloc();
   int _selectedItem = 0;
 
+  final newsItemsScreen = NewsItemsScreen();
+  final gradeScreen = GradeScreen();
+  final calendarScreen = CalendarScreen();
+
   Widget _bottomNavigationBarItem(int index) {
-    return [NewsItemsScreen(), GradeScreen()][index];
+    return [newsItemsScreen, gradeScreen, calendarScreen][index];
   }
 
   @override
@@ -40,15 +45,21 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           title: Text(widget.title),
         ),
+        floatingActionButton: _selectedItem == 2 ? FloatingActionButton(
+          onPressed: () => {},
+          child: Icon(Icons.add),
+        ) : null,
         drawer: _buildDrawer(),
         bottomNavigationBar: BottomNavigationBar(
             currentIndex: _selectedItem,
             onTap: _onItemTapped,
             items: [
               BottomNavigationBarItem(
-                  title: Text("Notícias"), icon: Icon(Icons.note)),
+                  title: Text("Notícias"), icon: Icon(Icons.library_books)),
               BottomNavigationBarItem(
-                  title: Text("Notas"), icon: Icon(Icons.grade)),
+                  title: Text("Notas"), icon: Icon(Icons.collections_bookmark)),
+              BottomNavigationBarItem(
+                  title: Text("Calendário"), icon: Icon(Icons.calendar_today)),
             ]),
         body: _bottomNavigationBarItem(_selectedItem));
   }
@@ -101,15 +112,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => ActivitiesScreen()));
-                      }),
-                  ListTile(
-                      leading: Icon(Icons.calendar_today),
-                      title: Text("Calendário"),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => CalendarScreen()));
                       }),
                   ListTile(
                     leading: Icon(Icons.restaurant),

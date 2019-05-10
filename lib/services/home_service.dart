@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart' show Client;
+import 'package:uepgacadonline_flutter/helpers/notification_helper.dart';
 import 'package:uepgacadonline_flutter/models/response.dart';
 
 class HomeService {
