@@ -13,22 +13,22 @@ class NewsItemsUninitialized extends NewsItemsState {
 }
 
 class NewsItemsLoaded extends NewsItemsState {
-  final NewsItems newsItems;
+  final List<NewsItems> newsItems;
   final bool hasReachedMax;
-  final DateTime date;
+  final int page;
 
-  NewsItemsLoaded({this.newsItems, this.hasReachedMax, this.date})
-      : super([newsItems, hasReachedMax, date]);
+  NewsItemsLoaded({this.newsItems, this.hasReachedMax, this.page})
+      : super([newsItems, hasReachedMax, page]);
 
   NewsItemsLoaded copyWith({
       NewsItems newsItems,
       bool hasReachedMax,
-      DateTime date
+      int page
   }) {
     return NewsItemsLoaded(
         newsItems: newsItems ?? this.newsItems,
         hasReachedMax: hasReachedMax ?? this.hasReachedMax,
-        date: date ?? this.date);
+        page: page ?? this.page);
   }
 
   @override

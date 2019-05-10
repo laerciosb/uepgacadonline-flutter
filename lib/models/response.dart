@@ -22,6 +22,7 @@ class Response {
 
   @JsonKey(name: 'activities') List<Activity> activities;
   @JsonKey(name: 'daily_news') NewsItems dailyNews;
+  @JsonKey(name: 'news_items') List<NewsItems> newsItems;
   @JsonKey(name: 'disciplines') List<Discipline> disciplines;
   @JsonKey(name: 'weekly_menu') List<Menu> weeklyMenu;
   @JsonKey(name: 'news') NewsItem news;

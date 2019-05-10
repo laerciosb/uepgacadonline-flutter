@@ -8,9 +8,8 @@ import 'package:uepgacadonline_flutter/models/response.dart';
 class PortalService {
   Client client = Client();
 
-  Future<Response> fetchNewsItems(DateTime date) async {
-    final dateFormatted = DateFormat('dd/MM/yyyy').format(date);
-    final response = await client.get("http://104.197.53.11/portal/newsitem?date=06/05/2019");
+  Future<Response> fetchNewsItems(int page) async {
+    final response = await client.get("http://104.197.53.11/portal/news_items?page="+page.toString());
 
     if (response.statusCode == 200) {
       return Response.fromJson(json.decode(response.body));
@@ -20,7 +19,7 @@ class PortalService {
   }
 
   Future<Response> fetchNewsItem(String cod) async {
-    final response = await client.get("http://104.197.53.11/portal/news?cod="+cod);
+    final response = await client.get("http://104.197.53.11/portal/news_item?cod="+cod);
 
     if (response.statusCode == 200) {
       return Response.fromJson(json.decode(response.body));

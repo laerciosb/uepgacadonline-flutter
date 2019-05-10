@@ -47,6 +47,13 @@ Response _$ResponseFromJson(Map json) {
                 (k, e) => MapEntry(k as String, e),
               )))
         ?.toList()
+    ..newsItems = (json['news_items'] as List)
+        ?.map((e) => e == null
+            ? null
+            : NewsItems.fromJson((e as Map)?.map(
+                (k, e) => MapEntry(k as String, e),
+              )))
+        ?.toList()
     ..disciplines = (json['disciplines'] as List)
         ?.map((e) => e == null
             ? null
@@ -62,6 +69,7 @@ Map<String, dynamic> _$ResponseToJson(Response instance) => <String, dynamic>{
       'token': instance.token,
       'activities': instance.activities,
       'daily_news': instance.dailyNews,
+      'news_items': instance.newsItems,
       'disciplines': instance.disciplines,
       'weekly_menu': instance.weeklyMenu,
       'news': instance.news,

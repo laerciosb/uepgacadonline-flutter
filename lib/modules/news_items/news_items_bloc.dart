@@ -17,27 +17,25 @@ class NewsItemsBloc extends Bloc<NewsItemsEvent, NewsItemsState> {
     if (event is NewsItemsFetch && !_hasReachedMax(currentState)) {
       try {
         if (currentState is NewsItemsUninitialized) {
-          final date = DateTime.now();
+          final page = 1;
 
-          final newsItems = (await _repository.fetchNewsItems(date)).dailyNews;
+          final newsItems = (await _repository.fetchNewsItems(page)).newsItems;
 
           yield NewsItemsLoaded(
-              newsItems: newsItems,
-              hasReachedMax: false,
-              date: date.subtract(Duration(days: 1)));
+              newsItems: newsItems, hasReachedMax: false, page: page + 1);
         }
 
         if (currentState is NewsItemsLoaded) {
           final newsItems = (await _repository
-                  .fetchNewsItems((currentState as NewsItemsLoaded).date))
-              .dailyNews;
-          yield newsItems == null
-              ? (currentState as NewsItemsLoaded).copyWith(
-                  hasReachedMax: true,
-                  date: (currentState as NewsItemsLoaded)
-                      .date
-                      .subtract(Duration(days: 1)))
-              : NewsItemsLoaded(newsItems: newsItems, hasReachedMax: false);
+                  .fetchNewsItems((currentState as NewsItemsLoaded).page))
+              .newsItems;
+          yield newsItems.isEmpty
+              ? (currentState as NewsItemsLoaded).copyWith(hasReachedMax: true)
+              : NewsItemsLoaded(
+                  newsItems:
+                      (currentState as NewsItemsLoaded).newsItems + newsItems,
+                  page: (currentState as NewsItemsLoaded).page + 1,
+                  hasReachedMax: false);
         }
       } catch (e) {
         print(e.toString());

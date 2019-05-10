@@ -17,7 +17,7 @@ class Repository {
   Future<Response> fetchHome() => homeService.fetchHome();
   Future<Response> fetchGrade() => acadOnlineService.fetchGrade();
   Future<Response> fetchWeeklyMenu() => ruService.fetchWeeklyMenu();
-  Future<Response> fetchNewsItems(DateTime date) => newsService.fetchNewsItems(date);
+  Future<Response> fetchNewsItems(int page) => newsService.fetchNewsItems(page);
   Future<Response> fetchNewsItem(String cod) => newsService.fetchNewsItem(cod);
   Future<Response> fetchActivities() => acadOnlineService.fetchActivities();
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uepgacadonline_flutter/models/news.dart';
+import 'package:uepgacadonline_flutter/models/news_items.dart';
 import 'package:uepgacadonline_flutter/modules/news_item/news_item.screen.dart';
 import 'package:uepgacadonline_flutter/modules/news_items/bloc.dart';
 import 'package:uepgacadonline_flutter/widgets/bottom_loader.dart';
@@ -58,12 +59,11 @@ class _NewsItemsScreenState extends State<NewsItemsScreen> {
           return ListView.builder(
               controller: _scrollController,
               itemCount: state.hasReachedMax
-                  ? state.newsItems.news.length
-                  : state.newsItems.news.length + 1,
-              itemBuilder: (context, index) => index >=
-                      state.newsItems.news.length
+                  ? state.newsItems.length
+                  : state.newsItems.length + 1,
+              itemBuilder: (context, index) => index >= state.newsItems.length
                   ? BottomLoader()
-                  : _itemBuilder(context, index, state.newsItems.news[index]));
+                  : _rowBuilder(context, index, state.newsItems[index]));
         }
 
         if (state is NewsItemsError) {
@@ -73,6 +73,19 @@ class _NewsItemsScreenState extends State<NewsItemsScreen> {
         }
       },
     );
+  }
+
+  Widget _rowBuilder(BuildContext context, int index, NewsItems news) {
+    return Column(children: <Widget>[
+      Text(news.date.toString()),
+      ListView.builder(
+          physics: ClampingScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: news.news.length,
+          itemBuilder: (context, index) =>
+              _itemBuilder(context, index, news.news[index])
+      )
+    ]);
   }
 
   Widget _itemBuilder(BuildContext context, int index, News news) {
