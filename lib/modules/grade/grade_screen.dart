@@ -62,9 +62,11 @@ class _GradeScreenState extends State<GradeScreen> {
       {'title': 'Exame', 'value': discipline.gradeE?.toString() ?? '?'},
       {'title': 'Média', 'value': discipline.mean?.toString() ?? '?'},
       {'title': 'Faltas', 'value': discipline.absences?.toString() ?? '?'},
-      {'title': 'Frequência', 'value': "${discipline.frequency?.toString()}%" ?? '?'},
+      {
+        'title': 'Frequência',
+        'value': "${discipline.frequency?.toString()}%" ?? '?'
+      },
     ];
-
 
     return Column(
       children: <Widget>[
@@ -116,11 +118,16 @@ class _GradeScreenState extends State<GradeScreen> {
                                   children: <Widget>[
                                     Table(
                                         border: TableBorder(
-                                            horizontalInside: BorderSide(color: Colors.grey[100])),
+                                            horizontalInside: BorderSide(
+                                                color: Colors.grey[100])),
                                         children: rows
                                             .asMap()
-                                            .map((index, value) => MapEntry(index,
-                                            _rowBuilder(index, value['title'], value['value'])))
+                                            .map((index, value) => MapEntry(
+                                                index,
+                                                _rowBuilder(
+                                                    index,
+                                                    value['title'],
+                                                    value['value'])))
                                             .values
                                             .toList()),
                                     SizedBox(height: 8.0),
@@ -140,7 +147,9 @@ class _GradeScreenState extends State<GradeScreen> {
                 ],
               ),
             ),
-            CardThumbnail()
+            CardThumbnail(
+                icon: Icon(discipline.iconData, color: Colors.white, size: 32.0),
+                color: discipline.color)
           ],
         ),
       ],
@@ -162,7 +171,10 @@ class _GradeScreenState extends State<GradeScreen> {
           )),
       Container(
           padding: EdgeInsets.all(8.0),
-          child: Text(value, textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xff4a6aff)))),
+          child: Text(value,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, color: Color(0xff4a6aff)))),
     ]);
   }
 }

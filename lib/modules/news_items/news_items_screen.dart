@@ -118,7 +118,12 @@ class _NewsItemsScreenState extends State<NewsItemsScreen> {
   Widget _itemBuilder(BuildContext context, int index, News news) {
     return Stack(
       alignment: Alignment.centerLeft,
-      children: <Widget>[_itemCard(news), CardThumbnail()],
+      children: <Widget>[
+        _itemCard(news),
+        CardThumbnail(
+            icon: Icon(Icons.collections_bookmark, color: Colors.white),
+            color: Color(0xff4a6aff))
+      ],
     );
   }
 
