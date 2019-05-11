@@ -9,7 +9,7 @@ import 'package:uepgacadonline_flutter/widgets/card_thumbnail.dart';
 class GradeScreen extends StatefulWidget {
   @override
   _GradeScreenState createState() => _GradeScreenState();
-} 
+}
 
 class _GradeScreenState extends State<GradeScreen> {
   final _gradeBloc = GradeBloc();
@@ -42,8 +42,8 @@ class _GradeScreenState extends State<GradeScreen> {
               return ListView.builder(
                   padding: EdgeInsets.all(8.0),
                   itemCount: state.disciplines.length,
-                  itemBuilder: (context, index) => _itemBuilder(
-                      context, index, state.disciplines[index]));
+                  itemBuilder: (context, index) =>
+                      _itemBuilder(context, index, state.disciplines[index]));
             }
 
             if (state is GradeError) {
@@ -57,63 +57,92 @@ class _GradeScreenState extends State<GradeScreen> {
 
   Widget _itemBuilder(BuildContext context, int index, Discipline discipline) {
     final rows = [
-      {'title': '1° Semestre', 'value': discipline.grade1?.toString() ?? '-'},
-      {'title': '2° Semestre', 'value': discipline.grade2?.toString() ?? '-'},
-      {'title': 'Exame', 'value': discipline.gradeE?.toString() ?? '-'},
-      {'title': 'Média', 'value': discipline.mean?.toString() ?? '-'},
-      {'title': 'Faltas', 'value': discipline.absences?.toString() ?? '-'},
-      {'title': 'Frequência', 'value': discipline.frequency?.toString() ?? '-'},
+      {'title': '1° Semestre', 'value': discipline.grade1?.toString() ?? '?'},
+      {'title': '2° Semestre', 'value': discipline.grade2?.toString() ?? '?'},
+      {'title': 'Exame', 'value': discipline.gradeE?.toString() ?? '?'},
+      {'title': 'Média', 'value': discipline.mean?.toString() ?? '?'},
+      {'title': 'Faltas', 'value': discipline.absences?.toString() ?? '?'},
+      {'title': 'Frequência', 'value': "${discipline.frequency?.toString()}%" ?? '?'},
     ];
 
-    return Stack(
-      alignment: Alignment.centerLeft,
+
+    return Column(
       children: <Widget>[
         Container(
-          margin: EdgeInsets.fromLTRB(48.0, index == 0 ? 16.0 : 0.0, 8.0, 8.0),
-          child: Card(
-            elevation: 2.0,
-            child: InkWell(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => DisciplineScreen(discipline: discipline)));
-              },
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 0.0),
-                    child: Row(
-                      children: <Widget>[
-                        IconButton(
-                            icon: Icon(Icons.assessment, size: 32.0),
-                            onPressed: () => {}),
-                        Container(
-                            child: Expanded(
-                                child: Text(discipline.name,
-                                    style: TextStyle(
-                                        fontSize: 14.0,
-                                        fontWeight: FontWeight.bold),
-                                    textAlign: TextAlign.left)))
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 16.0),
-                  Table(
-                      border: TableBorder(
-                          horizontalInside: BorderSide(color: Colors.grey[300])),
-                      children: rows
-                          .asMap()
-                          .map((index, value) => MapEntry(index,
-                              _rowBuilder(index, value['title'], value['value'])))
-                          .values
-                          .toList())
-                ],
-              ),
+          alignment: Alignment.centerLeft,
+          margin: EdgeInsets.fromLTRB(48.0, 16.0, 4.0, 0.0),
+          child: RichText(
+            text: TextSpan(
+              style: DefaultTextStyle.of(context).style,
+              children: <TextSpan>[
+                TextSpan(
+                    text: discipline.name,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Color(0xff4a6aff))),
+                TextSpan(
+                    text: ", (${discipline.cod})",
+                    style: TextStyle(fontWeight: FontWeight.w100)),
+              ],
             ),
           ),
         ),
-        CardThumbnail()
+        Stack(
+          alignment: Alignment.centerLeft,
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.fromLTRB(44.0, 4.0, 8.0, 4.0),
+              child: Column(
+                children: <Widget>[
+                  Card(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16.0)),
+                    elevation: 4.0,
+                    child: InkWell(
+                      borderRadius: BorderRadius.all(Radius.circular(16.0)),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    DisciplineScreen(discipline: discipline)));
+                      },
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(
+                              child: Container(
+                                padding:
+                                    EdgeInsets.fromLTRB(24.0, 16.0, 8.0, 16.0),
+                                child: Column(
+                                  children: <Widget>[
+                                    Table(
+                                        border: TableBorder(
+                                            horizontalInside: BorderSide(color: Colors.grey[100])),
+                                        children: rows
+                                            .asMap()
+                                            .map((index, value) => MapEntry(index,
+                                            _rowBuilder(index, value['title'], value['value'])))
+                                            .values
+                                            .toList()),
+                                    SizedBox(height: 8.0),
+                                  ],
+                                ),
+                              ),
+                              flex: 100),
+                          Flexible(
+                              child: Container(
+                                  child: Icon(Icons.keyboard_arrow_right,
+                                      size: 20.0, color: Color(0xff4a6aff))),
+                              flex: 15)
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            CardThumbnail()
+          ],
+        ),
       ],
     );
   }
@@ -121,22 +150,19 @@ class _GradeScreenState extends State<GradeScreen> {
   TableRow _rowBuilder(int index, String title, String value) {
     return TableRow(children: [
       Container(
+          margin: EdgeInsets.only(left: 8.0),
           padding: EdgeInsets.all(8.0),
-          decoration: BoxDecoration(
-              color: index % 2 == 0 ? Colors.grey[50] : Colors.white),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Text(title,
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontWeight: FontWeight.w700)),
+                  style: TextStyle(fontWeight: FontWeight.w100)),
             ],
           )),
       Container(
           padding: EdgeInsets.all(8.0),
-          decoration: BoxDecoration(
-              color: index % 2 == 0 ? Colors.grey[50] : Colors.white),
-          child: Text(value, textAlign: TextAlign.center)),
+          child: Text(value, textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xff4a6aff)))),
     ]);
   }
 }
