@@ -10,6 +10,7 @@ enum Effectiveness {
   very_bad,
   bad,
   ok,
+  good,
   excellent,
   unbelievable
 }
@@ -52,7 +53,8 @@ class Discipline {
     else if(meanDouble < 5.0) value = Effectiveness.very_bad;
     else if(meanDouble < 7.0) value = Effectiveness.bad;
     else if(meanDouble < 8.0) value = Effectiveness.ok;
-    else if(meanDouble < 9.0) value = Effectiveness.excellent;
+    else if(meanDouble < 9.0) value = Effectiveness.good;
+    else if(meanDouble < 10.0) value = Effectiveness.excellent;
     else value = Effectiveness.unbelievable;
 
     return value;
@@ -66,6 +68,7 @@ class Discipline {
       case Effectiveness.very_bad: value = Icons.sentiment_very_dissatisfied; break;
       case Effectiveness.bad: value = Icons.sentiment_dissatisfied; break;
       case Effectiveness.ok: value = Icons.sentiment_neutral; break;
+      case Effectiveness.good: value = Icons.sentiment_satisfied; break;
       case Effectiveness.excellent: value = Icons.sentiment_satisfied; break;
       case Effectiveness.unbelievable: value = Icons.sentiment_very_satisfied; break;
     }
@@ -80,9 +83,10 @@ class Discipline {
       case Effectiveness.undefined: value = Color(0xff4a6aff); break;
       case Effectiveness.very_bad: value = Colors.red; break;
       case Effectiveness.bad: value = Colors.orange; break;
-      case Effectiveness.ok: value = Colors.yellow; break;
-      case Effectiveness.excellent: value = Colors.green; break;
-      case Effectiveness.unbelievable: value = Colors.green[400]; break;
+      case Effectiveness.ok: value = Colors.amber; break;
+      case Effectiveness.good: value = Colors.lime[600]; break;
+      case Effectiveness.excellent: value = Colors.lightGreen; break;
+      case Effectiveness.unbelievable: value = Colors.green; break;
     }
 
     return value;
