@@ -89,13 +89,15 @@ class _NewsItemsScreenState extends State<NewsItemsScreen> {
     return Column(children: <Widget>[
       Container(
         alignment: Alignment.centerLeft,
-        margin: EdgeInsets.fromLTRB(8.0, index != 0 ? 32.0 : 16.0, 4.0, 4.0),
+        margin: EdgeInsets.fromLTRB(48.0, index != 0 ? 32.0 : 16.0, 4.0, 4.0),
         child: RichText(
           text: TextSpan(
             style: DefaultTextStyle.of(context).style,
             children: <TextSpan>[
               TextSpan(
-                  text: dateDay, style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xff4a6aff))),
+                  text: dateDay,
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Color(0xff4a6aff))),
               TextSpan(
                   text: dateRemain,
                   style: TextStyle(fontWeight: FontWeight.w100)),
@@ -113,40 +115,87 @@ class _NewsItemsScreenState extends State<NewsItemsScreen> {
   }
 
   Widget _itemBuilder(BuildContext context, int index, News news) {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
-      elevation: 4.0,
-      child: Stack(
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.all(16.0),
-            child: Column(
-              children: <Widget>[
-                Text(news.title),
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      Icon(Icons.access_time, size: 12.0, color: Colors.grey[400]),
-                      SizedBox(width: 4.0),
-                      Text(news.time, style: TextStyle(fontSize: 12.0, color: Colors.grey[400]))
-                    ]),
-              ],
+    return Stack(
+      alignment: Alignment.centerLeft,
+      children: <Widget>[_itemCard(news), _itemThumbnail()],
+    );
+  }
+
+  Widget _itemCard(News news) {
+    return Container(
+      child: Card(
+        margin: EdgeInsets.fromLTRB(48.0, 4.0, 16.0, 4.0),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
+        elevation: 4.0,
+        child: Stack(
+          children: <Widget>[_itemCardContent(news), _itemInkWell(news)],
+        ),
+      ),
+    );
+  }
+
+  Widget _itemCardContent(News news) {
+    return Row(
+      children: <Widget>[
+        Expanded(
+            child: Container(
+              padding: EdgeInsets.fromLTRB(24.0, 16.0, 8.0, 16.0),
+              child: Column(
+                children: <Widget>[
+                  Text(news.title),
+                  SizedBox(height: 8.0),
+                  _itemCardInfo(news),
+                ],
+              ),
             ),
-          ),
-          Positioned.fill(
-              child: Material(
+            flex: 100),
+        Flexible(
+            child: Container(
+                child: Icon(Icons.keyboard_arrow_right,
+                    size: 20.0, color: Color(0xff4a6aff))),
+            flex: 15)
+      ],
+    );
+  }
+
+  Widget _itemCardInfo(News news) {
+    return Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
+      Icon(Icons.access_time, size: 12.0, color: Colors.grey[400]),
+      SizedBox(width: 4.0),
+      Text(news.time, style: TextStyle(fontSize: 12.0, color: Colors.grey[400]))
+    ]);
+  }
+
+  Widget _itemInkWell(News news) {
+    return Positioned.fill(
+        child: Material(
             color: Colors.transparent,
             child: InkWell(
-              borderRadius: BorderRadius.all(Radius.circular(4.0)),
+              borderRadius: BorderRadius.all(Radius.circular(16.0)),
               onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
                           NewsItemScreen(title: "Notícia", news: news))),
-            ),
-          ))
-        ],
-      ),
+            )));
+  }
+
+  Widget _itemThumbnail() {
+    return Column(
+      children: <Widget>[
+        Container(
+          decoration: BoxDecoration(
+              color: Color(0xff4a6aff),
+              borderRadius: BorderRadius.circular(32.0)),
+          alignment: Alignment.centerLeft,
+          height: 64.0,
+          width: 64.0,
+          child: Container(
+              alignment: Alignment.center,
+              child: Icon(Icons.collections_bookmark, color: Colors.white)),
+        ),
+      ],
     );
   }
 }

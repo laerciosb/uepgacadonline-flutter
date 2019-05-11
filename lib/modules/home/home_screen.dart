@@ -59,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
               BottomNavigationBarItem(
                   title: Text("Notas"), icon: Icon(Icons.collections_bookmark)),
               BottomNavigationBarItem(
-                  title: Text("Calendário"), icon: Icon(Icons.calendar_today)),
+                  title: Text("Calendário"), icon: Icon(Icons.insert_invitation)),
             ]),
         body: _bottomNavigationBarItem(_selectedItem));
   }
@@ -124,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                   ),
                   ListTile(
-                    leading: Icon(Icons.supervised_user_circle),
+                    leading: Icon(Icons.info),
                     title: Text("Sobre"),
                     onTap: () {
                       Navigator.push(
