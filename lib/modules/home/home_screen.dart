@@ -25,12 +25,8 @@ class _HomeScreenState extends State<HomeScreen> {
   final _homeBloc = HomeBloc();
   int _selectedItem = 0;
 
-  final newsItemsScreen = NewsItemsScreen();
-  final gradeScreen = GradeScreen();
-  final calendarScreen = CalendarScreen();
-
   Widget _bottomNavigationBarItem(int index) {
-    return [newsItemsScreen, gradeScreen, calendarScreen][index];
+    return [NewsItemsScreen(), GradeScreen(), CalendarScreen()][index];
   }
 
   @override

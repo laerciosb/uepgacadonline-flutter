@@ -7,6 +7,7 @@ import 'package:uepgacadonline_flutter/models/news_items.dart';
 import 'package:uepgacadonline_flutter/modules/news_item/news_item.screen.dart';
 import 'package:uepgacadonline_flutter/modules/news_items/bloc.dart';
 import 'package:uepgacadonline_flutter/widgets/bottom_loader.dart';
+import 'package:uepgacadonline_flutter/widgets/card_thumbnail.dart';
 
 class NewsItemsScreen extends StatefulWidget {
   @override
@@ -117,7 +118,7 @@ class _NewsItemsScreenState extends State<NewsItemsScreen> {
   Widget _itemBuilder(BuildContext context, int index, News news) {
     return Stack(
       alignment: Alignment.centerLeft,
-      children: <Widget>[_itemCard(news), _itemThumbnail()],
+      children: <Widget>[_itemCard(news), CardThumbnail()],
     );
   }
 
@@ -179,23 +180,5 @@ class _NewsItemsScreenState extends State<NewsItemsScreen> {
                       builder: (context) =>
                           NewsItemScreen(title: "Notícia", news: news))),
             )));
-  }
-
-  Widget _itemThumbnail() {
-    return Column(
-      children: <Widget>[
-        Container(
-          decoration: BoxDecoration(
-              color: Color(0xff4a6aff),
-              borderRadius: BorderRadius.circular(32.0)),
-          alignment: Alignment.centerLeft,
-          height: 64.0,
-          width: 64.0,
-          child: Container(
-              alignment: Alignment.center,
-              child: Icon(Icons.collections_bookmark, color: Colors.white)),
-        ),
-      ],
-    );
   }
 }

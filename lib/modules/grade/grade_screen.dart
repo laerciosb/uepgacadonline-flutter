@@ -4,6 +4,7 @@ import 'package:uepgacadonline_flutter/models/discipline.dart';
 import 'package:uepgacadonline_flutter/modules/discipline/discipline_screen.dart';
 import 'package:uepgacadonline_flutter/modules/grade/bloc.dart';
 import 'package:uepgacadonline_flutter/modules/grade/grade_state.dart';
+import 'package:uepgacadonline_flutter/widgets/card_thumbnail.dart';
 
 class GradeScreen extends StatefulWidget {
   @override
@@ -39,6 +40,7 @@ class _GradeScreenState extends State<GradeScreen> {
                 );
               }
               return ListView.builder(
+                  padding: EdgeInsets.all(8.0),
                   itemCount: state.disciplines.length,
                   itemBuilder: (context, index) => _itemBuilder(
                       context, index, state.disciplines[index]));
@@ -63,50 +65,56 @@ class _GradeScreenState extends State<GradeScreen> {
       {'title': 'Frequência', 'value': discipline.frequency?.toString() ?? '-'},
     ];
 
-    return Container(
-      margin: EdgeInsets.fromLTRB(8.0, index == 0 ? 16.0 : 0.0, 8.0, 8.0),
-      child: Card(
-        elevation: 2.0,
-        child: InkWell(
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => DisciplineScreen(discipline: discipline)));
-          },
-          child: Column(
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 0.0),
-                child: Row(
-                  children: <Widget>[
-                    IconButton(
-                        icon: Icon(Icons.assessment, size: 32.0),
-                        onPressed: () => {}),
-                    Container(
-                        child: Expanded(
-                            child: Text(discipline.name,
-                                style: TextStyle(
-                                    fontSize: 14.0,
-                                    fontWeight: FontWeight.bold),
-                                textAlign: TextAlign.left)))
-                  ],
-                ),
+    return Stack(
+      alignment: Alignment.centerLeft,
+      children: <Widget>[
+        Container(
+          margin: EdgeInsets.fromLTRB(48.0, index == 0 ? 16.0 : 0.0, 8.0, 8.0),
+          child: Card(
+            elevation: 2.0,
+            child: InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DisciplineScreen(discipline: discipline)));
+              },
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 0.0),
+                    child: Row(
+                      children: <Widget>[
+                        IconButton(
+                            icon: Icon(Icons.assessment, size: 32.0),
+                            onPressed: () => {}),
+                        Container(
+                            child: Expanded(
+                                child: Text(discipline.name,
+                                    style: TextStyle(
+                                        fontSize: 14.0,
+                                        fontWeight: FontWeight.bold),
+                                    textAlign: TextAlign.left)))
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 16.0),
+                  Table(
+                      border: TableBorder(
+                          horizontalInside: BorderSide(color: Colors.grey[300])),
+                      children: rows
+                          .asMap()
+                          .map((index, value) => MapEntry(index,
+                              _rowBuilder(index, value['title'], value['value'])))
+                          .values
+                          .toList())
+                ],
               ),
-              SizedBox(height: 16.0),
-              Table(
-                  border: TableBorder(
-                      horizontalInside: BorderSide(color: Colors.grey[300])),
-                  children: rows
-                      .asMap()
-                      .map((index, value) => MapEntry(index,
-                          _rowBuilder(index, value['title'], value['value'])))
-                      .values
-                      .toList())
-            ],
+            ),
           ),
         ),
-      ),
+        CardThumbnail()
+      ],
     );
   }
 
