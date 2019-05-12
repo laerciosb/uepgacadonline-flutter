@@ -20,7 +20,16 @@ class _AboutScreenState extends State<AboutScreen> {
                 fontWeight: FontWeight.bold)),
         backgroundColor: Colors.white,
       ),
-      body: Center(child: Text("Sobre")),
+      body: Center(
+          child: Card(
+            margin: EdgeInsets.all(32.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+              
+            ]),
+          )
+      ),
     );
   }
 }
