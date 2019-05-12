@@ -29,7 +29,6 @@ class _NewsItemsScreenState extends State<NewsItemsScreen> {
       final currentScroll = _scrollController.position.pixels;
 
       if (maxScroll - currentScroll <= _scrollThreshold) {
-        print('Loading more');
         _newsItemsBloc.dispatch(NewsItemsFetch());
       }
     });
@@ -183,7 +182,7 @@ class _NewsItemsScreenState extends State<NewsItemsScreen> {
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                          NewsItemScreen(title: "Notícia", news: news))),
+                          NewsItemScreen(news: news))),
             )));
   }
 }

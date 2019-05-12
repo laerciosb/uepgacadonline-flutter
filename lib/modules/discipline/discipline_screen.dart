@@ -17,7 +17,16 @@ class _DisciplineScreenState extends State<DisciplineScreen> {
     final discipline = widget.discipline;
 
     return Scaffold(
-        appBar: AppBar(title: Text(discipline.name)),
+        appBar: AppBar(
+            titleSpacing: 0.0,
+            centerTitle: true,
+            iconTheme: IconThemeData(color: Color(0xff4a6aff)),
+            title: Text(discipline.name,
+                style: TextStyle(
+                    fontSize: 16.0,
+                    color: Color(0xff4a6aff),
+                    fontWeight: FontWeight.bold)),
+            backgroundColor: Colors.white),
         body: Container(
           child: SingleChildScrollView(
             padding: EdgeInsets.all(8.0),

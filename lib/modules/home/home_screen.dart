@@ -56,15 +56,45 @@ class _HomeScreenState extends State<HomeScreen> {
 //              onPressed: () => {}
 //            )
 //          ],
-            title: Row(children: <Widget>[
-              Text("Acadêmico",
-                  style: TextStyle(
-                      fontSize: 16.0,
-                      color: Color(0xff4a6aff),
-                      fontWeight: FontWeight.bold)),
-              Text(" Online",
-                  style: TextStyle(fontSize: 16.0, color: Color(0xff4a6aff)))
-            ]),
+            title: BlocBuilder(
+              bloc: _homeBloc,
+              builder: (context, HomeState state) {
+
+                if (state is HomeLoaded) {
+                  return Row(children: <Widget>[
+                    Flexible(
+                      flex: 10,
+                      child: Text(state.user.completeName,
+                          style: TextStyle(
+                              fontSize: 14.0,
+                              color: Color(0xff4a6aff),
+                              fontWeight: FontWeight.bold)),
+                    ),
+                    Flexible(
+                      flex: 6,
+                      child: Text(", ${state.user.academicRegister}",
+                          style: TextStyle(
+                              fontSize: 13.0, color: Colors.black)),
+                    )
+                  ]);
+                }
+                else {
+                  return Row(children: <Widget>[
+                    Flexible(
+                      child: Text("Acadêmico",
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              color: Color(0xff4a6aff),
+                              fontWeight: FontWeight.bold)),
+                    ),
+                    Flexible(
+                      child: Text(" Online",
+                          style: TextStyle(
+                              fontSize: 16.0, color: Color(0xff4a6aff))),
+                    )
+                  ]);
+                }
+              }),
           ),
           floatingActionButton: 0 == 2
               ? FloatingActionButton(

@@ -6,10 +6,9 @@ import 'package:uepgacadonline_flutter/models/news.dart';
 import 'package:uepgacadonline_flutter/modules/news_item/bloc.dart';
 
 class NewsItemScreen extends StatefulWidget {
-  NewsItemScreen({Key key, this.title, this.news}) : super(key: key);
+  NewsItemScreen({Key key, this.news}) : super(key: key);
 
   final News news;
-  final String title;
 
   @override
   _NewsItemScreenState createState() => _NewsItemScreenState();
@@ -28,7 +27,15 @@ class _NewsItemScreenState extends State<NewsItemScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(widget.title),
+            titleSpacing: 0.0,
+            centerTitle: true,
+            iconTheme: IconThemeData(color: Color(0xff4a6aff)),
+            title: Text(widget.news.title,
+                style: TextStyle(
+                    fontSize: 16.0,
+                    color: Color(0xff4a6aff),
+                    fontWeight: FontWeight.bold)),
+            backgroundColor: Colors.white
         ),
         body: BlocBuilder(
             bloc: newsItemBloc,
