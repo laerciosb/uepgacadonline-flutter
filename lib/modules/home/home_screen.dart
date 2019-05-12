@@ -19,47 +19,52 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  final _homeBloc = HomeBloc();
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
+  HomeBloc _homeBloc;
+  TabController _tabController;
 
   @override
   initState() {
     super.initState();
+    _homeBloc = HomeBloc();
     _homeBloc.dispatch(HomeFetch());
+    _tabController = TabController(vsync: this, length: 3);
+    _tabController.addListener(_handleTabIndex);
+  }
+
+  void _handleTabIndex() {
+    setState(() {});
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _homeBloc.dispose();
+    _tabController.removeListener(_handleTabIndex);
+    _tabController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-          appBar: AppBar(
-            titleSpacing: 0.0,
-            iconTheme: IconThemeData(color: Color(0xff4a6aff)),
-            bottom: TabBar(
-                indicatorColor: Color(0xff4a6aff),
-                unselectedLabelColor: Colors.grey[400],
-                labelColor: Color(0xff4a6aff),
-                tabs: [
-                  Tab(text: "Notícias", icon: Icon(Icons.library_books)),
-                  Tab(text: "Notas", icon: Icon(Icons.collections_bookmark)),
-                  Tab(text: "Calendário", icon: Icon(Icons.insert_invitation))
-                ]),
-            backgroundColor: Colors.white,
-//          actions: <Widget>[
-//            IconButton(
-//              icon: Icon(Icons.info, color: Colors.grey[400]),
-//              onPressed: () => {}
-//            ),
-//            IconButton(
-//              icon: Icon(Icons.notifications, color: Colors.grey[400]),
-//              onPressed: () => {}
-//            )
-//          ],
-            title: BlocBuilder(
+    return Scaffold(
+        appBar: AppBar(
+          titleSpacing: 0.0,
+          iconTheme: IconThemeData(color: Color(0xff4a6aff)),
+          bottom: TabBar(
+              controller: _tabController,
+              indicatorColor: Color(0xff4a6aff),
+              unselectedLabelColor: Colors.grey[400],
+              labelColor: Color(0xff4a6aff),
+              tabs: [
+                Tab(text: "Notícias", icon: Icon(Icons.library_books)),
+                Tab(text: "Notas", icon: Icon(Icons.collections_bookmark)),
+                Tab(text: "Calendário", icon: Icon(Icons.insert_invitation))
+              ]),
+          backgroundColor: Colors.white,
+          title: BlocBuilder(
               bloc: _homeBloc,
               builder: (context, HomeState state) {
-
                 if (state is HomeLoaded) {
                   return Row(children: <Widget>[
                     Flexible(
@@ -73,44 +78,38 @@ class _HomeScreenState extends State<HomeScreen> {
                     Flexible(
                       flex: 6,
                       child: Text(", ${state.user.academicRegister}",
-                          style: TextStyle(
-                              fontSize: 13.0, color: Colors.black)),
+                          style:
+                              TextStyle(fontSize: 13.0, color: Colors.black)),
                     )
                   ]);
-                }
-                else {
+                } else {
                   return Row(children: <Widget>[
                     Flexible(
                       child: Text("Acadêmico",
                           style: TextStyle(
-                              fontSize: 16.0,
+                              fontSize: 14.0,
                               color: Color(0xff4a6aff),
                               fontWeight: FontWeight.bold)),
                     ),
                     Flexible(
                       child: Text(" Online",
                           style: TextStyle(
-                              fontSize: 16.0, color: Color(0xff4a6aff))),
+                              fontSize: 13.0, color: Color(0xff4a6aff))),
                     )
                   ]);
                 }
               }),
-          ),
-          floatingActionButton: 0 == 2
-              ? FloatingActionButton(
-                  onPressed: () => {},
-                  child: Icon(Icons.add),
-                )
-              : null,
-          drawer: _buildDrawer(),
-          body: TabBarView(
-            children: <Widget>[
-              NewsItemsScreen(),
-              GradeScreen(),
-              CalendarScreen()
-            ],
-          )),
-    );
+        ),
+        drawer: _buildDrawer(),
+        body: TabBarView(
+          controller: _tabController,
+          children: <Widget>[
+            NewsItemsScreen(),
+            GradeScreen(),
+            CalendarScreen()
+          ],
+        ),
+        floatingActionButton: _buildFloatingButton());
   }
 
   Widget _buildDrawer() {
@@ -182,5 +181,14 @@ class _HomeScreenState extends State<HomeScreen> {
             authenticationBloc.dispatch(LoggedOut());
           }
         });
+  }
+
+  Widget _buildFloatingButton() {
+    return _tabController.index == 2
+        ? FloatingActionButton(
+            onPressed: () => {},
+            child: Icon(Icons.add),
+          )
+        : Container();
   }
 }

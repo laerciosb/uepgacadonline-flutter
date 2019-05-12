@@ -105,33 +105,38 @@ class _CalendarScreenState extends State<CalendarScreen> {
   }
 
   Widget _buildTableCalendar() {
-    return TableCalendar(
-      locale: 'pt_BR',
-      //events: _visibleEvents,
-      //holidays: _visibleHolidays,
-      initialCalendarFormat: CalendarFormat.month,
-      formatAnimation: FormatAnimation.slide,
-      startingDayOfWeek: StartingDayOfWeek.monday,
-      availableGestures: AvailableGestures.all,
-      availableCalendarFormats: const {
-        CalendarFormat.month: '',
-      },
-      calendarStyle: CalendarStyle(
-        selectedColor: Colors.blue[400],
-        todayColor: Colors.blue[200],
-        markersColor: Colors.blue[700],
-      ),
-      headerStyle: HeaderStyle(
-        centerHeaderTitle: true,
-        formatButtonTextStyle:
-            TextStyle().copyWith(color: Colors.white, fontSize: 15.0),
-        formatButtonDecoration: BoxDecoration(
-          color: Colors.blue[400],
-          borderRadius: BorderRadius.circular(16.0),
+    return Card(
+      elevation: 2.0,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16.0)),
+      child: TableCalendar(
+        locale: 'pt_BR',
+        //events: _visibleEvents,
+        //holidays: _visibleHolidays,
+        initialCalendarFormat: CalendarFormat.month,
+        formatAnimation: FormatAnimation.slide,
+        startingDayOfWeek: StartingDayOfWeek.monday,
+        availableGestures: AvailableGestures.all,
+        availableCalendarFormats: const {
+          CalendarFormat.month: '',
+        },
+        calendarStyle: CalendarStyle(
+          selectedColor: Color(0xff4a6aff),
+          todayColor: Colors.blue[200],
+          markersColor: Colors.blue[700],
         ),
-      ),
+        headerStyle: HeaderStyle(
+          centerHeaderTitle: true,
+          formatButtonTextStyle:
+              TextStyle().copyWith(color: Colors.white, fontSize: 15.0),
+          formatButtonDecoration: BoxDecoration(
+            color: Colors.blue[400],
+            borderRadius: BorderRadius.circular(16.0),
+          ),
+        ),
 //      onDaySelected: _onDaySelected,
 //      onVisibleDaysChanged: _onVisibleDaysChanged,
+      ),
     );
   }
 }

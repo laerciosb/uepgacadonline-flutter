@@ -23,7 +23,7 @@ class _DisciplineScreenState extends State<DisciplineScreen> {
             iconTheme: IconThemeData(color: Color(0xff4a6aff)),
             title: Text(discipline.name,
                 style: TextStyle(
-                    fontSize: 16.0,
+                    fontSize: 14.0,
                     color: Color(0xff4a6aff),
                     fontWeight: FontWeight.bold)),
             backgroundColor: Colors.white),

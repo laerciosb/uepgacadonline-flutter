@@ -32,7 +32,7 @@ class _NewsItemScreenState extends State<NewsItemScreen> {
             iconTheme: IconThemeData(color: Color(0xff4a6aff)),
             title: Text(widget.news.title,
                 style: TextStyle(
-                    fontSize: 16.0,
+                    fontSize: 14.0,
                     color: Color(0xff4a6aff),
                     fontWeight: FontWeight.bold)),
             backgroundColor: Colors.white
