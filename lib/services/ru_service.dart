@@ -8,7 +8,7 @@ class RuService {
   Client client = Client();
 
   Future<Response> fetchWeeklyMenu() async {
-    final response = await client.get("http://104.197.53.11/ru/menu");
+    final response = await client.get("http://104.197.53.11/ru/menu?campus=uvaranas&shift=A");
 
     if (response.statusCode == 200) {
       return Response.fromJson(json.decode(response.body));
