@@ -118,19 +118,16 @@ class DisciplineCardItem extends StatelessWidget {
                                         border: TableBorder(
                                             horizontalInside: BorderSide(
                                                 color: Colors.grey[100])),
-                                        children: rows
+                                        children: List<TableRow>.from(rows
                                             .asMap()
-                                            .map((index, value) {
-                                              print(value);
-                                              return MapEntry(
-                                                  index,
-                                                  _rowBuilder(
-                                                      index,
-                                                      value['title'],
-                                                      value['value']));
-                                            })
-                                            .values
-                                            .toList()),
+                                            .map((index, value) =>
+                                                MapEntry<int, TableRow>(
+                                                    index,
+                                                    _rowBuilder(
+                                                        index,
+                                                        value['title'],
+                                                        value['value'])))
+                                            .values)),
                                     SizedBox(height: 8.0),
                                   ],
                                 ),
@@ -164,19 +161,20 @@ class DisciplineCardItem extends StatelessWidget {
           margin: EdgeInsets.only(left: 8.0),
           padding: EdgeInsets.all(8.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Text(title,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontWeight: FontWeight.w100)),
+              Expanded(
+                child: Text(title,
+                    textAlign: TextAlign.start,
+                    style: TextStyle(fontWeight: FontWeight.w100)),
+              ),
+              Expanded(
+                child: Text(value,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Color(0xff4a6aff))),
+              )
             ],
-          )),
-      Container(
-          padding: EdgeInsets.all(8.0),
-          child: Text(value,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, color: Color(0xff4a6aff)))),
+          ))
     ]);
   }
 }
