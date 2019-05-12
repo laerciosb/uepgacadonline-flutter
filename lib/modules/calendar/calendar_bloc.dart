@@ -27,5 +27,12 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
         yield CalendarError();
       }
     }
+
+    if(event is CalendarOpenDialog) {
+      final lastState = currentState;
+
+      yield CalendarDialog();
+      yield lastState;
+    }
   }
 }

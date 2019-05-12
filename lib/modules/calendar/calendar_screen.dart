@@ -10,67 +10,83 @@ class CalendarScreen extends StatefulWidget {
 }
 
 class _CalendarScreenState extends State<CalendarScreen> {
-  final _calendarBloc = CalendarBloc();
+  CalendarBloc _calendarBloc;
 
   @override
   initState() {
     super.initState();
+    _calendarBloc = BlocProvider.of<CalendarBloc>(context);
     _calendarBloc.dispatch(CalendarFetch());
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: Column(
-      children: <Widget>[
-        _buildTableCalendar(),
-        BlocBuilder(
-            bloc: _calendarBloc,
-            builder: (context, CalendarState state) {
-              if (state is CalendarUninitialized) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
+    return BlocListener(
+        bloc: _calendarBloc,
+        listener: (context, state) {
+          if (state is CalendarDialog) {
+            print("Calendar");
+            showCalendarDialog(context);
+          }
+        },
+        child: Container(
+            child: Column(
+          children: <Widget>[
+            _buildTableCalendar(),
+            BlocBuilder(
+                bloc: _calendarBloc,
+                builder: (context, CalendarState state) {
+                  if (state is CalendarUninitialized) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
 
-              if (state is CalendarLoaded) {
-                if (state.calendar.isEmpty) {
-                  return Center(
-                    child: Text('Empty'),
-                  );
-                }
-                return _buildTableCalendarList(state.calendar);
-              }
+                  if (state is CalendarLoaded) {
+                    if (state.calendar.isEmpty) {
+                      return Center(
+                        child: Text('Empty'),
+                      );
+                    }
+                    return _buildTableCalendarList(state.calendar);
+                  }
 
-              if (state is CalendarError) {
-                return Center(
-                  child: Text('Error'),
-                );
-              }
-            })
-      ],
-    ));
+                  if (state is CalendarError) {
+                    return Center(
+                      child: Text('Error'),
+                    );
+                  }
+                })
+          ],
+        )));
   }
 
-//  void showCalendarDialog(BuildContext context) {
-//    showDialog(
-//        context: context,
-//        builder: (BuildContext context) {
-//          return AlertDialog(
-//            title: Text("Nova atividade"),
-//            content: Column(children: <Widget>[Text("Form")]),
-//            actions: <Widget>[
-//              FlatButton(
-//                child: Text("Cancelar"),
-//                onPressed: () {
-//                  Navigator.of(context).pop();
-//                },
-//              ),
-//              FlatButton(child: Text("Inserir"))
-//            ],
-//          );
-//        });
-//  }
+  void showCalendarDialog(BuildContext context) {
+    final categories = [
+      {'id': 1, 'title': 'Apresentação'},
+      {'id': 2, 'title': 'Prova'},
+      {'id': 3, 'title': 'Trabalho'},
+      {'id': 4, 'title': 'Outro'},
+    ];
+
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Nova atividade"),
+            content: Column(children: <Widget>[Text("Form")]),
+            actions: <Widget>[
+              FlatButton(
+                child: Text("Cancelar"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              FlatButton(child: Text("Inserir"))
+            ],
+          );
+        });
+  }
 
   Widget _buildTableCalendarList(List<Calendar> calendar) {
     return Expanded(
@@ -107,12 +123,12 @@ class _CalendarScreenState extends State<CalendarScreen> {
   Widget _buildTableCalendar() {
     return Card(
       elevation: 2.0,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16.0)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
       child: TableCalendar(
         locale: 'pt_BR',
         //events: _visibleEvents,
         //holidays: _visibleHolidays,
+        onDaySelected: (time, list) => { showCalendarDialog(context) },
         initialCalendarFormat: CalendarFormat.month,
         formatAnimation: FormatAnimation.slide,
         startingDayOfWeek: StartingDayOfWeek.monday,

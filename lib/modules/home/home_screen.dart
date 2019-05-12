@@ -4,6 +4,7 @@ import 'package:uepgacadonline_flutter/modules/about/about_screen.dart';
 import 'package:uepgacadonline_flutter/modules/activities/activities_screen.dart';
 import 'package:uepgacadonline_flutter/modules/authentication/authentication_bloc.dart';
 import 'package:uepgacadonline_flutter/modules/authentication/bloc.dart';
+import 'package:uepgacadonline_flutter/modules/calendar/bloc.dart';
 import 'package:uepgacadonline_flutter/modules/calendar/calendar_screen.dart';
 import 'package:uepgacadonline_flutter/modules/grade/grade_screen.dart';
 import 'package:uepgacadonline_flutter/modules/home/bloc.dart';
@@ -186,7 +187,11 @@ class _HomeScreenState extends State<HomeScreen>
   Widget _buildFloatingButton() {
     return _tabController.index == 2
         ? FloatingActionButton(
-            onPressed: () => {},
+            backgroundColor: Color(0xff4a6aff),
+            onPressed: () {
+              BlocProvider.of<CalendarBloc>(context)
+                  .dispatch(CalendarOpenDialog());
+            },
             child: Icon(Icons.add),
           )
         : Container();

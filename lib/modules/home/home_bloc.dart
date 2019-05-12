@@ -5,8 +5,6 @@ import 'package:uepgacadonline_flutter/services/repository.dart';
 import './bloc.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  final _repository = Repository();
-
   @override
   HomeState get initialState => HomeUninitialized();
 

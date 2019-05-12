@@ -25,3 +25,8 @@ class CalendarError extends CalendarState {
   @override
   String toString() => 'CalendarError';
 }
+
+class CalendarDialog extends CalendarState {
+  @override
+  String toString() => 'CalendarDialog';
+}

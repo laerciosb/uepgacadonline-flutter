@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uepgacadonline_flutter/modules/authentication/bloc.dart';
+import 'package:uepgacadonline_flutter/modules/calendar/bloc.dart';
 import 'package:uepgacadonline_flutter/modules/home/home_screen.dart';
 import 'package:uepgacadonline_flutter/modules/login/login_screen.dart';
 import 'package:uepgacadonline_flutter/modules/splash/splash_screen.dart';
@@ -20,6 +21,7 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   AuthenticationBloc authenticationBloc;
+  CalendarBloc calendarBloc;
 
   @override
   void initState() {
@@ -35,6 +37,7 @@ class _AppState extends State<App> {
         onSelectNotification: onSelectNotification);
 
     authenticationBloc = AuthenticationBloc();
+    calendarBloc = CalendarBloc();
     authenticationBloc.dispatch(AppStarted());
   }
 
@@ -48,15 +51,19 @@ class _AppState extends State<App> {
   @override
   void dispose() {
     super.dispose();
+    calendarBloc.dispose();
     authenticationBloc.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<AuthenticationBloc>(
-      bloc: authenticationBloc,
+    return BlocProviderTree(
+      blocProviders: [
+        BlocProvider<AuthenticationBloc>(bloc: authenticationBloc),
+        BlocProvider<CalendarBloc>(bloc: calendarBloc)
+      ],
       child: MaterialApp(
-          title: 'Flutter Demo',
+          title: 'Acadêmico Online - UEPG',
           theme: ThemeData(
             primarySwatch: Colors.indigo,
           ),

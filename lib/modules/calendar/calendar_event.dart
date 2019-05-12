@@ -1,6 +1,5 @@
-import 'package:meta/meta.dart';
+import 'package:uepgacadonline_flutter/models/calendar.dart';
 
-@immutable
 abstract class CalendarEvent {}
 
 class CalendarFetch extends CalendarEvent {
@@ -8,3 +7,11 @@ class CalendarFetch extends CalendarEvent {
   String toString() => 'CalendarFetch';
 }
 
+class CalendarOpenDialog extends CalendarEvent {
+  Calendar calendar;
+
+  CalendarOpenDialog({this.calendar});
+
+  @override
+  String toString() => 'CalendarOpenDialog';
+}
