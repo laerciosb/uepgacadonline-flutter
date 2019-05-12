@@ -21,11 +21,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final _homeBloc = HomeBloc();
-  int _selectedItem = 0;
-
-  Widget _bottomNavigationBarItem(int index) {
-    return [NewsItemsScreen(), GradeScreen(), CalendarScreen()][index];
-  }
 
   @override
   initState() {
@@ -35,11 +30,22 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          titleSpacing: 0.0,
-          iconTheme: IconThemeData(color: Color(0xff4a6aff)),
-          backgroundColor: Colors.white,
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+          appBar: AppBar(
+            titleSpacing: 0.0,
+            iconTheme: IconThemeData(color: Color(0xff4a6aff)),
+            bottom: TabBar(
+                indicatorColor: Color(0xff4a6aff),
+                unselectedLabelColor: Colors.grey[400],
+                labelColor: Color(0xff4a6aff),
+                tabs: [
+                  Tab(text: "Notícias", icon: Icon(Icons.library_books)),
+                  Tab(text: "Notas", icon: Icon(Icons.collections_bookmark)),
+                  Tab(text: "Calendário", icon: Icon(Icons.insert_invitation))
+                ]),
+            backgroundColor: Colors.white,
 //          actions: <Widget>[
 //            IconButton(
 //              icon: Icon(Icons.info, color: Colors.grey[400]),
@@ -50,42 +56,31 @@ class _HomeScreenState extends State<HomeScreen> {
 //              onPressed: () => {}
 //            )
 //          ],
-          title: Row(children: <Widget>[
-            Text("Acadêmico",
-                style: TextStyle(
-                    fontSize: 16.0,
-                    color: Color(0xff4a6aff),
-                    fontWeight: FontWeight.bold)),
-            Text(" Online",
-                style: TextStyle(fontSize: 16.0, color: Color(0xff4a6aff)))
-          ]),
-        ),
-        floatingActionButton: _selectedItem == 2
-            ? FloatingActionButton(
-                onPressed: () => {},
-                child: Icon(Icons.add),
-              )
-            : null,
-        drawer: _buildDrawer(),
-        bottomNavigationBar: BottomNavigationBar(
-            currentIndex: _selectedItem,
-            onTap: _onItemTapped,
-            items: [
-              BottomNavigationBarItem(
-                  title: Text("Notícias"), icon: Icon(Icons.library_books)),
-              BottomNavigationBarItem(
-                  title: Text("Notas"), icon: Icon(Icons.collections_bookmark)),
-              BottomNavigationBarItem(
-                  title: Text("Calendário"),
-                  icon: Icon(Icons.insert_invitation)),
+            title: Row(children: <Widget>[
+              Text("Acadêmico",
+                  style: TextStyle(
+                      fontSize: 16.0,
+                      color: Color(0xff4a6aff),
+                      fontWeight: FontWeight.bold)),
+              Text(" Online",
+                  style: TextStyle(fontSize: 16.0, color: Color(0xff4a6aff)))
             ]),
-        body: _bottomNavigationBarItem(_selectedItem));
-  }
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedItem = index;
-    });
+          ),
+          floatingActionButton: 0 == 2
+              ? FloatingActionButton(
+                  onPressed: () => {},
+                  child: Icon(Icons.add),
+                )
+              : null,
+          drawer: _buildDrawer(),
+          body: TabBarView(
+            children: <Widget>[
+              NewsItemsScreen(),
+              GradeScreen(),
+              CalendarScreen()
+            ],
+          )),
+    );
   }
 
   Widget _buildDrawer() {
@@ -113,15 +108,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontSize: 18.0, fontWeight: FontWeight.bold)),
                   Text(state.user?.academicRegister),
                   Divider(height: 16),
-//                  ListTile(
-//                      leading: Icon(Icons.insert_drive_file),
-//                      title: Text("Arquivos"),
-//                      onTap: () {
-//                        Navigator.push(
-//                            context,
-//                            MaterialPageRoute(
-//                                builder: (context) => FilesScreen()));
-//                      }),
                   ListTile(
                       leading: Icon(Icons.assignment),
                       title: Text("Atividades"),

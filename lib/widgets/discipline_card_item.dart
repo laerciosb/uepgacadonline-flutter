@@ -130,7 +130,6 @@ class DisciplineCardItem extends StatelessWidget {
                                                       value['value']));
                                             })
                                             .values
-                                            .map((v) =>  v.retype(TableRow))
                                             .toList()),
                                     SizedBox(height: 8.0),
                                   ],
