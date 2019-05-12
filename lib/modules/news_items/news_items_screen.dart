@@ -121,8 +121,8 @@ class _NewsItemsScreenState extends State<NewsItemsScreen> {
       children: <Widget>[
         _itemCard(news),
         CardThumbnail(
-            icon: Icon(Icons.collections_bookmark, color: Colors.white),
-            color: Color(0xff4a6aff))
+            icon: Icon(news.iconData, color: Colors.white),
+            color: news.color)
       ],
     );
   }

@@ -57,6 +57,10 @@ class Discipline {
     else if(meanDouble < 10.0) value = Effectiveness.excellent;
     else value = Effectiveness.unbelievable;
 
+    if(frequency < 75) {
+      value = Effectiveness.very_bad;
+    }
+
     return value;
   }
 

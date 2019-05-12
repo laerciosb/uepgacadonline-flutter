@@ -72,7 +72,7 @@ class _GradeScreenState extends State<GradeScreen> {
       children: <Widget>[
         Container(
           alignment: Alignment.centerLeft,
-          margin: EdgeInsets.fromLTRB(48.0, 16.0, 4.0, 0.0),
+          margin: EdgeInsets.fromLTRB(48.0, 20.0, 4.0, 0.0),
           child: RichText(
             text: TextSpan(
               style: DefaultTextStyle.of(context).style,
@@ -92,7 +92,7 @@ class _GradeScreenState extends State<GradeScreen> {
           alignment: Alignment.centerLeft,
           children: <Widget>[
             Container(
-              margin: EdgeInsets.fromLTRB(44.0, 4.0, 8.0, 4.0),
+              margin: EdgeInsets.fromLTRB(40.0, 4.0, 8.0, 4.0),
               child: Column(
                 children: <Widget>[
                   Card(
