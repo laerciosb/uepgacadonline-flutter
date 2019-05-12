@@ -37,6 +37,7 @@ class UserRepository {
   Future<User> getUser() async {
     final _prefs = await SharedPreferences.getInstance();
     final json_ = json.decode(_prefs.getString('user'));
+    if(json_ == null) return null;
     final user = User.fromJson(json_) ?? null;
 
     return user;

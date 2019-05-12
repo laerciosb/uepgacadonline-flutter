@@ -1,0 +1,1 @@
+enum DisciplineCardItemType { summary, complete }
