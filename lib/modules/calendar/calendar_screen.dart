@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:uepgacadonline_flutter/models/calendar.dart';
 import 'package:uepgacadonline_flutter/modules/calendar/bloc.dart';
+import 'package:uepgacadonline_flutter/modules/calendar/calendar_form.dart';
+import 'package:uepgacadonline_flutter/services/repository.dart';
 
 class CalendarScreen extends StatefulWidget {
   @override
@@ -61,31 +63,11 @@ class _CalendarScreenState extends State<CalendarScreen> {
         )));
   }
 
-  void showCalendarDialog(BuildContext context) {
-    final categories = [
-      {'id': 1, 'title': 'Apresentação'},
-      {'id': 2, 'title': 'Prova'},
-      {'id': 3, 'title': 'Trabalho'},
-      {'id': 4, 'title': 'Outro'},
-    ];
+  void showCalendarDialog(BuildContext context) async {
 
     showDialog(
         context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text("Nova atividade"),
-            content: Column(children: <Widget>[Text("Form")]),
-            actions: <Widget>[
-              FlatButton(
-                child: Text("Cancelar"),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-              FlatButton(child: Text("Inserir"))
-            ],
-          );
-        });
+        builder: (BuildContext context) => CalendarForm());
   }
 
   Widget _buildTableCalendarList(List<Calendar> calendar) {
@@ -128,7 +110,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
         locale: 'pt_BR',
         //events: _visibleEvents,
         //holidays: _visibleHolidays,
-        onDaySelected: (time, list) => { showCalendarDialog(context) },
+        onDaySelected: (time, list) => {showCalendarDialog(context)},
         initialCalendarFormat: CalendarFormat.month,
         formatAnimation: FormatAnimation.slide,
         startingDayOfWeek: StartingDayOfWeek.monday,

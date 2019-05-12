@@ -135,7 +135,9 @@ class _HomeScreenState extends State<HomeScreen>
                 children: <Widget>[
                   Text(state.user?.completeName,
                       style: TextStyle(
-                          fontSize: 18.0, fontWeight: FontWeight.bold)),
+                          color: Color(0xff4a6aff),
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold)),
                   Text(state.user?.academicRegister),
                   Divider(height: 16),
                   ListTile(
@@ -148,6 +150,13 @@ class _HomeScreenState extends State<HomeScreen>
                                 builder: (context) => ActivitiesScreen()));
                       }),
                   ListTile(
+                      leading: Icon(Icons.insert_invitation),
+                      title: Text("Calendário"),
+                      onTap: () {
+                        _tabController.index = 2;
+                        Navigator.pop(context);
+                      }),
+                  ListTile(
                     leading: Icon(Icons.restaurant),
                     title: Text("Restaurante"),
                     onTap: () {
@@ -157,6 +166,20 @@ class _HomeScreenState extends State<HomeScreen>
                               builder: (context) => WeeklyMenuScreen()));
                     },
                   ),
+                  ListTile(
+                      leading: Icon(Icons.collections_bookmark),
+                      title: Text("Notas"),
+                      onTap: () {
+                        _tabController.index = 1;
+                        Navigator.pop(context);
+                      }),
+                  ListTile(
+                      leading: Icon(Icons.library_books),
+                      title: Text("Notícias"),
+                      onTap: () {
+                        _tabController.index = 0;
+                        Navigator.pop(context);
+                      }),
                   ListTile(
                     leading: Icon(Icons.info),
                     title: Text("Sobre"),
