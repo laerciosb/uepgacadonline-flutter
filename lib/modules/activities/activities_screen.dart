@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:uepgacadonline_flutter/models/activity.dart';
 import 'package:uepgacadonline_flutter/modules/activities/bloc.dart';
+import 'package:uepgacadonline_flutter/widgets/activity_card_item.dart';
 
 class ActivitiesScreen extends StatefulWidget {
   @override
@@ -21,7 +21,15 @@ class _ActivitiesScreenState extends State<ActivitiesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Atividades Complementares"),
+        titleSpacing: 0.0,
+        centerTitle: true,
+        iconTheme: IconThemeData(color: Color(0xff4a6aff)),
+        title: Text("Atividades Complementares",
+            style: TextStyle(
+                fontSize: 14.0,
+                color: Color(0xff4a6aff),
+                fontWeight: FontWeight.bold)),
+        backgroundColor: Colors.white,
       ),
       body: BlocBuilder(
         bloc: _activitiesBloc,
@@ -34,9 +42,10 @@ class _ActivitiesScreenState extends State<ActivitiesScreen> {
 
           if (state is ActivitiesLoaded) {
             return ListView.builder(
+                padding: EdgeInsets.all(8.0),
                 itemCount: state.activities.length,
                 itemBuilder: (context, index) =>
-                    _itemBuilder(context, index, state.activities[index]));
+                    ActivityCardItem(activity: state.activities[index]));
           }
 
           if (state is ActivitiesError) {
@@ -45,21 +54,6 @@ class _ActivitiesScreenState extends State<ActivitiesScreen> {
             );
           }
         },
-      ),
-    );
-  }
-
-  Widget _itemBuilder(BuildContext context, int index, Activity activity) {
-    return Container(
-      child: Card(
-        child: Column(
-            children: <Widget>[
-              Text(activity.protocol),
-              Text(activity.date.toString()),
-              Text(activity.hours),
-              Text(activity.minutes),
-            ],
-        ),
       ),
     );
   }
