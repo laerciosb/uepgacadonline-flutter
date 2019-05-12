@@ -130,7 +130,7 @@ class _NewsItemsScreenState extends State<NewsItemsScreen> {
   Widget _itemCard(News news) {
     return Container(
       child: Card(
-        margin: EdgeInsets.fromLTRB(48.0, 4.0, 16.0, 4.0),
+        margin: EdgeInsets.fromLTRB(48.0, 4.0, 8.0, 4.0),
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
         elevation: 4.0,

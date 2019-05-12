@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:uepgacadonline_flutter/helpers/notification_helper.dart';
 import 'package:uepgacadonline_flutter/modules/about/about_screen.dart';
 import 'package:uepgacadonline_flutter/modules/activities/activities_screen.dart';
 import 'package:uepgacadonline_flutter/modules/authentication/authentication_bloc.dart';
 import 'package:uepgacadonline_flutter/modules/authentication/bloc.dart';
 import 'package:uepgacadonline_flutter/modules/calendar/calendar_screen.dart';
-import 'package:uepgacadonline_flutter/modules/files/files_screen.dart';
 import 'package:uepgacadonline_flutter/modules/grade/grade_screen.dart';
 import 'package:uepgacadonline_flutter/modules/home/bloc.dart';
 import 'package:uepgacadonline_flutter/modules/menu/menu_screen.dart';
@@ -39,12 +37,35 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(widget.title),
+          titleSpacing: 0.0,
+          iconTheme: IconThemeData(color: Color(0xff4a6aff)),
+          backgroundColor: Colors.white,
+//          actions: <Widget>[
+//            IconButton(
+//              icon: Icon(Icons.info, color: Colors.grey[400]),
+//              onPressed: () => {}
+//            ),
+//            IconButton(
+//              icon: Icon(Icons.notifications, color: Colors.grey[400]),
+//              onPressed: () => {}
+//            )
+//          ],
+          title: Row(children: <Widget>[
+            Text("Acadêmico",
+                style: TextStyle(
+                    fontSize: 16.0,
+                    color: Color(0xff4a6aff),
+                    fontWeight: FontWeight.bold)),
+            Text(" Online",
+                style: TextStyle(fontSize: 16.0, color: Color(0xff4a6aff)))
+          ]),
         ),
-        floatingActionButton: _selectedItem == 2 ? FloatingActionButton(
-          onPressed: () => {},
-          child: Icon(Icons.add),
-        ) : null,
+        floatingActionButton: _selectedItem == 2
+            ? FloatingActionButton(
+                onPressed: () => {},
+                child: Icon(Icons.add),
+              )
+            : null,
         drawer: _buildDrawer(),
         bottomNavigationBar: BottomNavigationBar(
             currentIndex: _selectedItem,
@@ -55,7 +76,8 @@ class _HomeScreenState extends State<HomeScreen> {
               BottomNavigationBarItem(
                   title: Text("Notas"), icon: Icon(Icons.collections_bookmark)),
               BottomNavigationBarItem(
-                  title: Text("Calendário"), icon: Icon(Icons.insert_invitation)),
+                  title: Text("Calendário"),
+                  icon: Icon(Icons.insert_invitation)),
             ]),
         body: _bottomNavigationBarItem(_selectedItem));
   }
