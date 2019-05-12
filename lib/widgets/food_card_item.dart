@@ -60,8 +60,8 @@ class FoodCardItem extends StatelessWidget {
               ),
             ),
             CardThumbnail(
-                icon: Icon(Icons.restaurant, color: Colors.white, size: 32.0),
-                color: Colors.redAccent)
+                icon: Icon(Icons.restaurant_menu, color: Colors.white, size: 32.0),
+                color: Colors.orange)
           ],
         ),
       ],
