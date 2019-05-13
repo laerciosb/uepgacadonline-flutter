@@ -12,7 +12,7 @@ class AcadOnlineService {
   Future<Response> fetchGrade() async {
     final _apiKey = await userRepository.getToken();
 
-    final response = await client.get("$prefix/grade?sample=true", headers: {'x-api-token': _apiKey}, );
+    final response = await client.get("$prefix/grade", headers: {'x-api-token': _apiKey}, );
 
     return response.statusCode == 200
         ? Response.fromJson(json.decode(response.body))

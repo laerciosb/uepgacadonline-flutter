@@ -78,26 +78,13 @@ class _HomeScreenState extends State<HomeScreen>
                     ),
                     Flexible(
                       flex: 6,
-                      child: Text(", ${state.user.academicRegister}",
+                      child: Text(" ${state.user.academicRegister}",
                           style:
                               TextStyle(fontSize: 13.0, color: Colors.black)),
                     )
                   ]);
                 } else {
-                  return Row(children: <Widget>[
-                    Flexible(
-                      child: Text("Acadêmico",
-                          style: TextStyle(
-                              fontSize: 14.0,
-                              color: Color(0xff4a6aff),
-                              fontWeight: FontWeight.bold)),
-                    ),
-                    Flexible(
-                      child: Text(" Online",
-                          style: TextStyle(
-                              fontSize: 13.0, color: Color(0xff4a6aff))),
-                    )
-                  ]);
+                  return Container();
                 }
               }),
         ),

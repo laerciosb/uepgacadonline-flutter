@@ -35,7 +35,7 @@ class _GradeScreenState extends State<GradeScreen> {
             }
 
             if (state is GradeLoaded) {
-              return state.disciplines.isEmpty
+              return state.disciplines == null
                   ? EmptyCard(
                       "Aparentemente, a listagem de disciplinas está vazia.")
                   : ListView.builder(
