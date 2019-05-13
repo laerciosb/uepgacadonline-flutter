@@ -72,8 +72,29 @@ class _NewsItemsScreenState extends State<NewsItemsScreen> {
           }
 
           if (state is NewsItemsError) {
-            return Center(
-              child: Text('Error'),
+            return Card(
+              margin: EdgeInsets.all(48.0),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16.0)),
+              elevation: 4.0,
+              child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(Icons.mood_bad, size: 100.0, color: Colors.orange),
+                    Flexible(
+                        child: Text("Vazio".toUpperCase(),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.orange))),
+                    SizedBox(height: 16.0),
+                    Flexible(
+                        child: Container(
+                            margin: EdgeInsets.symmetric(horizontal: 16.0),
+                            child: Text(
+                                "Aparentemente, a listagem de notícias está vazia.",
+                                textAlign: TextAlign.center)))
+                  ]),
             );
           }
         },
@@ -120,8 +141,7 @@ class _NewsItemsScreenState extends State<NewsItemsScreen> {
       children: <Widget>[
         _itemCard(news),
         CardThumbnail(
-            icon: Icon(news.iconData, color: Colors.white),
-            color: news.color)
+            icon: Icon(news.iconData, color: Colors.white), color: news.color)
       ],
     );
   }
@@ -181,8 +201,7 @@ class _NewsItemsScreenState extends State<NewsItemsScreen> {
               onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>
-                          NewsItemScreen(news: news))),
+                      builder: (context) => NewsItemScreen(news: news))),
             )));
   }
 }

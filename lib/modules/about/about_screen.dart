@@ -26,7 +26,7 @@ class _AboutScreenState extends State<AboutScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-              
+
             ]),
           )
       ),
