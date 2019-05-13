@@ -38,8 +38,7 @@ class NewsItemsBloc extends Bloc<NewsItemsEvent, NewsItemsState> {
                   hasReachedMax: false);
         }
       } catch (e) {
-        print(e.toString());
-        yield NewsItemsError();
+        yield NewsItemsError(e);
       }
     }
   }

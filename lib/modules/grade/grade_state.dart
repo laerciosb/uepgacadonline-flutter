@@ -24,6 +24,10 @@ class GradeLoaded extends GradeState {
 }
 
 class GradeError extends GradeState {
+  final Exception e;
+
+  GradeError(this.e);
+
   @override
   String toString() => 'GradeError';
 }

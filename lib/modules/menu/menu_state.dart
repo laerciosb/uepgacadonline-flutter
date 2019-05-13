@@ -24,6 +24,10 @@ class MenuLoaded extends MenuState {
 }
 
 class MenuError extends MenuState {
+  final Exception e;
+
+  MenuError(this.e);
+
   @override
   String toString() => 'MenuError';
 }

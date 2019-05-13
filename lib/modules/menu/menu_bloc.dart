@@ -20,8 +20,7 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
         final menu = (await _repository.fetchWeeklyMenu(campus)).weeklyMenu;
         yield MenuLoaded(menu: menu);
       } catch (e) {
-        print(e.toString());
-        yield MenuError();
+        yield MenuError(e);
       }
     }
   }

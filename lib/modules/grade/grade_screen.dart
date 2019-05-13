@@ -47,7 +47,7 @@ class _GradeScreenState extends State<GradeScreen> {
             }
 
             if (state is GradeError) {
-              return ErrorCard();
+              return ErrorCard(e: state.e);
             }
           }),
     );

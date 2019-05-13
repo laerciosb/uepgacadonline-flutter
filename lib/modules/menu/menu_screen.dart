@@ -80,7 +80,7 @@ class _WeeklyMenuScreenState extends State<WeeklyMenuScreen>
             }
 
             if (state is MenuError) {
-              return ErrorCard();
+              return ErrorCard(e: state.e);
             }
           },
         ),

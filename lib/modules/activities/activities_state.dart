@@ -24,6 +24,10 @@ class ActivitiesLoaded extends ActivitiesState {
 }
 
 class ActivitiesError extends ActivitiesState {
+  final Exception e;
+
+  ActivitiesError(this.e);
+
   @override
   String toString() => 'ActivitiesError';
 }

@@ -26,6 +26,10 @@ class NewsItemLoaded extends NewsItemState {
 }
 
 class NewsItemError extends NewsItemState {
+  final Exception e;
+
+  NewsItemError(this.e);
+
   @override
   String toString() => 'NewsItemError';
 }

@@ -17,8 +17,8 @@ class NewsItemBloc extends Bloc<NewsItemEvent, NewsItemState> {
       try {
         final newsItem = (await _repository.fetchNewsItem(event.cod)).news;
         yield NewsItemLoaded(newsItem: newsItem);
-      } catch (_) {
-        yield NewsItemError();
+      } catch (e) {
+        yield NewsItemError(e);
       }
     }
   }

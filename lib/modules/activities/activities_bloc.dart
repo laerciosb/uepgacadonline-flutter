@@ -18,8 +18,7 @@ class ActivitiesBloc extends Bloc<ActivitiesEvent, ActivitiesState> {
         final activities = (await _repository.fetchActivities()).activities;
         yield ActivitiesLoaded(activities: activities);
       } catch (e) {
-        print(e.toString());
-        yield ActivitiesError();
+        yield ActivitiesError(e);
       }
     }
   }

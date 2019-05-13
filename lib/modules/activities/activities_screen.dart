@@ -53,7 +53,7 @@ class _ActivitiesScreenState extends State<ActivitiesScreen> {
           }
 
           if (state is ActivitiesError) {
-            return ErrorCard();
+            return ErrorCard(e: state.e);
           }
         },
       ),
