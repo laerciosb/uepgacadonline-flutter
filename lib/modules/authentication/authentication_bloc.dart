@@ -27,7 +27,8 @@ class AuthenticationBloc
     }
 
     if (event is LoggedOut) {
-      userRepository.doLogout();
+      print(event);
+      await userRepository.doLogout();
       yield AuthenticationUnauthenticated();
     }
   }

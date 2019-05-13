@@ -36,7 +36,7 @@ class _NewsItemScreenState extends State<NewsItemScreen> {
                     fontSize: 14.0,
                     color: Color(0xff4a6aff),
                     fontWeight: FontWeight.bold)),
-            backgroundColor: widget.news.color
+            backgroundColor: Colors.white
         ),
         body: BlocBuilder(
             bloc: newsItemBloc,

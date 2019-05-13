@@ -27,7 +27,7 @@ class _DisciplineScreenState extends State<DisciplineScreen> {
                     fontSize: 14.0,
                     color: Color(0xff4a6aff),
                     fontWeight: FontWeight.bold)),
-            backgroundColor: widget.discipline.color),
+            backgroundColor: Colors.white),
         body: Container(
           child: SingleChildScrollView(
             padding: EdgeInsets.all(8.0),

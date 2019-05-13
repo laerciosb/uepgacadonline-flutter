@@ -23,11 +23,13 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   HomeBloc _homeBloc;
+  AuthenticationBloc _authenticationBloc;
   TabController _tabController;
 
   @override
   initState() {
     super.initState();
+    _authenticationBloc = BlocProvider.of<AuthenticationBloc>(context);
     _homeBloc = HomeBloc();
     _homeBloc.dispatch(HomeFetch());
     _tabController = TabController(vsync: this, length: 3);
@@ -41,6 +43,7 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   void dispose() {
     super.dispose();
+    _authenticationBloc.dispose();
     _homeBloc.dispose();
     _tabController.removeListener(_handleTabIndex);
     _tabController.dispose();
@@ -101,9 +104,6 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   Widget _buildDrawer() {
-    final AuthenticationBloc authenticationBloc =
-        BlocProvider.of<AuthenticationBloc>(context);
-
     return BlocBuilder(
         bloc: _homeBloc,
         builder: (context, HomeState state) {
@@ -181,7 +181,8 @@ class _HomeScreenState extends State<HomeScreen>
                       leading: Icon(Icons.exit_to_app),
                       title: Text("Sair"),
                       onTap: () {
-                        authenticationBloc.dispatch(LoggedOut());
+                        print("logout tap");
+                        _authenticationBloc.dispatch(LoggedOut());
                       })
                 ],
               ),
@@ -189,7 +190,7 @@ class _HomeScreenState extends State<HomeScreen>
           }
 
           if (state is HomeError) {
-            authenticationBloc.dispatch(LoggedOut());
+            _authenticationBloc.dispatch(LoggedOut());
           }
         });
   }
