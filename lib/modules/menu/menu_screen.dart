@@ -10,40 +10,56 @@ class WeeklyMenuScreen extends StatefulWidget {
   _WeeklyMenuScreenState createState() => _WeeklyMenuScreenState();
 }
 
-class _WeeklyMenuScreenState extends State<WeeklyMenuScreen> {
-  final _menuBloc = MenuBloc();
+class _WeeklyMenuScreenState extends State<WeeklyMenuScreen>
+    with SingleTickerProviderStateMixin {
+  MenuBloc _menuBloc;
+  TabController _tabController;
 
   @override
   void initState() {
     super.initState();
+    _menuBloc = MenuBloc();
     _menuBloc.dispatch(MenuFetch());
+    _tabController = TabController(vsync: this, length: 2);
+    _tabController.addListener(_handleTabIndex);
+  }
+
+  void _handleTabIndex() {
+    _menuBloc.dispatch(MenuFetch(index: _tabController.index));
+  }
+
+  @override
+  void dispose() {
+    _menuBloc.dispose();
+    _tabController.removeListener(_handleTabIndex);
+    _tabController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          titleSpacing: 0.0,
-          centerTitle: true,
-          iconTheme: IconThemeData(color: Color(0xff4a6aff)),
-          title: Text("Restaurante",
-              style: TextStyle(
-                  fontSize: 14.0,
-                  color: Color(0xff4a6aff),
-                  fontWeight: FontWeight.bold)),
-          backgroundColor: Colors.white,
-          bottom: TabBar(
-              indicatorColor: Color(0xff4a6aff),
-              unselectedLabelColor: Colors.grey[400],
-              labelColor: Color(0xff4a6aff),
-              tabs: [
-                Tab(text: "Central", icon: Icon(Icons.restaurant_menu)),
-                Tab(text: "Uvaranas", icon: Icon(Icons.restaurant)),
-              ]),
-        ),
-        body: BlocBuilder(
+    return Scaffold(
+      appBar: AppBar(
+        titleSpacing: 0.0,
+        centerTitle: true,
+        iconTheme: IconThemeData(color: Color(0xff4a6aff)),
+        title: Text("Restaurante",
+            style: TextStyle(
+                fontSize: 14.0,
+                color: Color(0xff4a6aff),
+                fontWeight: FontWeight.bold)),
+        backgroundColor: Colors.white,
+        bottom: TabBar(
+            controller: _tabController,
+            indicatorColor: Color(0xff4a6aff),
+            unselectedLabelColor: Colors.grey[400],
+            labelColor: Color(0xff4a6aff),
+            tabs: [
+              Tab(text: "Central", icon: Icon(Icons.restaurant_menu)),
+              Tab(text: "Uvaranas", icon: Icon(Icons.restaurant)),
+            ]),
+      ),
+      body: Container(
+        child: BlocBuilder(
           bloc: _menuBloc,
           builder: (context, MenuState state) {
             if (state is MenuUninitialized) {
@@ -55,7 +71,7 @@ class _WeeklyMenuScreenState extends State<WeeklyMenuScreen> {
             if (state is MenuLoaded) {
               return state.menu.isEmpty
                   ? EmptyCard(
-                      "Aparentemente, a listagem no cardápio está vazia.")
+                      "Aparentemente, a listagem no cardápio não foi cadastrada para esse campus.")
                   : ListView.builder(
                       padding: EdgeInsets.all(8.0),
                       itemCount: state.menu.length,

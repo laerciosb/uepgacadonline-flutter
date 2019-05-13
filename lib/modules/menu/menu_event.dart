@@ -7,7 +7,10 @@ abstract class MenuEvent extends Equatable {
 }
 
 class MenuFetch extends MenuEvent {
+  final int index;
+
+  MenuFetch({this.index});
+
   @override
   String toString() => 'MenuFetch';
 }
-

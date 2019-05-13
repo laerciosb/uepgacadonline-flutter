@@ -15,7 +15,7 @@ class BaseCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(16.0)),
       elevation: 4.0,
       child: Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             icon,

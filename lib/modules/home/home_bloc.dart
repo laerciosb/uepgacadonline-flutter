@@ -17,7 +17,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         final user = await userRepository.getUser();
         yield HomeLoaded(user: user);
       } catch (e) {
-        print(e.toString());
         yield HomeError();
       }
     }

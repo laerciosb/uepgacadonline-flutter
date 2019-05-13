@@ -14,8 +14,10 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
     MenuEvent event,
   ) async* {
     if(event is MenuFetch) {
+      yield MenuUninitialized();
       try {
-        final menu = (await _repository.fetchWeeklyMenu()).weeklyMenu;
+        var campus = event.index == 0 || event.index == null ? "central" : "uvaranas";
+        final menu = (await _repository.fetchWeeklyMenu(campus)).weeklyMenu;
         yield MenuLoaded(menu: menu);
       } catch (e) {
         print(e.toString());
