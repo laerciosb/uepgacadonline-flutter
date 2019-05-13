@@ -4,6 +4,8 @@ import 'package:uepgacadonline_flutter/enums/discipline_card_item_type.dart';
 import 'package:uepgacadonline_flutter/modules/grade/bloc.dart';
 import 'package:uepgacadonline_flutter/modules/grade/grade_state.dart';
 import 'package:uepgacadonline_flutter/widgets/discipline_card_item.dart';
+import 'package:uepgacadonline_flutter/widgets/empty_card.dart';
+import 'package:uepgacadonline_flutter/widgets/error_card.dart';
 
 class GradeScreen extends StatefulWidget {
   @override
@@ -33,23 +35,19 @@ class _GradeScreenState extends State<GradeScreen> {
             }
 
             if (state is GradeLoaded) {
-              if (state.disciplines.isEmpty) {
-                return Center(
-                  child: Text('Empty'),
-                );
-              }
-              return ListView.builder(
-                  padding: EdgeInsets.all(8.0),
-                  itemCount: state.disciplines.length,
-                  itemBuilder: (context, index) => DisciplineCardItem(
-                      discipline: state.disciplines[index],
-                      type: DisciplineCardItemType.summary));
+              return state.disciplines.isEmpty
+                  ? EmptyCard(
+                      "Aparentemente, a listagem de disciplinas está vazia.")
+                  : ListView.builder(
+                      padding: EdgeInsets.all(8.0),
+                      itemCount: state.disciplines.length,
+                      itemBuilder: (context, index) => DisciplineCardItem(
+                          discipline: state.disciplines[index],
+                          type: DisciplineCardItemType.summary));
             }
 
             if (state is GradeError) {
-              return Center(
-                child: Text('Error'),
-              );
+              return ErrorCard();
             }
           }),
     );

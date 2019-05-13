@@ -4,6 +4,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:html/dom.dart' as dom;
 import 'package:uepgacadonline_flutter/models/news.dart';
 import 'package:uepgacadonline_flutter/modules/news_item/bloc.dart';
+import 'package:uepgacadonline_flutter/widgets/error_card.dart';
 
 class NewsItemScreen extends StatefulWidget {
   NewsItemScreen({Key key, this.news}) : super(key: key);
@@ -97,9 +98,7 @@ class _NewsItemScreenState extends State<NewsItemScreen> {
                           ],
                         )));
               } else if (state is NewsItemError) {
-                Center(
-                  child: Text('Error'),
-                );
+                return ErrorCard();
               }
             }));
   }

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uepgacadonline_flutter/modules/activities/bloc.dart';
 import 'package:uepgacadonline_flutter/widgets/activity_card_item.dart';
+import 'package:uepgacadonline_flutter/widgets/empty_card.dart';
+import 'package:uepgacadonline_flutter/widgets/error_card.dart';
 
 class ActivitiesScreen extends StatefulWidget {
   @override
@@ -41,7 +43,9 @@ class _ActivitiesScreenState extends State<ActivitiesScreen> {
           }
 
           if (state is ActivitiesLoaded) {
-            return ListView.builder(
+            return state.activities.isEmpty
+                ? EmptyCard("Aparentemente, a listagem de atividades está vazia.")
+                : ListView.builder(
                 padding: EdgeInsets.all(8.0),
                 itemCount: state.activities.length,
                 itemBuilder: (context, index) =>
@@ -49,9 +53,7 @@ class _ActivitiesScreenState extends State<ActivitiesScreen> {
           }
 
           if (state is ActivitiesError) {
-            return Center(
-              child: Text('Error'),
-            );
+            return ErrorCard();
           }
         },
       ),

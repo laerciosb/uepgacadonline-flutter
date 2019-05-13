@@ -8,6 +8,8 @@ import 'package:uepgacadonline_flutter/modules/news_item/news_item.screen.dart';
 import 'package:uepgacadonline_flutter/modules/news_items/bloc.dart';
 import 'package:uepgacadonline_flutter/widgets/bottom_loader.dart';
 import 'package:uepgacadonline_flutter/widgets/card_thumbnail.dart';
+import 'package:uepgacadonline_flutter/widgets/empty_card.dart';
+import 'package:uepgacadonline_flutter/widgets/error_card.dart';
 
 class NewsItemsScreen extends StatefulWidget {
   @override
@@ -54,48 +56,23 @@ class _NewsItemsScreenState extends State<NewsItemsScreen> {
           }
 
           if (state is NewsItemsLoaded) {
-            print(state.newsItems);
-            if (state.newsItems == null) {
-              return Center(
-                child: Text('Empty'),
-              );
-            }
-            return ListView.builder(
-                padding: EdgeInsets.all(8.0),
-                controller: _scrollController,
-                itemCount: state.hasReachedMax
-                    ? state.newsItems.length
-                    : state.newsItems.length + 1,
-                itemBuilder: (context, index) => index >= state.newsItems.length
-                    ? BottomLoader()
-                    : _rowBuilder(context, index, state.newsItems[index]));
+            return state.newsItems.isEmpty
+                ? EmptyCard(
+                    "Aparentemente, a listagem de notícias está vazia.")
+                : ListView.builder(
+                    padding: EdgeInsets.all(8.0),
+                    controller: _scrollController,
+                    itemCount: state.hasReachedMax
+                        ? state.newsItems.length
+                        : state.newsItems.length + 1,
+                    itemBuilder: (context, index) => index >=
+                            state.newsItems.length
+                        ? BottomLoader()
+                        : _rowBuilder(context, index, state.newsItems[index]));
           }
 
           if (state is NewsItemsError) {
-            return Card(
-              margin: EdgeInsets.all(48.0),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16.0)),
-              elevation: 4.0,
-              child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Icon(Icons.mood_bad, size: 100.0, color: Colors.orange),
-                    Flexible(
-                        child: Text("Vazio".toUpperCase(),
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.orange))),
-                    SizedBox(height: 16.0),
-                    Flexible(
-                        child: Container(
-                            margin: EdgeInsets.symmetric(horizontal: 16.0),
-                            child: Text(
-                                "Aparentemente, a listagem de notícias está vazia.",
-                                textAlign: TextAlign.center)))
-                  ]),
-            );
+            return ErrorCard();
           }
         },
       ),
