@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:uepgacadonline_flutter/enums/discipline_card_item_type.dart';
+import 'package:uepgacadonline_flutter/models/discipline.dart';
 import 'package:uepgacadonline_flutter/widgets/discipline_card_item.dart';
 
 class DisciplineScreen extends StatefulWidget {
   DisciplineScreen({Key key, this.discipline}) : super(key: key);
 
-  final discipline;
+  final Discipline discipline;
 
   @override
   _DisciplineScreenState createState() => _DisciplineScreenState();
@@ -26,7 +27,7 @@ class _DisciplineScreenState extends State<DisciplineScreen> {
                     fontSize: 14.0,
                     color: Color(0xff4a6aff),
                     fontWeight: FontWeight.bold)),
-            backgroundColor: Colors.white),
+            backgroundColor: widget.discipline.color),
         body: Container(
           child: SingleChildScrollView(
             padding: EdgeInsets.all(8.0),
