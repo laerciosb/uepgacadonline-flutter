@@ -4,7 +4,7 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:uepgacadonline_flutter/models/calendar.dart';
 import 'package:uepgacadonline_flutter/modules/calendar/bloc.dart';
 import 'package:uepgacadonline_flutter/modules/calendar/calendar_form.dart';
-import 'package:uepgacadonline_flutter/services/repository.dart';
+import 'package:uepgacadonline_flutter/widgets/card_thumbnail.dart';
 
 class CalendarScreen extends StatefulWidget {
   @override
@@ -32,42 +32,41 @@ class _CalendarScreenState extends State<CalendarScreen> {
           }
         },
         child: Container(
+            margin: EdgeInsets.all(8.0),
             child: Column(
-          children: <Widget>[
-            _buildTableCalendar(),
-            BlocBuilder(
-                bloc: _calendarBloc,
-                builder: (context, CalendarState state) {
-                  if (state is CalendarUninitialized) {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
+              children: <Widget>[
+                _buildTableCalendar(),
+                BlocBuilder(
+                    bloc: _calendarBloc,
+                    builder: (context, CalendarState state) {
+                      if (state is CalendarUninitialized) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
 
-                  if (state is CalendarLoaded) {
-                    if (state.calendar.isEmpty) {
-                      return Center(
-                        child: Text('Empty'),
-                      );
-                    }
-                    return _buildTableCalendarList(state.calendar);
-                  }
+                      if (state is CalendarLoaded) {
+                        if (state.calendar.isEmpty) {
+                          return Center(
+                            child: Text('Empty'),
+                          );
+                        }
+                        return _buildTableCalendarList(state.calendar);
+                      }
 
-                  if (state is CalendarError) {
-                    return Center(
-                      child: Text('Error'),
-                    );
-                  }
-                })
-          ],
-        )));
+                      if (state is CalendarError) {
+                        return Center(
+                          child: Text('Error'),
+                        );
+                      }
+                    })
+              ],
+            )));
   }
 
   void showCalendarDialog(BuildContext context) async {
-
     showDialog(
-        context: context,
-        builder: (BuildContext context) => CalendarForm());
+        context: context, builder: (BuildContext context) => CalendarForm());
   }
 
   Widget _buildTableCalendarList(List<Calendar> calendar) {
@@ -75,31 +74,64 @@ class _CalendarScreenState extends State<CalendarScreen> {
       child: ListView.builder(
           itemCount: calendar.length,
           itemBuilder: (context, index) =>
-              _buildTableCalendarListItem(calendar[index])),
+              _buildTableCalendarListItem(context, index, calendar[index])),
     );
   }
 
-  Widget _buildTableCalendarListItem(Calendar calendar) {
-    return Card(
-      child: Stack(
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.all(16.0),
-            child: Column(
-              children: <Widget>[Text(calendar.title)],
-            ),
-          ),
-          Positioned.fill(
-              child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              borderRadius: BorderRadius.all(Radius.circular(4.0)),
-              onTap: () => {},
-            ),
-          ))
-        ],
-      ),
+  Widget _buildTableCalendarListItem(
+      BuildContext context, int index, Calendar calendar) {
+    return Stack(
+      alignment: Alignment.centerLeft,
+      children: <Widget>[
+        _itemCard(calendar),
+        CardThumbnail(
+            icon: Icon(Icons.person, color: Colors.white), color: Colors.purple)
+      ],
     );
+  }
+
+  Widget _itemCard(Calendar calendar) {
+    return Container(
+      child: Card(
+          margin: EdgeInsets.fromLTRB(48.0, 4.0, 8.0, 4.0),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
+          elevation: 4.0,
+          child: _itemCardContent(calendar)),
+    );
+  }
+
+  Widget _itemCardContent(Calendar calendar) {
+    return Row(
+      children: <Widget>[
+        Expanded(
+            child: Container(
+              padding: EdgeInsets.fromLTRB(24.0, 16.0, 8.0, 16.0),
+              child: Column(
+                children: <Widget>[
+                  Text(calendar.title),
+                  SizedBox(height: 8.0),
+                  _itemCardInfo(calendar),
+                ],
+              ),
+            ),
+            flex: 100),
+//        Flexible(
+//            child: Container(
+//                child: Icon(Icons.keyboard_arrow_right,
+//                    size: 20.0, color: Color(0xff4a6aff))),
+//            flex: 15)
+      ],
+    );
+  }
+
+  Widget _itemCardInfo(Calendar calendar) {
+    return Row(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
+      Icon(Icons.access_time, size: 12.0, color: Colors.grey[400]),
+      SizedBox(width: 4.0),
+      Text(calendar.date.toIso8601String(),
+          style: TextStyle(fontSize: 12.0, color: Colors.grey[400]))
+    ]);
   }
 
   Widget _buildTableCalendar() {
