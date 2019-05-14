@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:uepgacadonline_flutter/enums/discipline_card_item_type.dart';
-import 'package:uepgacadonline_flutter/modules/discipline/discipline_screen.dart';
 import 'package:uepgacadonline_flutter/widgets/card_thumbnail.dart';
 
 class DisciplineCardItem extends StatelessWidget {
@@ -97,49 +96,34 @@ class DisciplineCardItem extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16.0)),
                     elevation: 4.0,
-                    child: InkWell(
-                      borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    DisciplineScreen(discipline: discipline)));
-                      },
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                              child: Container(
-                                padding:
-                                    EdgeInsets.fromLTRB(24.0, 16.0, 8.0, 16.0),
-                                child: Column(
-                                  children: <Widget>[
-                                    Table(
-                                        border: TableBorder(
-                                            horizontalInside: BorderSide(
-                                                color: Colors.grey[100])),
-                                        children: List<TableRow>.from(rows
-                                            .asMap()
-                                            .map((index, value) =>
-                                                MapEntry<int, TableRow>(
-                                                    index,
-                                                    _rowBuilder(
-                                                        index,
-                                                        value['title'],
-                                                        value['value'])))
-                                            .values)),
-                                    SizedBox(height: 8.0),
-                                  ],
-                                ),
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                            child: Container(
+                              padding:
+                                  EdgeInsets.fromLTRB(24.0, 16.0, 8.0, 16.0),
+                              child: Column(
+                                children: <Widget>[
+                                  Table(
+                                      border: TableBorder(
+                                          horizontalInside: BorderSide(
+                                              color: Colors.grey[100])),
+                                      children: List<TableRow>.from(rows
+                                          .asMap()
+                                          .map((index, value) =>
+                                              MapEntry<int, TableRow>(
+                                                  index,
+                                                  _rowBuilder(
+                                                      index,
+                                                      value['title'],
+                                                      value['value'])))
+                                          .values)),
+                                  SizedBox(height: 8.0),
+                                ],
                               ),
-                              flex: 100),
-                          Flexible(
-                              child: Container(
-                                  child: Icon(Icons.keyboard_arrow_right,
-                                      size: 20.0, color: Color(0xff4a6aff))),
-                              flex: 15)
-                        ],
-                      ),
+                            ),
+                            flex: 100),
+                      ],
                     ),
                   ),
                 ],
