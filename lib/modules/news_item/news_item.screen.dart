@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:html/dom.dart' as dom;
+import 'package:intl/intl.dart';
 import 'package:uepgacadonline_flutter/models/news.dart';
 import 'package:uepgacadonline_flutter/modules/news_item/bloc.dart';
 import 'package:uepgacadonline_flutter/widgets/error_card.dart';
@@ -62,12 +63,61 @@ class _NewsItemScreenState extends State<NewsItemScreen> {
                                     state.newsItem.subtitle != "" ? 12.0 : 0.0),
                             Text(state.newsItem.subtitle,
                                 style: TextStyle(
-                                    color: Colors.grey,
+                                    color: Color(0xff4a6aff),
                                     fontSize: state.newsItem.subtitle != ""
                                         ? 14.0
                                         : 0.0),
                                 textAlign: TextAlign.center),
-                            SizedBox(height: 12.0),
+                            SizedBox(height: 16.0),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Flexible(
+                                  flex: 4,
+                                  child: Row(
+                                    children: <Widget>[
+                                      Flexible(
+                                          child: Icon(Icons.person,
+                                              color: Colors.grey[300])),
+                                      SizedBox(width: 4.0),
+                                      Expanded(
+                                        flex: 2,
+                                        child: Text(state.newsItem.author,
+                                            style: TextStyle(
+                                                color: Colors.grey,
+                                                fontSize: 12.0),
+                                            textAlign: TextAlign.center),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Flexible(
+                                  flex: 4,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: <Widget>[
+                                      Flexible(
+                                          child: Icon(Icons.access_time,
+                                              color: Colors.grey[300])),
+                                      SizedBox(width: 4.0),
+                                      Expanded(
+                                        flex: 2,
+                                        child: Text(
+                                            DateFormat(
+                                                    "dd \'d\'e MMMM \'d\'e yyyy  H:MM",
+                                                    "pt_BR")
+                                                .format(
+                                                    state.newsItem.created_at),
+                                            style: TextStyle(
+                                                color: Colors.grey,
+                                                fontSize: 12.0),
+                                            textAlign: TextAlign.center),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
 //                            Text("Criado em: ${state.newsItem}")
                             Divider(),
                             Html(
@@ -75,7 +125,9 @@ class _NewsItemScreenState extends State<NewsItemScreen> {
                               defaultTextStyle: TextStyle(
                                   fontFamily: 'Roboto', fontSize: 14.0),
                               onLinkTap: (url) async {
-                                await canLaunch(url) ? await launch(url) : throw 'Url: $url inválida';
+                                await canLaunch(url)
+                                    ? await launch(url)
+                                    : throw 'Url: $url inválida';
                               },
                               customRender: (node, children) {
                                 if (node is dom.Element) {
@@ -107,6 +159,7 @@ class _NewsItemScreenState extends State<NewsItemScreen> {
                           ],
                         )));
               } else if (state is NewsItemError) {
+                print(state.e.toString());
                 return ErrorCard(e: state.e);
               }
             }));

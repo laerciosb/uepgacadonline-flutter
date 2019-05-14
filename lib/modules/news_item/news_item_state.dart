@@ -17,9 +17,7 @@ class NewsItemUninitialized extends NewsItemState {
 class NewsItemLoaded extends NewsItemState {
   final NewsItem newsItem;
 
-  NewsItemLoaded({
-    this.newsItem
-  });
+  NewsItemLoaded({this.newsItem});
 
   @override
   String toString() => 'NewsItemLoaded';

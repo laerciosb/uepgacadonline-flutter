@@ -11,10 +11,6 @@ class FoodCardItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    print(menu.lunch);
-    print(menu.dinner);
-
     return Column(
       children: <Widget>[
         Container(
