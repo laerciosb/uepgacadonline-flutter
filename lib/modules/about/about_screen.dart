@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uepgacadonline_flutter/widgets/about_card.dart';
 
 class AboutScreen extends StatefulWidget {
   @override
@@ -21,14 +22,7 @@ class _AboutScreenState extends State<AboutScreen> {
         backgroundColor: Colors.white,
       ),
       body: Center(
-          child: Card(
-            margin: EdgeInsets.all(32.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-
-            ]),
-          )
+        child: AboutCard(),
       ),
     );
   }
