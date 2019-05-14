@@ -1,19 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:uepgacadonline_flutter/enums/effectiveness_type.dart';
 
 part 'discipline.g.dart';
 
 @JsonSerializable()
-
-enum Effectiveness {
-  undefined,
-  very_bad,
-  bad,
-  ok,
-  good,
-  excellent,
-  unbelievable
-}
 
 class Discipline {
 

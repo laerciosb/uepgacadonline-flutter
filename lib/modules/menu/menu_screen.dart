@@ -75,8 +75,9 @@ class _WeeklyMenuScreenState extends State<WeeklyMenuScreen>
                   : ListView.builder(
                       padding: EdgeInsets.all(8.0),
                       itemCount: state.menu.length,
-                      itemBuilder: (context, index) =>
-                          FoodCardItem(menu: state.menu[index]));
+                      itemBuilder: (context, index) {
+                        return FoodCardItem(menu: state.menu[index]);
+                      });
             }
 
             if (state is MenuError) {

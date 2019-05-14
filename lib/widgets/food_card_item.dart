@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:uepgacadonline_flutter/enums/food_card_item_type.dart';
+import 'package:uepgacadonline_flutter/models/menu.dart';
 import 'package:uepgacadonline_flutter/widgets/card_thumbnail.dart';
 
 class FoodCardItem extends StatelessWidget {
-  final menu;
+  final Menu menu;
 
   FoodCardItem({this.menu});
 
   @override
   Widget build(BuildContext context) {
+
+    print(menu.lunch);
+    print(menu.dinner);
+
     return Column(
       children: <Widget>[
         Container(
@@ -30,40 +36,54 @@ class FoodCardItem extends StatelessWidget {
             ),
           ),
         ),
-        Stack(
-          alignment: Alignment.centerLeft,
-          children: <Widget>[
-            Container(
-              margin: EdgeInsets.fromLTRB(40.0, 4.0, 8.0, 4.0),
-              child: Column(
-                children: <Widget>[
-                  Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16.0)),
-                    elevation: 4.0,
-                    child: Container(
-                      padding: EdgeInsets.all(16.0),
-                      child: Column(
-                        children: <Widget>[
-                          Table(
-                              border: TableBorder(
-                                  horizontalInside:
-                                      BorderSide(color: Colors.grey[100])),
-                              children: List<TableRow>.from(menu.food
+        menu.lunch != null ? _buildCard(FoodCardItemType.lunch) : Container(),
+        menu.dinner != null ? _buildCard(FoodCardItemType.dinner) : Container(),
+      ],
+    );
+  }
+
+  Widget _buildCard(FoodCardItemType type) {
+    return Stack(
+      alignment: Alignment.centerLeft,
+      children: <Widget>[
+        Container(
+          margin: EdgeInsets.fromLTRB(40.0, 4.0, 8.0, 4.0),
+          child: Column(
+            children: <Widget>[
+              Card(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16.0)),
+                elevation: 4.0,
+                child: Container(
+                  padding: EdgeInsets.all(16.0),
+                  child: Column(
+                    children: <Widget>[
+                      Table(
+                          border: TableBorder(
+                              horizontalInside:
+                                  BorderSide(color: Colors.grey[100])),
+                          children: type == FoodCardItemType.lunch
+                              ? List<TableRow>.from(
+                                  menu.lunch.map((value) => _rowBuilder(value)))
+                              : List<TableRow>.from(menu.dinner
                                   .map((value) => _rowBuilder(value)))),
-                          SizedBox(height: 8.0),
-                        ],
-                      ),
-                    ),
+                      SizedBox(height: 8.0),
+                    ],
                   ),
-                ],
+                ),
               ),
-            ),
-            CardThumbnail(
-                icon: Icon(Icons.restaurant_menu, color: Colors.white, size: 32.0),
-                color: Colors.orange)
-          ],
+            ],
+          ),
         ),
+        CardThumbnail(
+            icon: Icon(
+                type == FoodCardItemType.lunch
+                    ? Icons.restaurant_menu
+                    : Icons.restaurant,
+                color: Colors.white,
+                size: 32.0),
+            color:
+                type == FoodCardItemType.lunch ? Colors.orange : Colors.purple)
       ],
     );
   }
@@ -76,8 +96,7 @@ class FoodCardItem extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Expanded(
-                child: Text(value,
-                    textAlign: TextAlign.left),
+                child: Text(value, textAlign: TextAlign.left),
               )
             ],
           ))

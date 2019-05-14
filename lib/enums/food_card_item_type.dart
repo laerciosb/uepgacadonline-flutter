@@ -1,0 +1,1 @@
+enum FoodCardItemType { lunch, dinner }
