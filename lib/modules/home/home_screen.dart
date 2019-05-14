@@ -100,7 +100,8 @@ class _HomeScreenState extends State<HomeScreen>
             CalendarScreen()
           ],
         ),
-        floatingActionButton: _buildFloatingButton());
+        floatingActionButton: _buildFloatingButton(),
+        resizeToAvoidBottomPadding: true);
   }
 
   Widget _buildDrawer() {

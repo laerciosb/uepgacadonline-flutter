@@ -5,6 +5,8 @@ import 'package:uepgacadonline_flutter/models/calendar.dart';
 import 'package:uepgacadonline_flutter/modules/calendar/bloc.dart';
 import 'package:uepgacadonline_flutter/modules/calendar/calendar_form.dart';
 import 'package:uepgacadonline_flutter/widgets/card_thumbnail.dart';
+import 'package:uepgacadonline_flutter/widgets/empty_card.dart';
+import 'package:uepgacadonline_flutter/widgets/error_card.dart';
 
 class CalendarScreen extends StatefulWidget {
   @override
@@ -32,36 +34,34 @@ class _CalendarScreenState extends State<CalendarScreen> {
           }
         },
         child: Container(
-            margin: EdgeInsets.all(8.0),
-            child: Column(
-              children: <Widget>[
-                _buildTableCalendar(),
-                BlocBuilder(
-                    bloc: _calendarBloc,
-                    builder: (context, CalendarState state) {
-                      if (state is CalendarUninitialized) {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
+          child: BlocBuilder(
+              bloc: _calendarBloc,
+              builder: (context, CalendarState state) {
+                if (state is CalendarUninitialized) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
 
-                      if (state is CalendarLoaded) {
-                        if (state.calendar.isEmpty) {
-                          return Center(
-                            child: Text('Empty'),
-                          );
-                        }
-                        return _buildTableCalendarList(state.calendar);
-                      }
+                if (state is CalendarLoaded) {
+                  if (state.calendar.isEmpty) {
+                    return EmptyCard("Não há registros para esse dia.");
+                  }
+                  return SingleChildScrollView(
+                    child: Column(
+                      children: <Widget>[
+                        _buildTableCalendar(),
+                        _buildTableCalendarList(state.calendar),
+                      ],
+                    ),
+                  );
+                }
 
-                      if (state is CalendarError) {
-                        return Center(
-                          child: Text('Error'),
-                        );
-                      }
-                    })
-              ],
-            )));
+                if (state is CalendarError) {
+                  return ErrorCard();
+                }
+              }),
+        ));
   }
 
   void showCalendarDialog(BuildContext context) async {
@@ -70,12 +70,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
   }
 
   Widget _buildTableCalendarList(List<Calendar> calendar) {
-    return Expanded(
-      child: ListView.builder(
-          itemCount: calendar.length,
-          itemBuilder: (context, index) =>
-              _buildTableCalendarListItem(context, index, calendar[index])),
-    );
+    return ListView.builder(
+        padding: EdgeInsets.all(8.0),
+        physics: ClampingScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: calendar.length,
+        itemBuilder: (context, index) =>
+            _buildTableCalendarListItem(context, index, calendar[index]));
   }
 
   Widget _buildTableCalendarListItem(
@@ -104,18 +105,16 @@ class _CalendarScreenState extends State<CalendarScreen> {
   Widget _itemCardContent(Calendar calendar) {
     return Row(
       children: <Widget>[
-        Expanded(
-            child: Container(
-              padding: EdgeInsets.fromLTRB(24.0, 16.0, 8.0, 16.0),
-              child: Column(
-                children: <Widget>[
-                  Text(calendar.title),
-                  SizedBox(height: 8.0),
-                  _itemCardInfo(calendar),
-                ],
-              ),
-            ),
-            flex: 100),
+        Container(
+          padding: EdgeInsets.fromLTRB(24.0, 16.0, 8.0, 16.0),
+          child: Column(
+            children: <Widget>[
+              Text(calendar.title),
+              SizedBox(height: 8.0),
+              _itemCardInfo(calendar),
+            ],
+          ),
+        ),
 //        Flexible(
 //            child: Container(
 //                child: Icon(Icons.keyboard_arrow_right,
