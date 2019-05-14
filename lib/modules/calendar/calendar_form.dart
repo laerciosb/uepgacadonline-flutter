@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uepgacadonline_flutter/models/category.dart';
+import 'package:uepgacadonline_flutter/repositories/category_repository.dart';
+
+import 'bloc.dart';
+import 'calendar_state.dart';
 
 class CalendarForm extends StatefulWidget {
   @override
@@ -6,15 +12,34 @@ class CalendarForm extends StatefulWidget {
 }
 
 class _CalendarFormState extends State<CalendarForm> {
+  CalendarBloc _calendarBloc;
+
+  @override
+  initState() {
+    super.initState();
+    _calendarBloc = BlocProvider.of<CalendarBloc>(context);
+    _descriptionController.addListener(_onDescriptionChanged);
+  }
+
+  Category categorySelected;
+  final TextEditingController _descriptionController = TextEditingController();
+
+  bool get isPopulated =>
+      categorySelected?.id != null && _descriptionController.text.isNotEmpty;
+
+  bool isSubmitButtonEnabled(CalendarFormState state) {
+    return state.isFormValid && isPopulated && !state.isSubmitting;
+  }
+
+  void _onDescriptionChanged() {
+    _calendarBloc.dispatch(
+      DescriptionChanged(description: _descriptionController.text),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final categories = [
-      '',
-      'Apresentação',
-      'Prova',
-      'Trabalho',
-      'Outro',
-    ];
+    final List<Category> categories = categoryRepository.all();
 
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
@@ -31,16 +56,22 @@ class _CalendarFormState extends State<CalendarForm> {
                   labelText: 'Item',
                 ),
                 child: DropdownButtonHideUnderline(
-                  child: DropdownButton<String>(
+                  child: DropdownButton<Category>(
                     isExpanded: true,
                     isDense: true,
                     hint: Text("Item"),
-                    onChanged: (String newValue) {},
+                    value: categorySelected,
+                    onChanged: (Category newValue) {
+                      setState(() {
+                        _calendarBloc.dispatch(ItemChanged(id: newValue.id));
+                        categorySelected = newValue;
+                      });
+                    },
                     items: categories
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
+                        .map<DropdownMenuItem<Category>>((Category value) {
+                      return DropdownMenuItem<Category>(
                         value: value,
-                        child: Text(value),
+                        child: Text(value.name),
                       );
                     }).toList(),
                   ),
@@ -72,7 +103,17 @@ class _CalendarFormState extends State<CalendarForm> {
             Navigator.of(context).pop();
           },
         ),
-        FlatButton(child: Text("Inserir"))
+        FlatButton(
+          child: Text("Inserir"),
+          onPressed: () {
+            _calendarBloc.dispatch(
+              SubmitItemPressed(
+                id: categorySelected.id,
+                description: _descriptionController.text,
+              ),
+            );
+          },
+        )
       ],
     );
   }

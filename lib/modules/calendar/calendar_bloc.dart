@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:uepgacadonline_flutter/models/calendar.dart';
@@ -16,10 +17,6 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
   ) async* {
     if (event is CalendarFetch) {
       try {
-        final calendar_ = Calendar(1, "Teste", DateTime.now(), 0);
-        await calendarRepository.create(calendar_);
-        print(calendar_.toString());
-
         final calendar = await calendarRepository.all();
         yield CalendarLoaded(calendar: calendar);
       } catch (e) {
@@ -28,11 +25,25 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
       }
     }
 
-    if(event is CalendarOpenDialog) {
+    if (event is CalendarOpenDialog) {
       final lastState = currentState;
 
       yield CalendarDialog();
       yield lastState;
+    }
+
+    if (event is SubmitItemPressed) {
+      yield CalendarFormState.loading();
+      try {
+        final calendar = Calendar(
+            Random().nextInt(100000), event.description, DateTime.now(), 0);
+        final doCreate = await calendarRepository.create(calendar);
+
+        yield CalendarUninitialized();
+      } catch (e) {
+        print(e.toString());
+        yield CalendarError();
+      }
     }
   }
 }
