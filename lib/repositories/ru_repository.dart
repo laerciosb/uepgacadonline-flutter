@@ -7,7 +7,7 @@ class RuRepository {
 
   Future<Response> fetchWeeklyMenu(campus) async {
     final lunch = await ruService.fetchWeeklyMenu(campus, "A");
-    final dinner = await ruService.fetchWeeklyMenu(campus, "J");
+    final dinner = await ruService.fetchWeeklyMenu(campus, "A");
 
     if (lunch.weeklyMenu != null && dinner.weeklyMenu != null) {
       for (int i = 0; i < lunch.weeklyMenu.length; i++) {

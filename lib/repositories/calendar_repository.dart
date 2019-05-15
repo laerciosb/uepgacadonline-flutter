@@ -5,7 +5,8 @@ import 'package:uepgacadonline_flutter/models/calendar.dart';
 class CalendarRepository {
   Future<void> create(Calendar calendar) async {
     final database = await DBProvider.db.database;
-    await database.insert(Calendar.table, calendar.toJson(), conflictAlgorithm: ConflictAlgorithm.replace);
+    await database.insert(Calendar.table, calendar.toJson(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   Future<Calendar> find(int id) async {
@@ -16,12 +17,24 @@ class CalendarRepository {
     return Calendar.fromJson(result.first);
   }
 
-  dynamic findByDate(DateTime date) async {
+  Future<void> delete(int id) async {
+    final database = await DBProvider.db.database;
+    await database.delete(Calendar.table, where: "id = ?", whereArgs: [id]);
+  }
+
+  Future<List<Calendar>> findByDate(DateTime date) async {
     final database = await DBProvider.db.database;
     final result = await database
-        .query(Calendar.table, where: "date = ?", whereArgs: [date]);
+        .query(Calendar.table, where: "date >= ? and date < ?", whereArgs: [
+      DateTime(date.year, date.month, date.day).millisecondsSinceEpoch,
+      DateTime(date.year, date.month, date.day + 1).millisecondsSinceEpoch
+    ]);
 
-    return result;
+    List<Calendar> calendar = result.isNotEmpty
+        ? result.map((c) => Calendar.fromJson(c)).toList()
+        : [];
+
+    return calendar;
   }
 
   Future<List<Calendar>> all() async {

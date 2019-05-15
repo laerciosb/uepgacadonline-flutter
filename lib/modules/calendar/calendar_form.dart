@@ -7,6 +7,10 @@ import 'bloc.dart';
 import 'calendar_state.dart';
 
 class CalendarForm extends StatefulWidget {
+  final DateTime date;
+
+  CalendarForm(this.date);
+
   @override
   _CalendarFormState createState() => _CalendarFormState();
 }
@@ -52,7 +56,7 @@ class _CalendarFormState extends State<CalendarForm> {
               return InputDecorator(
                 decoration: InputDecoration(
                   hasFloatingPlaceholder: false,
-                  icon: const Icon(Icons.edit),
+                  icon: Icon(Icons.edit),
                   labelText: 'Item',
                 ),
                 child: DropdownButtonHideUnderline(
@@ -81,7 +85,9 @@ class _CalendarFormState extends State<CalendarForm> {
           ),
         ),
         TextFormField(
+          controller: _descriptionController,
           keyboardType: TextInputType.multiline,
+          textAlign: TextAlign.left,
           minLines: null,
           autovalidate: true,
           decoration: InputDecoration(
@@ -108,9 +114,9 @@ class _CalendarFormState extends State<CalendarForm> {
           onPressed: () {
             _calendarBloc.dispatch(
               SubmitItemPressed(
-                id: categorySelected.id,
-                description: _descriptionController.text,
-              ),
+                  id: categorySelected.id,
+                  description: _descriptionController.text,
+                  date: widget.date),
             );
           },
         )

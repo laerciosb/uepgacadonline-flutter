@@ -21,6 +21,6 @@ class DBProvider {
         join(await getDatabasesPath(), "uepgacadonline.db"),
         onCreate: (Database db, int version) async {
       await db.execute(Calendar.createTable);
-    }, version: 1);
+    }, version: 2);
   }
 }

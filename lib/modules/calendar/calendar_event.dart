@@ -7,6 +7,10 @@ abstract class CalendarEvent extends Equatable {
 }
 
 class CalendarFetch extends CalendarEvent {
+  DateTime date;
+
+  CalendarFetch(this.date);
+
   @override
   String toString() => 'CalendarFetch';
 }
@@ -41,12 +45,25 @@ class DescriptionChanged extends CalendarEvent {
 class SubmitItemPressed extends CalendarEvent {
   final int id;
   final String description;
+  final DateTime date;
 
-  SubmitItemPressed({@required this.id, @required this.description})
-      : super([id, description]);
+  SubmitItemPressed(
+      {@required this.id, @required this.description, @required this.date})
+      : super([id, description, date]);
 
   @override
   String toString() {
-    return 'SubmitItemPressed { id: $id, password: $description }';
+    return 'SubmitItemPressed { id: $id, password: $description, date: $date }';
+  }
+}
+
+class DeleteItem extends CalendarEvent {
+  final int id;
+
+  DeleteItem(this.id);
+
+  @override
+  String toString() {
+    return 'DeleteItem { id: $id }';
   }
 }

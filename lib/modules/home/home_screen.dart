@@ -198,14 +198,16 @@ class _HomeScreenState extends State<HomeScreen>
 
   Widget _buildFloatingButton() {
     return _tabController.index == 2
-        ? FloatingActionButton(
-            backgroundColor: Color(0xff4a6aff),
-            onPressed: () {
-              BlocProvider.of<CalendarBloc>(context)
-                  .dispatch(CalendarOpenDialog());
-            },
-            child: Icon(Icons.add),
-          )
+        ? Align(
+            child: FloatingActionButton(
+              backgroundColor: Color(0xff4a6aff),
+              onPressed: () {
+                BlocProvider.of<CalendarBloc>(context)
+                    .dispatch(CalendarOpenDialog());
+              },
+              child: Icon(Icons.add),
+            ),
+            alignment: Alignment(1, 1))
         : Container();
   }
 }
