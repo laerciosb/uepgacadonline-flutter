@@ -13,7 +13,7 @@ class NewsItemBloc extends Bloc<NewsItemEvent, NewsItemState> {
   Stream<NewsItemState> mapEventToState(
     NewsItemEvent event,
   ) async* {
-    if(event is NewsItemFetch) {
+    if (event is NewsItemFetch) {
       try {
         final newsItem = (await _repository.fetchNewsItem(event.cod)).news;
         yield NewsItemLoaded(newsItem: newsItem);

@@ -14,8 +14,9 @@ class CalendarUninitialized extends CalendarState {
 
 class CalendarLoaded extends CalendarState {
   final List<Calendar> calendar;
+  final List<Calendar> all;
 
-  CalendarLoaded({this.calendar});
+  CalendarLoaded({this.calendar, this.all});
 
   @override
   String toString() => 'CalendarLoaded';

@@ -12,9 +12,9 @@ import 'package:uepgacadonline_flutter/modules/menu/menu_screen.dart';
 import 'package:uepgacadonline_flutter/modules/news_items/news_items_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({Key key, this.title}) : super(key: key);
+  HomeScreen({Key key, this.bloc}) : super(key: key);
 
-  final String title;
+  final AuthenticationBloc bloc;
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -23,13 +23,11 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   HomeBloc _homeBloc;
-  AuthenticationBloc _authenticationBloc;
   TabController _tabController;
 
   @override
   initState() {
     super.initState();
-    _authenticationBloc = BlocProvider.of<AuthenticationBloc>(context);
     _homeBloc = HomeBloc();
     _homeBloc.dispatch(HomeFetch());
     _tabController = TabController(vsync: this, length: 3);
@@ -43,7 +41,6 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   void dispose() {
     super.dispose();
-    _authenticationBloc.dispose();
     _homeBloc.dispose();
     _tabController.removeListener(_handleTabIndex);
     _tabController.dispose();
@@ -186,7 +183,7 @@ class _HomeScreenState extends State<HomeScreen>
                       title: Text("Sair"),
                       onTap: () {
                         print("logout tap");
-                        _authenticationBloc.dispatch(LoggedOut());
+                        widget.bloc.dispatch(LoggedOut());
                       })
                 ],
               ),
@@ -194,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen>
           }
 
           if (state is HomeError) {
-            _authenticationBloc.dispatch(LoggedOut());
+            widget.bloc.dispatch(LoggedOut());
           }
         });
   }

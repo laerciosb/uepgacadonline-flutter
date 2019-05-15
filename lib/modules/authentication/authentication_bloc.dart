@@ -14,6 +14,8 @@ class AuthenticationBloc
   Stream<AuthenticationState> mapEventToState(
     AuthenticationEvent event,
   ) async* {
+    print(event);
+
     if (event is AppStarted) {
       yield AuthenticationUnauthenticated();
       final user = await userRepository.getUser();

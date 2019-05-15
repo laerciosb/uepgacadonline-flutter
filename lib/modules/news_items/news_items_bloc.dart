@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:uepgacadonline_flutter/modules/news_items/bloc.dart';
 import 'package:uepgacadonline_flutter/services/repository.dart';
 
@@ -19,7 +20,7 @@ class NewsItemsBloc extends Bloc<NewsItemsEvent, NewsItemsState> {
         if (currentState is NewsItemsUninitialized) {
           final page = 1;
 
-          final newsItems = (await _repository.fetchNewsItems(page)).newsItems;
+          var newsItems = (await _repository.fetchNewsItems(page)).newsItems;
 
           yield NewsItemsLoaded(
               newsItems: newsItems, hasReachedMax: false, page: page + 1);

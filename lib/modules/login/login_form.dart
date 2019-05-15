@@ -8,10 +8,7 @@ class LoginForm extends StatefulWidget {
   final LoginBloc loginBloc;
   final AuthenticationBloc authenticationBloc;
 
-  LoginForm({
-    this.loginBloc,
-    this.authenticationBloc
-  });
+  LoginForm({this.loginBloc, this.authenticationBloc});
 
   State<LoginForm> createState() => _LoginFormState();
 }
@@ -78,78 +75,107 @@ class _LoginFormState extends State<LoginForm> {
         bloc: widget.loginBloc,
         builder: (BuildContext context, LoginState state) {
           return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Expanded(flex: 6, child: Container()),
-              Expanded(
-                flex: 10,
-                child: Column(
-                  children: <Widget>[
-//                Padding(
-//                  padding: EdgeInsets.symmetric(vertical: 20),
-//                  child: Image.asset('images/uepg_logo.png', height: 200),
-//                ),
-                    Card(
-                      child: Container(
-                        padding: EdgeInsets.all(16.0),
+              SizedBox(height: 32.0),
+              Stack(
+                children: <Widget>[
+                  Column(
+                    children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.fromLTRB(16.0, 32.0, 16.0, 0.0),
+                        child: Card(
+                          elevation: 4.0,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16.0)),
+                          child: Container(
+                            padding:
+                                EdgeInsets.fromLTRB(32.0, 64.0, 32.0, 32.0),
+                            child: Column(
+                              children: <Widget>[
+                                TextFormField(
+                                  controller: _raController,
+                                  decoration: InputDecoration(
+                                    icon: Icon(Icons.person),
+                                    labelText: 'Registro Acadêmico',
+                                  ),
+                                  maxLength: 8,
+                                  autovalidate: true,
+                                  autocorrect: false,
+                                  validator: (_) {
+                                    return !state.isRaValid
+                                        ? 'Registro Acadêmico Inválido'
+                                        : null;
+                                  },
+                                ),
+                                TextFormField(
+                                  controller: _passwordController,
+                                  decoration: InputDecoration(
+                                    icon: Icon(Icons.lock),
+                                    labelText: 'Senha',
+                                  ),
+                                  obscureText: true,
+                                  autovalidate: true,
+                                  autocorrect: false,
+                                  validator: (_) {
+                                    return !state.isPasswordValid
+                                        ? 'Senha inválida'
+                                        : null;
+                                  },
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 20),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: <Widget>[
+                                      LoginButton(
+                                        onPressed: isLoginButtonEnabled(state)
+                                            ? _onFormSubmitted
+                                            : null,
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
                         child: Column(
                           children: <Widget>[
-                            TextFormField(
-                              controller: _raController,
-                              decoration: InputDecoration(
-                                icon: Icon(Icons.person),
-                                labelText: 'Registro Acadêmico',
-                              ),
-                              maxLength: 8,
-                              autovalidate: true,
-                              autocorrect: false,
-                              validator: (_) {
-                                return !state.isRaValid
-                                    ? 'Registro Acadêmico Inválido'
-                                    : null;
-                              },
+                            SizedBox(height: 16.0),
+                            Text(
+                              "Desenvolvido por alunos e ex-alunos ❤️",
+                              style: TextStyle(color: Colors.grey),
                             ),
-                            TextFormField(
-                              controller: _passwordController,
-                              decoration: InputDecoration(
-                                icon: Icon(Icons.lock),
-                                labelText: 'Senha',
-                              ),
-                              obscureText: true,
-                              autovalidate: true,
-                              autocorrect: false,
-                              validator: (_) {
-                                return !state.isPasswordValid
-                                    ? 'Senha inválida'
-                                    : null;
-                              },
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(vertical: 20),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: <Widget>[
-                                  LoginButton(
-                                    onPressed: isLoginButtonEnabled(state)
-                                        ? _onFormSubmitted
-                                        : null,
-                                  )
-                                ],
-                              ),
+                            Text(
+                              "v0.1",
+                              style: TextStyle(color: Colors.grey),
                             )
                           ],
                         ),
+                      )
+                    ],
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Material(
+                      borderRadius: BorderRadius.circular(16.0),
+                      elevation: 4.0,
+                      child: Container(
+                        padding: EdgeInsets.all(16.0),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16.0),
+                            color: Color(0xff4a6aff)),
+                        child:
+                            Icon(Icons.edit, size: 48.0, color: Colors.white),
                       ),
                     ),
-                  ],
-                ),
-              ),
-              Expanded(
-                  flex: 4,
-                  child: Container(
-                      margin: EdgeInsets.only(bottom: 32.0),
-                      alignment: Alignment.bottomCenter,
-                      child: Text("v0.0.1",
-                          style: TextStyle(color: Colors.white))))
+                  )
+                ],
+              )
             ],
           );
         },

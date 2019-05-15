@@ -10,12 +10,14 @@ class UserRepository {
     final _prefs = await SharedPreferences.getInstance();
 
     final now = DateTime.now();
-    final lastLogin = _prefs.getString('last_login') != null ? DateTime.parse(_prefs.getString('last_login')) : null;
+    final lastLogin = _prefs.getString('last_login') != null
+        ? DateTime.parse(_prefs.getString('last_login'))
+        : null;
 
-    if(lastLogin != null) {
+    if (lastLogin != null) {
       final difference = now.difference(lastLogin).inMinutes;
 
-      if(difference > 10) {
+      if (difference > 10) {
         final login = _prefs.getString('login');
         final password = _prefs.getString('password');
 

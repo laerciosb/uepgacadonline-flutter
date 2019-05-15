@@ -58,16 +58,24 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    FlutterStatusbarcolor.setStatusBarColor(Color(0xff4a6aff));
+    FlutterStatusbarcolor.setStatusBarColor(Colors.grey[400]);
     return BlocProviderTree(
-      blocProviders: [
-        BlocProvider<AuthenticationBloc>(bloc: authenticationBloc),
-        BlocProvider<CalendarBloc>(bloc: calendarBloc)
-      ],
+      blocProviders: [BlocProvider<CalendarBloc>(bloc: calendarBloc)],
       child: MaterialApp(
           title: 'Acadêmico Online - UEPG',
           theme: ThemeData(
-            primarySwatch: Colors.indigo,
+            primarySwatch: MaterialColor(0xff4a6aff, {
+              50: Color(0xff4a6aff),
+              100: Color(0xff4a6aff),
+              200: Color(0xff4a6aff),
+              300: Color(0xff4a6aff),
+              400: Color(0xff4a6aff),
+              500: Color(0xff4a6aff),
+              600: Color(0xff4a6aff),
+              700: Color(0xff4a6aff),
+              800: Color(0xff4a6aff),
+              900: Color(0xff4a6aff)
+            }),
           ),
           home: BlocBuilder(
               bloc: authenticationBloc,
@@ -77,10 +85,12 @@ class _AppState extends State<App> {
                 }
 
                 if (state is AuthenticationAuthenticated) {
-                  return HomeScreen(title: "");
+                  return HomeScreen(bloc: authenticationBloc);
                 }
 
-                return LoginScreen();
+                if (state is AuthenticationUnauthenticated) {
+                  return LoginScreen(bloc: authenticationBloc);
+                }
               })),
     );
   }
