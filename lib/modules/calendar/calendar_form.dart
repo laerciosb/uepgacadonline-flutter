@@ -49,61 +49,63 @@ class _CalendarFormState extends State<CalendarForm> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
       title: Text("Novo Item",
           style: TextStyle(color: Color(0xff4a6aff), fontSize: 16.0)),
-      content: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-        Flexible(
-          child: FormField(
-            builder: (FormFieldState state) {
-              return InputDecorator(
-                decoration: InputDecoration(
-                  alignLabelWithHint: true,
-                  hasFloatingPlaceholder: true,
-                  icon: Icon(Icons.edit),
-                  labelText: '',
-                ),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton<Category>(
-                    isExpanded: true,
-                    isDense: true,
-                    hint: Text("Item"),
-                    value: categorySelected,
-                    onChanged: (Category newValue) {
-                      setState(() {
-                        _calendarBloc.dispatch(ItemChanged(id: newValue.id));
-                        categorySelected = newValue;
-                      });
-                    },
-                    items: categories
-                        .map<DropdownMenuItem<Category>>((Category value) {
-                      return DropdownMenuItem<Category>(
-                        value: value,
-                        child: Text(value.name),
-                      );
-                    }).toList(),
+      content: SingleChildScrollView(
+        child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+          Flexible(
+            child: FormField(
+              builder: (FormFieldState state) {
+                return InputDecorator(
+                  decoration: InputDecoration(
+                    alignLabelWithHint: true,
+                    hasFloatingPlaceholder: true,
+                    icon: Icon(Icons.edit),
+                    labelText: '',
                   ),
-                ),
-              );
-            },
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<Category>(
+                      isExpanded: true,
+                      isDense: true,
+                      hint: Text("Item"),
+                      value: categorySelected,
+                      onChanged: (Category newValue) {
+                        setState(() {
+                          _calendarBloc.dispatch(ItemChanged(id: newValue.id));
+                          categorySelected = newValue;
+                        });
+                      },
+                      items: categories
+                          .map<DropdownMenuItem<Category>>((Category value) {
+                        return DropdownMenuItem<Category>(
+                          value: value,
+                          child: Text(value.name),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                );
+              },
+            ),
           ),
-        ),
-        TextFormField(
-          controller: _descriptionController,
-          keyboardType: TextInputType.multiline,
-          textAlign: TextAlign.left,
-          minLines: null,
-          maxLines: null,
-          autovalidate: true,
-          decoration: InputDecoration(
-              hasFloatingPlaceholder: false,
-              icon: Icon(Icons.library_books, color: Colors.grey),
-              labelText: 'Descrição',
-              hintText: 'Descrição'),
+          TextFormField(
+            controller: _descriptionController,
+            keyboardType: TextInputType.multiline,
+            textAlign: TextAlign.left,
+            minLines: null,
+            maxLines: null,
+            autovalidate: true,
+            decoration: InputDecoration(
+                hasFloatingPlaceholder: false,
+                icon: Icon(Icons.library_books, color: Colors.grey),
+                labelText: 'Descrição',
+                hintText: 'Descrição'),
 //                validator: (_) {
 //                  return !state.
 //                      ? ''
 //                      : null;
 //                }
-        )
-      ]),
+          )
+        ]),
+      ),
       actions: <Widget>[
         FlatButton(
           child: Text("Cancelar"),

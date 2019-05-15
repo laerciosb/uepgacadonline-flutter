@@ -71,7 +71,7 @@ class _WeeklyMenuScreenState extends State<WeeklyMenuScreen>
             if (state is MenuLoaded) {
               return state.menu.isEmpty
                   ? EmptyCard(
-                      "Aparentemente, a listagem no cardápio não foi cadastrada para esse campus.")
+                      "Aparentemente, a listagem do cardápio não foi cadastrada para esse campus.")
                   : ListView.builder(
                       padding: EdgeInsets.all(8.0),
                       itemCount: state.menu.length,

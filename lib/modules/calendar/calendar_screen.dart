@@ -138,7 +138,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    Text(calendar.title, textAlign: TextAlign.left),
+                    Flexible(
+                        child: Text(calendar.title, textAlign: TextAlign.left)),
                   ],
                 ),
                 SizedBox(height: 8.0),
