@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -139,8 +140,17 @@ class _NewsItemScreenState extends State<NewsItemScreen> {
                                         child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(8.0),
-                                          child: Image.network(
-                                              node.attributes['src']),
+                                          child: CachedNetworkImage(
+                                              placeholder: (context, url) => Center(
+                                                  child: Padding(
+                                                      padding:
+                                                          EdgeInsets.all(8.0),
+                                                      child: SizedBox(
+                                                          height: 32,
+                                                          width: 32,
+                                                          child:
+                                                              CircularProgressIndicator()))),
+                                              imageUrl: node.attributes['src']),
                                         ),
                                       );
                                       break;
