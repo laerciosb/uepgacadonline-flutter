@@ -81,9 +81,12 @@ class _HomeScreenState extends State<HomeScreen>
                     ),
                     Flexible(
                       flex: 6,
-                      child: Text(" ${state.user.academicRegister}",
-                          style:
-                              TextStyle(fontSize: 13.0, color: Colors.black)),
+                      child: Container(
+                        margin: EdgeInsets.only(left: 8.0),
+                        child: Text(" ${state.user.academicRegister}",
+                            style:
+                                TextStyle(fontSize: 12.0, color: Colors.black)),
+                      ),
                     )
                   ]);
                 } else {
@@ -101,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen>
           ],
         ),
         floatingActionButton: _buildFloatingButton(),
-        resizeToAvoidBottomPadding: true);
+        resizeToAvoidBottomPadding: false);
   }
 
   Widget _buildDrawer() {

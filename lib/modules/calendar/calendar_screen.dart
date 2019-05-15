@@ -172,7 +172,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
   Widget _buildTableCalendar() {
     return Card(
-      margin: EdgeInsets.fromLTRB(8.0, 4.0, 8.0, 0.0),
+      margin: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0.0),
       elevation: 2.0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
       child: TableCalendar(

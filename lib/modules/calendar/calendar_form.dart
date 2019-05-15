@@ -89,6 +89,7 @@ class _CalendarFormState extends State<CalendarForm> {
           keyboardType: TextInputType.multiline,
           textAlign: TextAlign.left,
           minLines: null,
+          maxLines: null,
           autovalidate: true,
           decoration: InputDecoration(
               hasFloatingPlaceholder: false,
@@ -118,6 +119,7 @@ class _CalendarFormState extends State<CalendarForm> {
                   description: _descriptionController.text,
                   date: widget.date),
             );
+            Navigator.pop(context);
           },
         )
       ],
