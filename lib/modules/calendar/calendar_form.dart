@@ -55,9 +55,10 @@ class _CalendarFormState extends State<CalendarForm> {
             builder: (FormFieldState state) {
               return InputDecorator(
                 decoration: InputDecoration(
-                  hasFloatingPlaceholder: false,
+                  alignLabelWithHint: true,
+                  hasFloatingPlaceholder: true,
                   icon: Icon(Icons.edit),
-                  labelText: 'Item',
+                  labelText: '',
                 ),
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton<Category>(
