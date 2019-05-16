@@ -33,6 +33,7 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
+    final focus = FocusNode();
     return BlocListener(
       bloc: widget.loginBloc,
       listener: (BuildContext context, LoginState state) {
@@ -102,6 +103,11 @@ class _LoginFormState extends State<LoginForm> {
                                   maxLength: 8,
                                   autovalidate: true,
                                   autocorrect: false,
+                                  textInputAction: TextInputAction.next,
+                                  autofocus: true,
+                                  onFieldSubmitted: (v) {
+                                    FocusScope.of(context).requestFocus(focus);
+                                  },
                                   validator: (_) {
                                     return !state.isRaValid
                                         ? 'Registro Acadêmico Inválido'
@@ -117,6 +123,7 @@ class _LoginFormState extends State<LoginForm> {
                                   obscureText: true,
                                   autovalidate: true,
                                   autocorrect: false,
+                                  focusNode: focus,
                                   validator: (_) {
                                     return !state.isPasswordValid
                                         ? 'Senha inválida'
