@@ -143,7 +143,7 @@ class _HomeGuestScreenState extends State<HomeGuestScreen>
                     ),
                     ListTile(
                         leading: Icon(Icons.exit_to_app),
-                        title: Text("Login"),
+                        title: Text("Acadêmico Online"),
                         onTap: () {
                           Navigator.pop(context);
                           widget.bloc.dispatch(Login());
