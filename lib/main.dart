@@ -5,7 +5,7 @@ import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:uepgacadonline_flutter/modules/authentication/bloc.dart';
 import 'package:uepgacadonline_flutter/modules/calendar/bloc.dart';
-import 'package:uepgacadonline_flutter/modules/home/home_screen.dart';
+import 'package:uepgacadonline_flutter/modules/home_auth/home_auth_screen.dart';
 import 'package:uepgacadonline_flutter/modules/login/login_screen.dart';
 import 'package:uepgacadonline_flutter/modules/splash/splash_screen.dart';
 

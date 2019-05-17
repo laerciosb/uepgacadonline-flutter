@@ -7,7 +7,7 @@ import 'package:uepgacadonline_flutter/modules/authentication/bloc.dart';
 import 'package:uepgacadonline_flutter/modules/calendar/bloc.dart';
 import 'package:uepgacadonline_flutter/modules/calendar/calendar_screen.dart';
 import 'package:uepgacadonline_flutter/modules/grade/grade_screen.dart';
-import 'package:uepgacadonline_flutter/modules/home/bloc.dart';
+import 'package:uepgacadonline_flutter/modules/home_auth/bloc.dart';
 import 'package:uepgacadonline_flutter/modules/menu/menu_screen.dart';
 import 'package:uepgacadonline_flutter/modules/news_items/news_items_screen.dart';
 
