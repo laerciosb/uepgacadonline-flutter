@@ -24,6 +24,10 @@ class AuthenticationBloc
           : AuthenticationUnauthenticated();
     }
 
+    if (event is Login) {
+      yield AuthenticationLogin();
+    }
+
     if (event is LoggedIn) {
       yield AuthenticationAuthenticated();
     }

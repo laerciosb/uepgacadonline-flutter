@@ -11,14 +11,16 @@ class AppStarted extends AuthenticationEvent {
   String toString() => 'AppStarted';
 }
 
+class Login extends AuthenticationEvent {
+  @override
+  String toString() => 'Login';
+}
+
 class LoggedIn extends AuthenticationEvent {
   final String ra;
   final String password;
 
-  LoggedIn({
-    this.ra,
-    this.password
-  });
+  LoggedIn({this.ra, this.password});
 
   @override
   String toString() => 'LoggedIn';
