@@ -33,6 +33,7 @@ class _WeeklyMenuScreenState extends State<WeeklyMenuScreen>
     _menuBloc.dispose();
     _tabController.removeListener(_handleTabIndex);
     _tabController.dispose();
+    super.dispose();
   }
 
   @override
