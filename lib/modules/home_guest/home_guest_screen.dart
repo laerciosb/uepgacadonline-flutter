@@ -145,6 +145,7 @@ class _HomeGuestScreenState extends State<HomeGuestScreen>
                         leading: Icon(Icons.exit_to_app),
                         title: Text("Login"),
                         onTap: () {
+                          Navigator.pop(context);
                           widget.bloc.dispatch(Login());
                         })
                   ],
