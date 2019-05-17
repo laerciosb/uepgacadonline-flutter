@@ -183,6 +183,7 @@ class _HomeScreenState extends State<HomeScreen>
                       title: Text("Sair"),
                       onTap: () {
                         print("logout tap");
+                        Navigator.pop(context);
                         widget.bloc.dispatch(LoggedOut());
                       })
                 ],
