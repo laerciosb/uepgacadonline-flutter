@@ -6,6 +6,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:uepgacadonline_flutter/modules/authentication/bloc.dart';
 import 'package:uepgacadonline_flutter/modules/calendar/bloc.dart';
 import 'package:uepgacadonline_flutter/modules/home_auth/home_auth_screen.dart';
+import 'package:uepgacadonline_flutter/modules/home_guest/home_guest_screen.dart';
 import 'package:uepgacadonline_flutter/modules/login/login_screen.dart';
 import 'package:uepgacadonline_flutter/modules/splash/splash_screen.dart';
 
@@ -89,7 +90,15 @@ class _AppState extends State<App> {
                 }
 
                 if (state is AuthenticationUnauthenticated) {
-                  return LoginScreen(bloc: authenticationBloc);
+                  return HomeGuestScreen(
+                    bloc: authenticationBloc,
+                  );
+                }
+
+                if (state is AuthenticationLogin) {
+                  return LoginScreen(
+                    bloc: authenticationBloc,
+                  );
                 }
               })),
     );
