@@ -1,5 +1,10 @@
 # App Flutter - Universidade Estadual de Ponta Grossa (não oficial).
 
+[![Play Store](https://img.shields.io/badge/Play%20Store-Baixar-brightgreen.svg?style=flat&logo=google-play)](https://play.google.com/store/apps/details?id=com.pauloalvesjr.uepgacadonline_flutter)
+[![App Store](https://img.shields.io/badge/App%20Store-N%C3%A3o%20lan%C3%A7ado-red.svg?style=flat&logo=apple)](#)
+[![GitHub tag (latest by date)](https://img.shields.io/github/tag-date/pstwh/uepgacadonline-flutter.svg?style=flat)](https://github.com/pstwh/uepgacadonline-flutter/tags)
+[![GitHub contributors](https://img.shields.io/github/contributors-anon/pstwh/uepgacadonline-flutter.svg?style=flat)](https://github.com/pstwh/uepgacadonline-flutter/graphs/contributors)
+
 Aplicativo desenvolvido para complementar o projeto do crawler: [https://github.com/pstwh/uepgacadonline-api](https://github.com/pstwh/uepgacadonline-api).
 
 O objetivo desse projeto é beneficiar a comunidade acadêmica disponibilizando os dados de maneira portátil.
