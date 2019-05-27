@@ -1,5 +1,6 @@
 # App Flutter - Universidade Estadual de Ponta Grossa (não oficial).
 
+[![Travis (.org)](https://img.shields.io/travis/pstwh/uepgacadonline-flutter.svg?style=flat&logo=travis-ci)](https://travis-ci.com/pstwh/uepgacadonline-flutter)
 [![Play Store](https://img.shields.io/badge/Play%20Store-Baixar-brightgreen.svg?style=flat&logo=google-play)](https://play.google.com/store/apps/details?id=com.pauloalvesjr.uepgacadonline_flutter)
 [![App Store](https://img.shields.io/badge/App%20Store-N%C3%A3o%20lan%C3%A7ado-red.svg?style=flat&logo=apple)](#)
 [![GitHub tag (latest by date)](https://img.shields.io/github/tag-date/pstwh/uepgacadonline-flutter.svg?style=flat)](https://github.com/pstwh/uepgacadonline-flutter/tags)
