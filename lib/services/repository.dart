@@ -10,15 +10,13 @@ import 'package:uepgacadonline_flutter/services/ru_service.dart';
 class Repository {
   final acadOnlineService = AcadOnlineService();
   final ruService = RuService();
-  final newsService = PortalService();
   final loginService = LoginService();
   final homeService = HomeService();
 
   Future<Response> fetchHome() => homeService.fetchHome();
   Future<Response> fetchGrade() => acadOnlineService.fetchGrade();
-  Future<Response> fetchNewsItems(int page) => newsService.fetchNewsItems(page);
-  Future<Response> fetchNewsItem(String cod) => newsService.fetchNewsItem(cod);
   Future<Response> fetchActivities() => acadOnlineService.fetchActivities();
 
-  Future<Response> doLogin(String login, String password) => loginService.doLogin(login, password);
+  Future<Response> doLogin(String login, String password) =>
+      loginService.doLogin(login, password);
 }

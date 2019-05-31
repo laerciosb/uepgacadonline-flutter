@@ -1,11 +1,11 @@
 import 'dart:async';
+
 import 'package:bloc/bloc.dart';
-import 'package:uepgacadonline_flutter/services/repository.dart';
+import 'package:uepgacadonline_flutter/repositories/portal_repository.dart';
+
 import './bloc.dart';
 
 class NewsItemBloc extends Bloc<NewsItemEvent, NewsItemState> {
-  final _repository = Repository();
-
   @override
   NewsItemState get initialState => NewsItemUninitialized();
 
@@ -15,7 +15,7 @@ class NewsItemBloc extends Bloc<NewsItemEvent, NewsItemState> {
   ) async* {
     if (event is NewsItemFetch) {
       try {
-        final newsItem = (await _repository.fetchNewsItem(event.cod)).news;
+        final newsItem = (await portalRepository.fetchNewsItem(event.cod)).news;
         yield NewsItemLoaded(newsItem: newsItem);
       } catch (e) {
         yield NewsItemError(e);
