@@ -4,6 +4,8 @@ import 'package:uepgacadonline_flutter/modules/authentication/bloc.dart';
 import 'package:uepgacadonline_flutter/modules/login/bloc.dart';
 import 'package:uepgacadonline_flutter/widgets/login_button.dart';
 
+import 'package:get_version/get_version.dart';
+
 class LoginForm extends StatefulWidget {
   final LoginBloc loginBloc;
   final AuthenticationBloc authenticationBloc;
@@ -27,6 +29,7 @@ class _LoginFormState extends State<LoginForm> {
   @override
   void initState() {
     super.initState();
+
     _raController.addListener(_onEmailChanged);
     _passwordController.addListener(_onPasswordChanged);
   }
@@ -157,10 +160,15 @@ class _LoginFormState extends State<LoginForm> {
                               "Desenvolvido por alunos e ex-alunos ❤️",
                               style: TextStyle(color: Colors.grey),
                             ),
-                            Text(
-                              "v0.1",
-                              style: TextStyle(color: Colors.grey),
-                            )
+                            FutureBuilder<String>(
+                                future: GetVersion.projectVersion,
+                                builder:
+                                    (context, AsyncSnapshot<String> snapshot) {
+                                  return Text(
+                                    "v${snapshot.data}",
+                                    style: TextStyle(color: Colors.grey),
+                                  );
+                                })
                           ],
                         ),
                       )
