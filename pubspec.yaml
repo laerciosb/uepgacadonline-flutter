@@ -28,6 +28,7 @@ dependencies:
   flutter_swiper: ^1.1.6
   flutter_statusbarcolor: ^0.2.0
   get_version: ^0.1.0
+  google_maps_flutter: ^0.5.15
   http: ^0.12.0+2
   intl: ^0.15.8
   json_annotation: ^2.0.0

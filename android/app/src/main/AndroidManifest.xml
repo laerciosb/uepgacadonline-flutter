@@ -12,6 +12,10 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="Acadêmico Online - UEPG"
         android:icon="@mipmap/ic_launcher">
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAZY_2DR9jFv2KCQ8E7GuMDr5yMVteboX0"/>
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
