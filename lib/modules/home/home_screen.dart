@@ -6,6 +6,8 @@ import 'package:uepgacadonline_flutter/modules/authentication/authentication_blo
 import 'package:uepgacadonline_flutter/modules/authentication/bloc.dart';
 import 'package:uepgacadonline_flutter/modules/calendar/bloc.dart';
 import 'package:uepgacadonline_flutter/modules/calendar/calendar_screen.dart';
+import 'package:uepgacadonline_flutter/modules/chat/chat_screen.dart';
+import 'package:uepgacadonline_flutter/modules/contact/contact_screen.dart';
 import 'package:uepgacadonline_flutter/modules/grade/grade_screen.dart';
 import 'package:uepgacadonline_flutter/modules/home/bloc.dart';
 import 'package:uepgacadonline_flutter/modules/menu/menu_screen.dart';
@@ -168,6 +170,26 @@ class _HomeScreenState extends State<HomeScreen>
                         _tabController.index = 0;
                         Navigator.pop(context);
                       }),
+                  ListTile(
+                    leading: Icon(Icons.message),
+                    title: Text("Chat"),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ChatScreen()));
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.perm_device_information),
+                    title: Text("Contato"),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ContactScreen()));
+                    },
+                  ),
                   ListTile(
                     leading: Icon(Icons.info),
                     title: Text("Sobre"),

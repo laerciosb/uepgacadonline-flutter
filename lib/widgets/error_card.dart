@@ -18,7 +18,7 @@ class ErrorCard extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   color: Colors.grey)),
           Text(
-              "Você está sem conexão com a internet.",
+              "Você está sem conexão.",
               textAlign: TextAlign.center)
       );
     }
