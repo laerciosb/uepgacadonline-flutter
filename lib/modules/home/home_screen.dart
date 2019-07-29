@@ -10,6 +10,7 @@ import 'package:uepgacadonline_flutter/modules/chat/chat_screen.dart';
 import 'package:uepgacadonline_flutter/modules/contact/contact_screen.dart';
 import 'package:uepgacadonline_flutter/modules/grade/grade_screen.dart';
 import 'package:uepgacadonline_flutter/modules/home/bloc.dart';
+import 'package:uepgacadonline_flutter/modules/map/map_screen.dart';
 import 'package:uepgacadonline_flutter/modules/menu/menu_screen.dart';
 import 'package:uepgacadonline_flutter/modules/news_items/news_items_screen.dart';
 
@@ -181,15 +182,21 @@ class _HomeScreenState extends State<HomeScreen>
                     },
                   ),
                   ListTile(
-                    leading: Icon(Icons.perm_device_information),
-                    title: Text("Contato"),
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ContactScreen()));
-                    },
-                  ),
+                      leading: Icon(Icons.map),
+                      title: Text("Mapa"),
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => MapScreen()));
+                      }),
+                  ListTile(
+                      leading: Icon(Icons.perm_device_information),
+                      title: Text("Contato"),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ContactScreen()));
+                      }),
                   ListTile(
                     leading: Icon(Icons.info),
                     title: Text("Sobre"),

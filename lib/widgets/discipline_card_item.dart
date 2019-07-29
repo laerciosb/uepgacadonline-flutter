@@ -12,15 +12,19 @@ class DisciplineCardItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var rows;
+
+    final titleType = discipline.isSemiannual ? "Bimestre" : "Semestre";
+    final titleFunction = (value, multiplier) => (2 * (multiplier - 1)) + value;
+
     switch (type) {
       case DisciplineCardItemType.summary:
         rows = [
           {
-            'title': '1° Semestre',
+            'title': '${titleFunction(1, discipline.semester)}° $titleType',
             'value': discipline.grade1?.toString() ?? '?'
           },
           {
-            'title': '2° Semestre',
+            'title': '${titleFunction(2, discipline.semester)}° $titleType',
             'value': discipline.grade2?.toString() ?? '?'
           },
           {'title': 'Exame', 'value': discipline.gradeE?.toString() ?? '?'},
@@ -48,11 +52,11 @@ class DisciplineCardItem extends StatelessWidget {
           },
           {'title': 'Faltas', 'value': discipline.absences?.toString() ?? '?'},
           {
-            'title': '1° Semestre',
+            'title': '${titleFunction(1, discipline.semester)}° $titleType',
             'value': discipline.grade1?.toString() ?? '?'
           },
           {
-            'title': '2° Semestre',
+            'title': '${titleFunction(2, discipline.semester)}° $titleType',
             'value': discipline.grade2?.toString() ?? '?'
           },
           {'title': 'Exame', 'value': discipline.gradeE?.toString() ?? '?'},
@@ -137,10 +141,11 @@ class DisciplineCardItem extends StatelessWidget {
                               flex: 100),
                           type == DisciplineCardItemType.summary
                               ? Flexible(
-                              child: Container(
-                                  child: Icon(Icons.keyboard_arrow_right,
-                                      size: 20.0, color: Color(0xff4a6aff))),
-                              flex: 15)
+                                  child: Container(
+                                      child: Icon(Icons.keyboard_arrow_right,
+                                          size: 20.0,
+                                          color: Color(0xff4a6aff))),
+                                  flex: 15)
                               : Container()
                         ],
                       ),
